@@ -1,3 +1,5 @@
+[![ci](https://github.com/tarciosaraiva/schools-and-properties/actions/workflows/ci.yml/badge.svg)](https://github.com/tarciosaraiva/schools-and-properties/actions/workflows/ci.yml)
+
 # schools-and-properties
 
 ## Build Setup
