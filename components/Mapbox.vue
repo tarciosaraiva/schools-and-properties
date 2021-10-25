@@ -17,8 +17,6 @@ import maplibregl from 'maplibre-gl'
 import PopupContent from '~/components/PopupContent.vue'
 import { PropertyListing } from '~/store/index'
 
-const MAP_TILER_API_KEY = ''
-
 export default Vue.extend({
 
   props: {
@@ -37,7 +35,7 @@ export default Vue.extend({
         .addSource('primary-schools', {
           type: 'geojson',
           generateId: true,
-          data: `https://api.maptiler.com/data/33dea49b-84a9-43ab-af10-a2455acfa88b/features.json?key=${MAP_TILER_API_KEY}`,
+          data: `https://api.maptiler.com/data/33dea49b-84a9-43ab-af10-a2455acfa88b/features.json?key=${process.env.mapTilerSecret}`,
         })
         .addLayer({
           id: 'primary-schools-fill',
@@ -112,7 +110,7 @@ export default Vue.extend({
         })
         .addSource('school-locations', {
           type: 'geojson',
-          data: `https://api.maptiler.com/data/06ea284f-1eec-43ec-92f6-9026d826371e/features.json?key=${MAP_TILER_API_KEY}`,
+          data: `https://api.maptiler.com/data/06ea284f-1eec-43ec-92f6-9026d826371e/features.json?key=${process.env.mapTilerSecret}`,
           cluster: true,
           generateId: true,
           clusterMaxZoom: 12,
@@ -139,7 +137,7 @@ export default Vue.extend({
     const map = new maplibregl.Map({
       accessToken: '',
       container: 'map',
-      style: `https://api.maptiler.com/maps/streets/style.json?key=${MAP_TILER_API_KEY}`,
+      style: `https://api.maptiler.com/maps/streets/style.json?key=${process.env.mapTilerSecret}`,
       center: [144.9646, -37.0201],
       zoom: 7,
     })

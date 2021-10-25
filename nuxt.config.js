@@ -5,6 +5,8 @@ export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
 
+  dev: process.env.NODE_ENV !== 'production',
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'schools-and-properties',
@@ -21,6 +23,10 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       { rel: 'stylesheet', type: 'text/css', href: '//cdn.maptiler.com/maplibre-gl-js/v1.14.0/maplibre-gl.css' }
     ]
+  },
+
+  env: {
+    mapTilerSecret: process.env.MAP_TILER_SECRET
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
