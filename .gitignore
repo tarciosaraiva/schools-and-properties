@@ -88,3 +88,6 @@ sw.*
 
 # Vim swap files
 *.swp
+
+# scraped data
+scrape-top-primary-schools.html
