@@ -16,6 +16,14 @@ describe('SidebarFilter', () => {
   beforeEach(() => {
     propsData = { loadListingsFn: jest.fn() }
     mutations = {
+      'UPDATE_PROPERTY_FILTER_TYPE': jest.fn(),
+      'UPDATE_PROPERTY_FILTER_ROOMS': jest.fn(),
+      'UPDATE_PROPERTY_FILTER_BATHROOMS': jest.fn(),
+      'UPDATE_PROPERTY_FILTER_CAR_SPACES': jest.fn(),
+      'UPDATE_PROPERTY_FILTER_MAX_PRICE': jest.fn(),
+      'UPDATE_SCHOOL_EDUCATION_SECTOR': jest.fn(),
+      'UPDATE_SCHOOL_RATING': jest.fn(),
+      'UPDATE_SCHOOL_ENG_RATING': jest.fn(),
       'UPDATE_SCHOOL_MATH_RATING': jest.fn()
     }
     store = new Vuex.Store({ state, mutations })
@@ -85,11 +93,22 @@ describe('SidebarFilter', () => {
     expect(propsData.loadListingsFn).toHaveBeenCalled()
   })
 
-  test('should have committed a new mutation to the store when a form field changes', () => {
-    const input = wrapper.find('#s_maths_rating')
-    input.element.value = '2'
-    input.trigger('change')
+  test.each([
+    ['UPDATE_PROPERTY_FILTER_ROOMS', '#p_rooms', '2'],
+    ['UPDATE_PROPERTY_FILTER_BATHROOMS', '#p_bathrooms', '3'],
+    ['UPDATE_PROPERTY_FILTER_CAR_SPACES', '#p_car_spaces', '2'],
+    ['UPDATE_PROPERTY_FILTER_MAX_PRICE', '#p_max_price', '500000'],
+    ['UPDATE_SCHOOL_RATING', '#s_rating', '99'],
+    ['UPDATE_SCHOOL_ENG_RATING', '#s_english_rating', '2'],
+    ['UPDATE_SCHOOL_MATH_RATING', '#s_maths_rating', '3'],
+  ])(
+    'should have committed mutation %p to the store when rating changes',
+    (mutation, elementId, value) => {
+      const input = wrapper.find(elementId)
+      input.element.value = value
+      input.trigger('change')
 
-    expect(mutations.UPDATE_SCHOOL_MATH_RATING).toHaveBeenCalledWith(store.state, '2')
-  })
+      expect(mutations[mutation]).toHaveBeenCalledWith(store.state, value)
+    }
+  )
 })
