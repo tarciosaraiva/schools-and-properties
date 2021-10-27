@@ -35,7 +35,8 @@ export default {
     'normalize.css',
     'milligram',
     '@/assets/css/main.css',
-    '@/assets/css/sidebar.css'
+    '@/assets/css/sidebar.css',
+    '@/assets/css/popup.css'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins

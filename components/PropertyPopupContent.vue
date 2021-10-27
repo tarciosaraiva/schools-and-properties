@@ -14,9 +14,3 @@ export default Vue.extend({
   }
 })
 </script>
-
-<style scoped>
-.marker-popup p {
-  margin-bottom: 0;
-}
-</style>

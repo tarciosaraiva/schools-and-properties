@@ -1,0 +1,17 @@
+.school-info.container .school-name {
+  border-bottom: 1px solid #ccc;
+  text-align: justify;
+  text-justify: inter-character;
+  white-space: nowrap;
+}
+
+.school-info.container .school-stat-label {
+  text-decoration: underline;
+  white-space: nowrap;
+}
+
+.school-info.container .school-stat-value {
+  font-weight: bold;
+  text-align: right;
+  white-space: nowrap;
+}

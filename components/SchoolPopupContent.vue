@@ -2,32 +2,30 @@
   <div class="school-info container">
     <div class="row">
       <div class="column">
-        <p>
+        <p class="school-name">
           <strong>{{ school.schoolName }}</strong>
         </p>
       </div>
     </div>
     <div class="row">
       <span class="column school-stat-label">Overall rating</span>
-      <span class="column school-stat">
-        <em>{{ school.overallScore }}</em>
-      </span>
+      <span class="column school-stat-value"><em>{{ school.overallScore }}</em></span>
     </div>
     <div class="row">
       <span class="column school-stat-label">English rating</span>
-      <span class="column school-stat"><em>{{ school.englishScore }}</em></span>
+      <span class="column school-stat-value"><em>{{ school.englishScore }}</em></span>
     </div>
     <div class="row">
       <span class="column school-stat-label">Maths rating</span>
-      <span class="column school-stat"><em>{{ school.mathsScore }}</em></span>
+      <span class="column school-stat-value"><em>{{ school.mathsScore }}</em></span>
     </div>
     <div class="row">
       <span class="column school-stat-label">Enrolments</span>
-      <span class="column school-stat"><em>{{ school.enrolments }}</em></span>
+      <span class="column school-stat-value"><em>{{ school.enrolments }}</em></span>
     </div>
     <div class="row">
       <span class="column school-stat-label">Phone</span>
-      <span class="column school-stat"><em>{{ school.phoneNumber }}</em></span>
+      <span class="column school-stat-value"><em>{{ school.phoneNumber }}</em></span>
     </div>
   </div>
 </template>
@@ -41,24 +39,3 @@ export default Vue.extend({
   },
 })
 </script>
-
-<style scoped>
-.school-info p {
-  text-align: justify;
-  text-justify: inter-character;
-  border-bottom: 1px solid #ccc;
-}
-
-.school-info span, .school-info p {
-  white-space: nowrap;
-}
-
-.school-info .school-stat-label {
-  text-decoration: underline;
-}
-
-.school-info .school-stat {
-  font-weight: bold;
-  text-align: right;
-}
-</style>
