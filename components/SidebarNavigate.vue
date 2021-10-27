@@ -5,19 +5,19 @@
       <fieldset>
         <label for="geo_go_to">Go to</label>
         <input
+          id="geo_go_to"
+          v-model="location"
           placeholder="200 St Kilda Road, Melbourne"
           type="text"
           name="geo_go_to"
-          id="geo_go_to"
-          v-model="location"
           @keyup="handleKeyUp"
         />
       </fieldset>
     </form>
     <h3 v-if="locations.length">Suggestions for '{{location}}'</h3>
-    <div class="results" v-if="locations.length">
-      <div class="row" v-for="location in locations" :key="location.name">
-        <a href="#" @click.stop.prevent="navigateTo(location.center)" class="column">{{ location.name }}</a>
+    <div v-if="locations.length" class="results">
+      <div v-for="location in locations" :key="location.name" class="row">
+        <a href="#" class="column" @click.stop.prevent="navigateTo(location.center)">{{ location.name }}</a>
       </div>
     </div>
   </div>
@@ -38,6 +38,9 @@ export default Vue.extend({
   computed: mapState({
     locations: (state: any) => state.geocodeSuggestions
   }),
+  created () {
+    this.geolocate = debounce(this.geolocate, 300, { leading: false, trailing: true })
+  },
   methods: {
     handleKeyUp() {
       this.geolocate()
@@ -48,9 +51,6 @@ export default Vue.extend({
     navigateTo (center: any) {
       this.$emit('navigate', center)
     }
-  },
-  created () {
-    this.geolocate = debounce(this.geolocate, 300, { leading: false, trailing: true })
   }
 })
 </script>

@@ -38,7 +38,7 @@ export default Vue.extend({
       }
     },
     schoolsFilter: {
-      handler: function (currentFilter, _) {
+      handler (currentFilter, _) {
         this.map.setFilter('school-point', this.getLayerFilter(currentFilter))
       },
       deep: true
@@ -142,7 +142,7 @@ export default Vue.extend({
         ratingFilter,
         engRatingFilter,
         mathsRatingFilter
-      ].filter(i => null !== i)
+      ].filter(i => i !== null)
     },
 
     mapLoaded () {

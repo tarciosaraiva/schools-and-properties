@@ -6,38 +6,38 @@
         <legend>Property options</legend>
         <div class="row">
           <label class="column label-inline">
-            <input type="checkbox" value="House" v-model="pTypes" id="p_house_type"> House
+            <input id="p_house_type" v-model="pTypes" type="checkbox" value="House"> House
           </label>
           <label class="column label-inline">
-            <input type="checkbox" value="Townhouse" v-model="pTypes" id="p_townhouse_type"> Townhouse
+            <input id="p_townhouse_type" v-model="pTypes" type="checkbox" value="Townhouse"> Townhouse
           </label>
           <label class="column label-inline">
-            <input type="checkbox" value="ApartmentUnitFlat" v-model="pTypes" id="p_unit_type"> Unit
+            <input id="p_unit_type" v-model="pTypes" type="checkbox" value="ApartmentUnitFlat"> Unit
           </label>
         </div>
         <label for="p_rooms">Rooms</label>
-        <select v-model="pRooms" id="p_rooms">
+        <select id="p_rooms" v-model="pRooms">
           <option value="1">1+</option>
           <option value="2">2+</option>
           <option value="3">3+</option>
           <option value="4">4+</option>
         </select>
         <label for="p_bathrooms">Bathrooms</label>
-        <select v-model="pBathrooms" id="p_bathrooms">
+        <select id="p_bathrooms" v-model="pBathrooms">
           <option value="1">1+</option>
           <option value="2">2+</option>
           <option value="3">3+</option>
           <option value="4">4+</option>
         </select>
         <label for="p_car_spaces">Car spaces</label>
-        <select v-model="pCarSpaces" id="p_car_spaces">
+        <select id="p_car_spaces" v-model="pCarSpaces">
           <option value="1">1+</option>
           <option value="2">2+</option>
           <option value="3">3+</option>
           <option value="4">4+</option>
         </select>
         <label for="p_max_price">Max price</label>
-        <select v-model="pMaxPrice" id="p_max_price">
+        <select id="p_max_price" v-model="pMaxPrice">
           <option value="500000">500 K</option>
           <option value="600000">600 K</option>
           <option value="700000">700 K</option>
@@ -46,22 +46,22 @@
           <option value="1000000">1 M</option>
         </select>
       </fieldset>
-      <button v-on:click.stop.prevent="applyFilter">Find matching properties</button>
+      <button @click.stop.prevent="applyFilter">Find matching properties</button>
       <fieldset>
         <legend>School options</legend>
         <div class="row">
           <label class="column label-inline">
-            <input type="radio" id="s_edu_sector" name="s_edu_sector" v-model="sEducationSector" value="all"> All
+            <input id="s_edu_sector" v-model="sEducationSector" type="radio" name="s_edu_sector" value="all"> All
           </label>
           <label class="column label-inline">
-            <input type="radio" id="s_edu_sector" name="s_edu_sector" v-model="sEducationSector" value="Government"> Public
+            <input id="s_edu_sector" v-model="sEducationSector" type="radio" name="s_edu_sector" value="Government"> Public
           </label>
           <label class="column label-inline">
-            <input type="radio" id="s_edu_sector" name="s_edu_sector" v-model="sEducationSector" value="NonGovernment"> Private
+            <input id="s_edu_sector" v-model="sEducationSector" type="radio" name="s_edu_sector" value="NonGovernment"> Private
           </label>
         </div>
         <label for="s_rating">Overall rating</label>
-        <select v-model="sRating" id="s_rating">
+        <select id="s_rating" v-model="sRating">
           <option value="100">= 100</option>
           <option value="99">>= 99</option>
           <option value="98">>= 98</option>
@@ -80,7 +80,7 @@
         </div>
         <div class="row">
           <div class="column">
-            <select v-model="sEnglishRating" id="s_english_rating">
+            <select id="s_english_rating" v-model="sEnglishRating">
               <option value="5">= 5</option>
               <option value="4">>= 4</option>
               <option value="3">>= 3</option>
@@ -89,7 +89,7 @@
             </select>
           </div>
           <div class="column">
-            <select v-model="sMathsRating" id="s_maths_rating">
+            <select id="s_maths_rating" v-model="sMathsRating">
               <option value="5">= 5</option>
               <option value="4">>= 4</option>
               <option value="3">>= 3</option>
@@ -108,11 +108,8 @@ import Vue from 'vue'
 import { mapState } from 'vuex'
 
 export default Vue.extend({
-  props: ['loadListingsFn'],
-  methods: {
-    applyFilter () {
-      this.loadListingsFn()
-    }
+  props: {
+    loadListingsFn: Function
   },
   computed: {
     pTypes: {
@@ -152,6 +149,11 @@ export default Vue.extend({
       set (value) { this.$store.commit('UPDATE_SCHOOL_MATH_RATING', value) }
     },
     ...mapState({ filter: (state: any) => state.filter })
+  },
+  methods: {
+    applyFilter () {
+      this.loadListingsFn()
+    }
   }
 })
 </script>

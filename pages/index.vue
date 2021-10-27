@@ -5,13 +5,13 @@
     </header>
     <main>
       <mapbox
-        :schoolsFilter="schoolsFilter"
+        :schools-filter="schoolsFilter"
         :listings="listings"
-        :flyToCenter="flyToCenter"
+        :fly-to-center="flyToCenter"
       />
       <div class="sidebar">
-        <sidebar-navigate :geocodeFn="geocode" v-on:navigate="onNavigate" />
-        <sidebar-filter :loadListingsFn="loadListings" />
+        <sidebar-navigate :geocode-fn="geocode" @navigate="onNavigate" />
+        <sidebar-filter :load-listings-fn="loadListings" />
       </div>
     </main>
     <footer>
@@ -51,12 +51,12 @@ import SidebarFilter from '~/components/SidebarFilter.vue'
 import Mapbox from '~/components/Mapbox.vue'
 
 export default Vue.extend({
+  components: { SidebarNavigate, SidebarFilter, Mapbox },
   data() {
     return {
       flyToCenter: [] as number[],
     }
   },
-  components: { SidebarNavigate, SidebarFilter, Mapbox },
   computed: {
     ...mapGetters(['listings', 'schoolsFilter']),
   },
