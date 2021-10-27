@@ -16,8 +16,8 @@
     </form>
     <h3 v-if="locations.length">Suggestions for '{{location}}'</h3>
     <div v-if="locations.length" class="geo-suggestions">
-      <div v-for="location in locations" :key="location.name" class="row">
-        <a href="#" class="suggestion column" @click.stop.prevent="navigateTo(location.center)">{{ location.name }}</a>
+      <div v-for="loc in locations" :key="loc.name" class="row">
+        <a href="#" class="suggestion column" @click.stop.prevent="navigateTo(loc.center)">{{ loc.name }}</a>
       </div>
     </div>
   </div>
