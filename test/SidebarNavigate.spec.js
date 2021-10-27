@@ -33,6 +33,10 @@ describe('SidebarNavigate', () => {
     expect(wrapper.vm).toBeTruthy()
   })
 
+  test('renders correctly with props and store', () => {
+    expect(wrapper).toMatchSnapshot()
+  })
+
   test('should trigger geocodeFn when debounced', () => {
     const input = wrapper.find('#geo_go_to')
     input.setValue('my suburb')

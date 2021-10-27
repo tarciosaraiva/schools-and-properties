@@ -20,5 +20,8 @@ module.exports = {
     '<rootDir>/components/**/*.vue',
     '<rootDir>/pages/**/*.vue'
   ],
-  testEnvironment: 'jsdom'
+  testEnvironment: 'jsdom',
+  snapshotSerializers: [
+    '<rootDir>/node_modules/jest-serializer-vue-tjw'
+  ]
 }

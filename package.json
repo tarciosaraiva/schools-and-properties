@@ -36,6 +36,7 @@
     "eslint-plugin-nuxt": "^2.0.0",
     "eslint-plugin-vue": "^7.12.1",
     "jest": "^27.0.5",
+    "jest-serializer-vue-tjw": "^3.19.0",
     "prettier": "^2.3.2",
     "ts-jest": "^27.0.3",
     "vue-jest": "^3.0.4"

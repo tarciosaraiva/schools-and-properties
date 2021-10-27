@@ -34,6 +34,10 @@ describe('SidebarFilter', () => {
     expect(wrapper.vm).toBeTruthy()
   })
 
+  test('renders correctly with props and store', () => {
+    expect(wrapper).toMatchSnapshot()
+  })
+
   test('property types default values matches state', () => {
     const houseInput = wrapper.find('#p_house_type')
     expect(houseInput.element.checked).toBeTruthy()
