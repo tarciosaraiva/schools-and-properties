@@ -90,6 +90,6 @@ describe('SidebarFilter', () => {
     input.element.value = '2'
     input.trigger('change')
 
-    expect(mutations['UPDATE_SCHOOL_MATH_RATING']).toHaveBeenCalledWith(store.state, '2')
+    expect(mutations.UPDATE_SCHOOL_MATH_RATING).toHaveBeenCalledWith(store.state, '2')
   })
 })
