@@ -1,14 +1,28 @@
 import { GetterTree, ActionTree, MutationTree } from 'vuex'
-
-const DOMAIN_API_KEY = 'key_78b0335f263283d1293a338095709f3c'
-
-interface ListingRequest {
-  polygonId: number,
-  polygonPoints: PolygonPoints[]
-}
+import { AxiosRequestConfig } from 'axios'
 
 interface PolygonPoints {
   lon: number, lat: number
+}
+
+export interface ApplicationFilter {
+  properties: PropertiesFilter,
+  schools: SchoolsFilter
+}
+
+export interface PropertiesFilter {
+  types: string[],
+  rooms: number,
+  bathrooms: number,
+  carSpaces: number,
+  maxPrice: number
+}
+
+export interface SchoolsFilter {
+  educationSector: string,
+  rating: number,
+  englishRating: number,
+  mathsRating: number
 }
 
 export interface SchoolZoneProperties {
@@ -35,62 +49,155 @@ export interface PropertyListing {
   street: string,
   streetNumber: string,
   suburb: string,
-  unitNumber: string,
-  polygonId: number,
+  unitNumber: string
 }
 
 export const state = () => ({
-  list: [] as PropertyListing[]
+  bounds: {
+    ne: { lat: 0, lon: 0 },
+    nw: { lat: 0, lon: 0 },
+    se: { lat: 0, lon: 0 },
+    sw: { lat: 0, lon: 0 },
+  },
+  geocodeSuggestions: [] as any,
+  list: [] as PropertyListing[],
+  filter: {
+    properties: {
+      types: ['House', 'Townhouse'],
+      rooms: 3,
+      bathrooms: 2,
+      carSpaces: 1,
+      maxPrice: 900000
+    },
+    schools: {
+      educationSector: 'all',
+      rating: 95,
+      englishRating: 4,
+      mathsRating: 4
+    }
+  } as ApplicationFilter
 })
 
 export type RootState = ReturnType<typeof state>
 
-export const mutations: MutationTree<RootState> = {
-  ADD_LISTINGS (state, payload: SchoolZoneProperties) {
-    payload.listings.map(({ listing }) => {
-      const propertyListing: PropertyListing = {
-        id: listing.id,
-        price: listing.priceDetails?.displayPrice,
-        area: listing.propertyDetails.area,
-        bathrooms: listing.propertyDetails.bathrooms,
-        bedrooms: listing.propertyDetails.bedrooms,
-        carspaces: listing.propertyDetails.carspaces,
-        displayableAddress: listing.propertyDetails.displayableAddress,
-        features: listing.propertyDetails.features,
-        landArea: listing.propertyDetails.landArea,
-        latitude: listing.propertyDetails.latitude,
-        longitude: listing.propertyDetails.longitude,
-        postcode: listing.propertyDetails.postcode,
-        propertyType: listing.propertyDetails.propertyType,
-        region: listing.propertyDetails.region,
-        state: listing.propertyDetails.state,
-        street: listing.propertyDetails.street,
-        streetNumber: listing.propertyDetails.streetNumber,
-        suburb: listing.propertyDetails.suburb,
-        unitNumber: listing.propertyDetails.unitNumber,
-        polygonId: payload.polygonId
-      }
+export const getters: GetterTree<RootState, RootState> = {
+  listings: state => state.list,
+  schoolsFilter: state => state.filter.schools
+}
 
-      state.list.push(propertyListing)
-    })
+export const mutations: MutationTree<RootState> = {
+  ADD_LISTINGS (state, listings: any[]) {
+    const propertyListings = listings
+      .filter(l => l.type === 'PropertyListing')
+      .map(({ listing }) => {
+        const propertyListing: PropertyListing = {
+          id: listing.id,
+          price: listing.priceDetails?.displayPrice,
+          area: listing.propertyDetails.area,
+          bathrooms: listing.propertyDetails.bathrooms,
+          bedrooms: listing.propertyDetails.bedrooms,
+          carspaces: listing.propertyDetails.carspaces,
+          displayableAddress: listing.propertyDetails.displayableAddress,
+          features: listing.propertyDetails.features,
+          landArea: listing.propertyDetails.landArea,
+          latitude: listing.propertyDetails.latitude,
+          longitude: listing.propertyDetails.longitude,
+          postcode: listing.propertyDetails.postcode,
+          propertyType: listing.propertyDetails.propertyType,
+          region: listing.propertyDetails.region,
+          state: listing.propertyDetails.state,
+          street: listing.propertyDetails.street,
+          streetNumber: listing.propertyDetails.streetNumber,
+          suburb: listing.propertyDetails.suburb,
+          unitNumber: listing.propertyDetails.unitNumber
+        }
+
+        return propertyListing
+      })
+
+    state.list = propertyListings
+  },
+  UPDATE_PROPERTY_FILTER_TYPE (state, payload) {
+    state.filter.properties.types = payload
+  },
+  UPDATE_PROPERTY_FILTER_ROOMS (state, payload) {
+    state.filter.properties.rooms = Number(payload)
+  },
+  UPDATE_PROPERTY_FILTER_BATHROOMS (state, payload) {
+    state.filter.properties.bathrooms = Number(payload)
+  },
+  UPDATE_PROPERTY_FILTER_CAR_SPACES (state, payload) {
+    state.filter.properties.carSpaces = Number(payload)
+  },
+  UPDATE_PROPERTY_FILTER_MAX_PRICE (state, payload) {
+    state.filter.properties.maxPrice = Number(payload)
+  },
+  UPDATE_BOUNDING_BOX (state, payload) {
+    state.bounds.nw.lat = payload.getNorthWest().lat
+    state.bounds.nw.lon = payload.getNorthWest().lng
+    state.bounds.ne.lat = payload.getNorthEast().lat
+    state.bounds.ne.lon = payload.getNorthEast().lng
+    state.bounds.se.lat = payload.getSouthEast().lat
+    state.bounds.se.lon = payload.getSouthEast().lng
+    state.bounds.sw.lat = payload.getSouthWest().lat
+    state.bounds.sw.lon = payload.getSouthWest().lng
+  },
+  UPDATE_SCHOOL_EDUCATION_SECTOR (state, payload) {
+    state.filter.schools.educationSector = payload
+  },
+  UPDATE_SCHOOL_RATING (state, payload) {
+    state.filter.schools.rating = Number(payload)
+  },
+  UPDATE_SCHOOL_ENG_RATING (state, payload) {
+    state.filter.schools.englishRating = Number(payload)
+  },
+  UPDATE_SCHOOL_MATH_RATING (state, payload) {
+    state.filter.schools.mathsRating = Number(payload)
+  },
+  ADD_GEOCODE_RESULTS (state, payload) {
+    state.geocodeSuggestions = payload.features.map((f: any) => ({
+      center: f.center,
+      name: f.place_name
+    }))
   }
 }
 
 export const actions: ActionTree<RootState, RootState> = {
-  async loadListings ({ commit, state }, request: ListingRequest) {
-    const result = state.list.find(i => i.polygonId === request.polygonId)
-    if (!result) {
-      const payload = {
-        listingType: 'Sale',
-        propertyTypes: ['House'],
-        minBedrooms: 3,
-        minBathrooms: 2,
-        minCarspaces: 1,
-        geoWindow: { polygon: { points: request.polygonPoints } }
-      }
+  async loadListings ({ commit, state }) {
+    const { filter, bounds } = state
 
-      const listings = await this.$axios.$post('https://api.domain.com.au/v1/listings/residential/_search', payload, { headers: {'X-Api-Key': DOMAIN_API_KEY } })
-      commit('ADD_LISTINGS', { polygonId: request.polygonId, listings })
+    const payload = {
+      listingType: 'Sale',
+      pageSize: 200,
+      propertyTypes: filter.properties.types,
+      minBedrooms: filter.properties.rooms,
+      minBathrooms: filter.properties.bathrooms,
+      minCarspaces: filter.properties.carSpaces,
+      maxPrice: filter.properties.maxPrice,
+      locations: [{
+        state: 'VIC'
+      }],
+      geoWindow: { box: { topLeft: bounds.nw, bottomRight: bounds.se } }
     }
+
+    const listings = await this.$axios.$post('https://api.domain.com.au/v1/listings/residential/_search', payload, { headers: {'X-Api-Key': process.env.domainApiKey } })
+    commit('ADD_LISTINGS', listings)
+  },
+
+  async geocode ({ commit, state }, query) {
+    const { bounds } = state
+
+    const params = {
+      key: process.env.mapTilerSecret,
+      bbox: '141.24847451171752,-39.624732230379166,148.68072548828115,-34.32302549095252',
+      language: 'en'
+    }
+
+    const geocodeResults = await this.$axios.$get(`https://api.maptiler.com/geocoding/${query}.json`, { params })
+    commit('ADD_GEOCODE_RESULTS', geocodeResults)
+  },
+
+  setBoundingBox({ commit }, payload) {
+    commit('UPDATE_BOUNDING_BOX', payload)
   }
 }

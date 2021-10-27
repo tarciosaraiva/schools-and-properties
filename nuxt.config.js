@@ -5,7 +5,7 @@ export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
 
-  dev: process.env.NODE_ENV !== 'production',
+  // dev: process.env.NODE_ENV !== 'production',
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -26,13 +26,15 @@ export default {
   },
 
   env: {
-    mapTilerSecret: process.env.MAP_TILER_SECRET
+    mapTilerSecret: process.env.MAP_TILER_SECRET,
+    domainApiKey: process.env.DOMAIN_API_KEY
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     'normalize.css',
-    'milligram'
+    'milligram',
+    '@/assets/css/main.css'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
