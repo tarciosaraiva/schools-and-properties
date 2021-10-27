@@ -29,7 +29,9 @@ import { mapState } from 'vuex'
 import debounce from 'lodash.debounce'
 
 export default Vue.extend({
-  props: ['geocodeFn'],
+  props: {
+    geocodeFn: Function
+  },
   data() {
     return {
       location: '',

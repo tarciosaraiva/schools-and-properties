@@ -28,7 +28,7 @@ describe('SidebarFilter', () => {
     }
     store = new Vuex.Store({ state, mutations })
     wrapper = shallowMount(SidebarFilter, { propsData, store, localVue })
-  });
+  })
 
   test('is a Vue instance', () => {
     expect(wrapper.vm).toBeTruthy()
