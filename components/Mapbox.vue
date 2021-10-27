@@ -148,12 +148,12 @@ export default Vue.extend({
     mapLoaded () {
       this.setBoundingBox(this.map.getBounds())
 
-      this.map.loadImage('/primary-school.png', (err: any, img: any) => {
+      this.map.loadImage(require('~/assets/images/primary-school.png'), (err: any, img: any) => {
         if (err) throw err;
         this.map.addImage('primary-school', img);
       })
 
-      this.map.loadImage('/secondary-school.png', (err: any, img: any) => {
+      this.map.loadImage(require('~/assets/images/secondary-school.png'), (err: any, img: any) => {
         if (err) throw err;
         this.map.addImage('secondary-school', img);
       })
