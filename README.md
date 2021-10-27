@@ -1,6 +1,18 @@
+# schools-and-properties
+
+> A simple SPA that leverages from data captured from different domains and provides tools to plot and visualize said that to aid people in making decisions on where to live.
+
 [![ci](https://github.com/tarciosaraiva/schools-and-properties/actions/workflows/ci.yml/badge.svg)](https://github.com/tarciosaraiva/schools-and-properties/actions/workflows/ci.yml)
 
-# schools-and-properties
+## Motivation
+
+While researching for our next place to live I found myself constantly looking up 3 websites:
+
+- A property search website popular in Australia
+- [Find My School](https://www.findmyschool.vic.gov.au/) to see which school would be in the catchment zone of the property I was interested in
+- [Better Education](https://bettereducation.com.au/) to have an idea of school ranking that I found using the website above
+
+It is annoying and exhausting to constantly swap between these websites so I decided to do something about it. This project is the initial thinking of what I want to do - yes, MVP, for those that like acronyms.
 
 ## Build Setup
 
@@ -20,52 +32,3 @@ $ yarn generate
 ```
 
 For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
-
-## Special Directories
-
-You can create the following extra directories, some of which have special behaviors. Only `pages` is required; you can delete them if you don't want to use their functionality.
-
-### `assets`
-
-The assets directory contains your uncompiled assets such as Stylus or Sass files, images, or fonts.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/assets).
-
-### `components`
-
-The components directory contains your Vue.js components. Components make up the different parts of your page and can be reused and imported into your pages, layouts and even other components.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/components).
-
-### `layouts`
-
-Layouts are a great help when you want to change the look and feel of your Nuxt app, whether you want to include a sidebar or have distinct layouts for mobile and desktop.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/layouts).
-
-
-### `pages`
-
-This directory contains your application views and routes. Nuxt will read all the `*.vue` files inside this directory and setup Vue Router automatically.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/get-started/routing).
-
-### `plugins`
-
-The plugins directory contains JavaScript plugins that you want to run before instantiating the root Vue.js Application. This is the place to add Vue plugins and to inject functions or constants. Every time you need to use `Vue.use()`, you should create a file in `plugins/` and add its path to plugins in `nuxt.config.js`.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/plugins).
-
-### `static`
-
-This directory contains your static files. Each file inside this directory is mapped to `/`.
-
-Example: `/static/robots.txt` is mapped as `/robots.txt`.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/static).
-
-### `store`
-
-This directory contains your Vuex store files. Creating a file in this directory automatically activates Vuex.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/store).
