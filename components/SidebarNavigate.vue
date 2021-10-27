@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="navigate-container container">
     <h2>Navigate</h2>
     <form>
       <fieldset>
@@ -15,9 +15,9 @@
       </fieldset>
     </form>
     <h3 v-if="locations.length">Suggestions for '{{location}}'</h3>
-    <div v-if="locations.length" class="results">
+    <div v-if="locations.length" class="geo-suggestions">
       <div v-for="location in locations" :key="location.name" class="row">
-        <a href="#" class="column" @click.stop.prevent="navigateTo(location.center)">{{ location.name }}</a>
+        <a href="#" class="suggestion column" @click.stop.prevent="navigateTo(location.center)">{{ location.name }}</a>
       </div>
     </div>
   </div>
@@ -54,33 +54,3 @@ export default Vue.extend({
   }
 })
 </script>
-
-<style>
-.sidebar form {
-  margin-bottom: 0;
-}
-
-.sidebar .container {
-  margin-bottom: 2rem;
-}
-
-.results {
-  border: 1px solid #ccc;
-  border-radius: 0.5rem;
-  padding: 1rem;
-  font-size: 90%;
-  height: 100%;
-  max-height: 20rem;
-  overflow-y: auto;
-  overflow-x: hidden;
-}
-
-.results .row span.column {
-  display: block;
-  padding: 0.25rem 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  width: 30rem;
-}
-</style>
