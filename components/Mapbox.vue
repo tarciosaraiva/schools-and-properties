@@ -52,7 +52,7 @@ export default Vue.extend({
         const hasPoi = this.markers.find(m => m.getLngLat() === lngLat)
 
         if (!hasPoi) {
-          const popup = new maplibregl.Popup({ closeButton: false })
+          const popup = new maplibregl.Popup({ maxWidth: '400px', closeButton: false })
             .setHTML(`<div id="property-popup-content-${p.id}"></div>`)
             .on('open', () => {
               new PropertyPopupContent({ propsData: { property: p } })
@@ -60,7 +60,7 @@ export default Vue.extend({
             })
 
           const el = document.createElement('div')
-          el.style.backgroundImage = 'url(/location.png)'
+          el.style.backgroundImage = `url(${require('~/assets/images/location.png')})`
           el.style.width = '32px'
           el.style.height = '32px'
           el.style.backgroundSize = '100%'
@@ -102,7 +102,7 @@ export default Vue.extend({
         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
       }
 
-      new maplibregl.Popup({ closeButton: false })
+      new maplibregl.Popup({ maxWidth: '300px', closeButton: false })
           .setHTML(`<div id="school-popup-content-${poiFeature.id}"></div>`)
           .on('open', () => {
             new SchoolPopupContent({ propsData: { school: props } })
@@ -238,7 +238,6 @@ export default Vue.extend({
 
   mounted() {
     this.map = new maplibregl.Map({
-      accessToken: '',
       container: 'map',
       style: `https://api.maptiler.com/maps/streets/style.json?key=${process.env.mapTilerSecret}`,
       center: [144.9646, -37.0201],

@@ -1,17 +1,48 @@
-.school-info.container .school-name {
+.maplibregl-popup-content.mapboxgl-popup-content {
+  border-radius: 0.5rem;
+}
+
+.popup-info.container {
+  padding: 0;
+}
+
+.popup-info.container .school-name {
   border-bottom: 1px solid #ccc;
+  margin-bottom: 1.6rem;
   text-align: justify;
   text-justify: inter-character;
   white-space: nowrap;
 }
 
-.school-info.container .school-stat-label {
+.popup-info.container .school-stat-label {
   text-decoration: underline;
   white-space: nowrap;
 }
 
-.school-info.container .school-stat-value {
+.popup-info.container .school-stat-value {
   font-weight: bold;
   text-align: right;
   white-space: nowrap;
+}
+
+.popup-info.container .property {
+  padding: 1rem 0 0 0;
+}
+
+.popup-info.container .property .price {
+  font-weight: bold;
+  font-size: 120%;
+}
+
+.popup-info.container .property .address {
+  font-weight: bold;
+}
+
+.popup-info.container ul {
+  column-count: 3;
+  list-style-type: none;
+}
+
+.popup-info.container ul li {
+  margin-bottom: 0.25rem;
 }

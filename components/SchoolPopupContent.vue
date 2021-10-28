@@ -1,5 +1,5 @@
 <template>
-  <div class="school-info container">
+  <div class="popup-info container">
     <div class="row">
       <div class="column">
         <p class="school-name">
