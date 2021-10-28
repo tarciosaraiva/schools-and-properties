@@ -49,7 +49,9 @@ export interface PropertyListing {
   street: string,
   streetNumber: string,
   suburb: string,
-  unitNumber: string
+  unitNumber: string,
+  media: string[],
+  listingSlug: string
 }
 
 export const state = () => ({
@@ -109,7 +111,9 @@ export const mutations: MutationTree<RootState> = {
           street: listing.propertyDetails.street,
           streetNumber: listing.propertyDetails.streetNumber,
           suburb: listing.propertyDetails.suburb,
-          unitNumber: listing.propertyDetails.unitNumber
+          unitNumber: listing.propertyDetails.unitNumber,
+          media: listing.media.map((m: any) => m.url),
+          listingSlug: listing.listingSlug
         }
 
         return propertyListing
