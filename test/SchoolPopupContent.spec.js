@@ -5,10 +5,10 @@ describe('SchoolPopupContent', () => {
   const propsData = {
     school: {
       schoolName: 'school',
-      overallScore: 95,
-      englishScore: 4,
-      mathsScore: 4,
-      enrolments: 500,
+      primaryOverallScore: 95,
+      primaryEnglishScore: 4,
+      primaryMathsScore: 4,
+      primaryEnrolments: 500,
       phoneNumber: '03 9999 8888',
     }
   }

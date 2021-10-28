@@ -132,9 +132,9 @@ export default Vue.extend({
         eduSectorFilter = null
       }
 
-      const ratingFilter = ['>=', ['get', 'overallScore'], `${schoolsFilter.rating}`]
-      const engRatingFilter = ['>=', ['get', 'englishScore'], `${schoolsFilter.englishRating}`]
-      const mathsRatingFilter = ['>=', ['get', 'mathsScore'], `${schoolsFilter.mathsRating}`]
+      const ratingFilter = ['>=', ['get', 'primaryOverallScore'], `${schoolsFilter.rating}`]
+      const engRatingFilter = ['>=', ['get', 'primaryEnglishScore'], `${schoolsFilter.englishRating}`]
+      const mathsRatingFilter = ['>=', ['get', 'primaryMathsScore'], `${schoolsFilter.mathsRating}`]
 
       return [
         'all',
@@ -164,7 +164,8 @@ export default Vue.extend({
         .addSource('primary-schools', {
           type: 'geojson',
           generateId: true,
-          data: `https://api.maptiler.com/data/33dea49b-84a9-43ab-af10-a2455acfa88b/features.json?key=${process.env.mapTilerSecret}`,
+          data: `https://api.maptiler.com/data/${process.env.primaryZones}/features.json?key=${process.env.mapTilerSecret}`,
+          attribution: 'Department of Training and Education'
         })
         .addLayer({
           id: 'primary-schools-fill',
@@ -192,13 +193,19 @@ export default Vue.extend({
           type: 'geojson',
           data: `https://api.maptiler.com/data/06ea284f-1eec-43ec-92f6-9026d826371e/features.json?key=${process.env.mapTilerSecret}`,
           generateId: true,
+          attribution: 'Department of Training and Education, BetterEducation'
         })
         .addLayer({
           id: 'school-point',
           type: 'symbol',
           source: 'school-locations',
           layout: {
-            'icon-image': 'primary-school',
+            'icon-image': [
+              'case',
+              ['==', ['get', 'schoolType'], 'Primary'],
+              'primary-school',
+              'secondary-school'
+            ],
             'text-anchor': 'left',
             'text-justify': 'left',
             'text-field': [

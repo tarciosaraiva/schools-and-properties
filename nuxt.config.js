@@ -5,7 +5,7 @@ export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
 
-  // dev: process.env.NODE_ENV !== 'production',
+  dev: process.env.NODE_ENV !== 'production',
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -27,7 +27,14 @@ export default {
 
   env: {
     mapTilerSecret: process.env.MAP_TILER_SECRET,
-    domainApiKey: process.env.DOMAIN_API_KEY
+    domainApiKey: process.env.DOMAIN_API_KEY,
+    primaryZones: '33dea49b-84a9-43ab-af10-a2455acfa88b',
+    p7Zones: 'b07924ec-b6e7-4753-a5ad-d9265f6ca53e',
+    p8Zones: 'd56a57af-f555-4e3b-a5f0-6ea6b7ef4848',
+    p9Zones: '52617416-64a9-4fa3-8e28-ba129d50478d',
+    p10Zones: 'f2434a55-5a6b-4568-a27e-36681391d821',
+    p11Zones: 'b37e727a-e712-4291-81dd-15d552559208',
+    p12Zones: '6bbd7b86-379e-4e58-9e72-e50a5dc1269f',
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
