@@ -1,0 +1,12 @@
+!table
+!version 300
+!charset Neutral
+
+Definition Table
+  Type NATIVE Charset "Neutral"
+  Fields 5
+    School_Name Char (254) ;
+    Campus_Name Char (254) ;
+    ENTITY_CODE Integer (10) ;
+    Year_Level Char (254) ;
+    Boundary_Year Char (254) ;
