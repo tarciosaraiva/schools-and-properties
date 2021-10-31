@@ -1,5 +1,5 @@
 .maplibregl-popup-content.mapboxgl-popup-content {
-  border-radius: 0.5rem;
+  padding: 0.25rem
 }
 
 .popup-info.container {
@@ -8,41 +8,57 @@
 
 .popup-info.container .school-name {
   border-bottom: 1px solid #ccc;
-  margin-bottom: 1.6rem;
-  text-align: justify;
-  text-justify: inter-character;
-  white-space: nowrap;
 }
 
-.popup-info.container .school-stat-label {
+.popup-info.container .school-name small {
+  color: #999;
+}
+
+.popup-info.container .school-stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: var(--universal-margin)
+}
+
+.popup-info.container .school-stats .label {
+  font-size: 0.85rem;
+  max-width: 120px;
   text-decoration: underline;
+  width: 100%;
   white-space: nowrap;
 }
 
-.popup-info.container .school-stat-value {
+.popup-info.container .school-stats .value {
+  font-size: 0.85rem;
   font-weight: bold;
+  max-width: 150px;
   text-align: right;
   white-space: nowrap;
 }
 
-.popup-info.container .property {
-  padding: 1rem 0 0 0;
-}
-
-.popup-info.container .property .price {
+.popup-info.container .property-stats .price {
   font-weight: bold;
   font-size: 120%;
 }
 
-.popup-info.container .property .address {
+.popup-info.container .property-stats .address {
   font-weight: bold;
 }
 
-.popup-info.container ul {
-  column-count: 3;
-  list-style-type: none;
+.popup-info.container .property-stats .division {
+  display: flex;
+  justify-content: space-between;
+  text-decoration: underline;
 }
 
-.popup-info.container ul li {
+.popup-info.container .property-stats ul {
+  column-count: 3;
+  list-style-type: none;
+  margin: var(--universal-margin);
+  padding: 0;
+}
+
+.popup-info.container .property-stats ul li {
   margin-bottom: 0.25rem;
 }

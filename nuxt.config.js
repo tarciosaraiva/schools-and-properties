@@ -15,7 +15,7 @@ export default {
     },
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'initial-scale=1,maximum-scale=1,user-scalable=no' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' }
     ],
@@ -28,6 +28,7 @@ export default {
   env: {
     mapTilerSecret: process.env.MAP_TILER_SECRET,
     domainApiKey: process.env.DOMAIN_API_KEY,
+    schoolLocations: '06ea284f-1eec-43ec-92f6-9026d826371e',
     primaryZones: '33dea49b-84a9-43ab-af10-a2455acfa88b',
     p7Zones: 'b07924ec-b6e7-4753-a5ad-d9265f6ca53e',
     p8Zones: 'd56a57af-f555-4e3b-a5f0-6ea6b7ef4848',
@@ -39,8 +40,7 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    'normalize.css',
-    'milligram',
+    'mini.css',
     '@/assets/css/main.css',
     '@/assets/css/sidebar.css',
     '@/assets/css/popup.css'

@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`index renders correctly with props 1`] = `
+<div id="app">
+  <header>
+    <h1>Schools and properties</h1>
+  </header>
+  <main>
+    <mapbox-stub flytocenter></mapbox-stub>
+    <form class="sidebar">
+      <sidebar-navigate-stub geocodefn="[Function]"></sidebar-navigate-stub>
+      <sidebar-filter-stub loadlistingsfn="[Function]"></sidebar-filter-stub>
+    </form>
+  </main>
+  <footer>
+    <p>
+      The Department of Education and Training’s
+      <a href="https://www.education.vic.gov.au/Pages/disclaimer.aspx">Disclaimer</a>,
+      <a href="https://www.education.vic.gov.au/Pages/webprivacypolicy.aspx">Privacy</a>
+      and
+      <a href="https://www.education.vic.gov.au/Pages/copyright.aspx" id="copyright-link">Copyright</a>
+      applies to information on this website.
+    </p>
+  </footer>
+</div>
+`;

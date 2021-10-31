@@ -31,6 +31,18 @@ export default Vue.extend({
     }
   },
 
+  computed: {
+    streetsStyle: () => `https://api.maptiler.com/maps/streets/style.json?key=${process.env.mapTilerSecret}`,
+    priSchoolZonesSource: () => `https://api.maptiler.com/data/${process.env.primaryZones}/features.json?key=${process.env.mapTilerSecret}`,
+    p7SchoolZonesSource: () => `https://api.maptiler.com/data/${process.env.p7Zones}/features.json?key=${process.env.mapTilerSecret}`,
+    p8SchoolZonesSource: () => `https://api.maptiler.com/data/${process.env.p8Zones}/features.json?key=${process.env.mapTilerSecret}`,
+    p9SchoolZonesSource: () => `https://api.maptiler.com/data/${process.env.p9Zones}/features.json?key=${process.env.mapTilerSecret}`,
+    p10SchoolZonesSource: () => `https://api.maptiler.com/data/${process.env.p10Zones}/features.json?key=${process.env.mapTilerSecret}`,
+    p11SchoolZonesSource: () => `https://api.maptiler.com/data/${process.env.p11Zones}/features.json?key=${process.env.mapTilerSecret}`,
+    p12SchoolZonesSource: () => `https://api.maptiler.com/data/${process.env.p12Zones}/features.json?key=${process.env.mapTilerSecret}`,
+    schoolLocationsSource: () => `https://api.maptiler.com/data/${process.env.schoolLocations}/features.json?key=${process.env.mapTilerSecret}`,
+  },
+
   watch: {
     flyToCenter (newCenter, _) {
       if (newCenter.length === 2) {
@@ -84,10 +96,7 @@ export default Vue.extend({
     },
 
     flyMapToCenter (center: any) {
-      this.map.flyTo({
-        center,
-        zoom: 14
-      })
+      this.map.flyTo({ center, zoom: 14 })
     },
 
     onSchoolPoiClick (e: any) {
@@ -102,7 +111,7 @@ export default Vue.extend({
         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
       }
 
-      new maplibregl.Popup({ maxWidth: '300px', closeButton: false })
+      new maplibregl.Popup({ closeButton: false })
           .setHTML(`<div id="school-popup-content-${poiFeature.id}"></div>`)
           .on('open', () => {
             new SchoolPopupContent({ propsData: { school: props } })
@@ -132,17 +141,27 @@ export default Vue.extend({
         eduSectorFilter = null
       }
 
-      const ratingFilter = ['>=', ['get', 'primaryOverallScore'], `${schoolsFilter.rating}`]
-      const engRatingFilter = ['>=', ['get', 'primaryEnglishScore'], `${schoolsFilter.englishRating}`]
-      const mathsRatingFilter = ['>=', ['get', 'primaryMathsScore'], `${schoolsFilter.mathsRating}`]
-
-      return [
+      const primaryFilter = [
         'all',
         eduSectorFilter,
-        ratingFilter,
-        engRatingFilter,
-        mathsRatingFilter
+        ['>=', ['get', 'primaryOverallScore'], `${schoolsFilter.primary.rating}`],
+        ['>=', ['get', 'primaryEnglishScore'], `${schoolsFilter.primary.englishRating}`],
+        ['>=', ['get', 'primaryMathsScore'], `${schoolsFilter.primary.mathsRating}`]
       ].filter(i => i !== null)
+
+      const secondaryFilter = [
+        'all',
+        eduSectorFilter,
+        ['>=', ['get', 'secondaryOverallScore'], `${schoolsFilter.secondary.rating}`],
+        ['>=', ['get', 'secondaryEnglishScore'], `${schoolsFilter.secondary.englishRating}`],
+        ['>=', ['get', 'secondaryMathsScore'], `${schoolsFilter.secondary.mathsRating}`]
+      ].filter(i => i !== null)
+
+      return [
+        'any',
+        primaryFilter,
+        secondaryFilter
+      ]
     },
 
     mapLoaded () {
@@ -164,7 +183,7 @@ export default Vue.extend({
         .addSource('primary-schools', {
           type: 'geojson',
           generateId: true,
-          data: `https://api.maptiler.com/data/${process.env.primaryZones}/features.json?key=${process.env.mapTilerSecret}`,
+          data: this.priSchoolZonesSource,
           attribution: 'Department of Training and Education'
         })
         .addLayer({
@@ -191,7 +210,7 @@ export default Vue.extend({
         })
         .addSource('school-locations', {
           type: 'geojson',
-          data: `https://api.maptiler.com/data/06ea284f-1eec-43ec-92f6-9026d826371e/features.json?key=${process.env.mapTilerSecret}`,
+          data: this.schoolLocationsSource,
           generateId: true,
           attribution: 'Department of Training and Education, BetterEducation'
         })
@@ -202,9 +221,9 @@ export default Vue.extend({
           layout: {
             'icon-image': [
               'case',
-              ['==', ['get', 'schoolType'], 'Primary'],
-              'primary-school',
-              'secondary-school'
+              ['==', ['get', 'schoolType'], 'Primary'], 'primary-school',
+              ['!=', ['get', 'schoolType'], 'Primary'], 'secondary-school',
+              'primary-school'
             ],
             'text-anchor': 'left',
             'text-justify': 'left',
@@ -230,23 +249,18 @@ export default Vue.extend({
     },
 
     addControls () {
-      const scaleControl = new maplibregl.ScaleControl({})
-      const navControl = new maplibregl.NavigationControl({})
-      const geolocateControl = new maplibregl.GeolocateControl({
+      this.map.addControl(new maplibregl.NavigationControl({}), 'bottom-right')
+      this.map.addControl(new maplibregl.GeolocateControl({
         positionOptions: { enableHighAccuracy: true },
         trackUserLocation: false
-      })
-
-      this.map.addControl(scaleControl, 'bottom-right')
-      this.map.addControl(navControl, 'bottom-right')
-      this.map.addControl(geolocateControl)
+      }))
     }
   },
 
   mounted() {
     this.map = new maplibregl.Map({
       container: 'map',
-      style: `https://api.maptiler.com/maps/streets/style.json?key=${process.env.mapTilerSecret}`,
+      style: this.streetsStyle,
       center: [144.9646, -37.0201],
       zoom: 7,
     })
@@ -256,13 +270,3 @@ export default Vue.extend({
   }
 })
 </script>
-
-<style>
-.mapboxgl-ctrl-group button {
-  margin-bottom: 0;
-}
-
-.school-popup p {
-  margin-bottom: 0;
-}
-</style>

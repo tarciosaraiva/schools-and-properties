@@ -1,32 +1,32 @@
 <template>
   <div class="popup-info container">
-    <div class="row">
-      <div class="column">
-        <p class="school-name">
-          <strong>{{ school.schoolName }}</strong>
-        </p>
-      </div>
-    </div>
-    <div class="row">
-      <span class="column school-stat-label">Overall rating</span>
-      <span class="column school-stat-value"><em>{{ school.primaryOverallScore }}</em></span>
-    </div>
-    <div class="row">
-      <span class="column school-stat-label">English rating</span>
-      <span class="column school-stat-value"><em>{{ school.primaryEnglishScore }}</em></span>
-    </div>
-    <div class="row">
-      <span class="column school-stat-label">Maths rating</span>
-      <span class="column school-stat-value"><em>{{ school.primaryMathsScore }}</em></span>
-    </div>
-    <div class="row">
-      <span class="column school-stat-label">Enrolments</span>
-      <span class="column school-stat-value"><em>{{ school.primaryEnrolments }}</em></span>
-    </div>
-    <div class="row">
-      <span class="column school-stat-label">Phone</span>
-      <span class="column school-stat-value"><em>{{ school.phoneNumber }}</em></span>
-    </div>
+    <p class="school-name">
+      {{ school.schoolName }}
+      <br>
+      <small>{{ school.educationSector }}, {{ school.schoolType }} - {{ school.phoneNumber }}</small>
+    </p>
+    <p v-if="hasPrimaryRating">Primary ratings</p>
+    <dl v-if="hasPrimaryRating" class="school-stats">
+      <dt class="label">Overall rating</dt>
+      <dd class="value"><em>{{ school.primaryOverallScore }}</em></dd>
+      <dt class="label">English rating</dt>
+      <dd class="value"><em>{{ school.primaryEnglishScore }}</em></dd>
+      <dt class="label">Maths rating</dt>
+      <dd class="value"><em>{{ school.primaryMathsScore }}</em></dd>
+      <dt class="label">Enrolments</dt>
+      <dd class="value"><em>{{ school.primaryEnrolments }}</em></dd>
+    </dl>
+    <p v-if="hasSecondaryRating">Secondary ratings</p>
+    <dl v-if="hasSecondaryRating" class="school-stats">
+      <dt class="label">Overall rating</dt>
+      <dd class="value"><em>{{ school.secondaryOverallScore }}</em></dd>
+      <dt class="label">English rating</dt>
+      <dd class="value"><em>{{ school.secondaryEnglishScore }}</em></dd>
+      <dt class="label">Maths rating</dt>
+      <dd class="value"><em>{{ school.secondaryMathsScore }}</em></dd>
+      <dt class="label">Enrolments</dt>
+      <dd class="value"><em>{{ school.secondaryEnrolments }}</em></dd>
+    </dl>
   </div>
 </template>
 
@@ -37,5 +37,13 @@ export default Vue.extend({
   props: {
     school: Object,
   },
+  computed: {
+    hasPrimaryRating () {
+      return this.school.primaryOverallScore !== '#N/A'
+    },
+    hasSecondaryRating () {
+      return this.school.secondaryOverallScore !== '#N/A'
+    }
+  }
 })
 </script>

@@ -1,4 +1,4 @@
-import { shallowMount, createLocalVue } from '@vue/test-utils'
+import { mount, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
 
 import { state } from '@/store'
@@ -22,7 +22,7 @@ describe('SidebarNavigate', () => {
       { name: 'my other suburb', center: [2, 2] }
     ]
 
-    wrapper = shallowMount(SidebarNavigate, { propsData, store, localVue })
+    wrapper = mount(SidebarNavigate, { propsData, store, localVue })
   })
 
   afterEach(() => {

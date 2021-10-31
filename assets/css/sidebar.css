@@ -1,30 +1,20 @@
-.sidebar .container {
-  margin-bottom: 2rem;
-}
-
-.sidebar .container form {
-  margin-bottom: 0;
-}
-
-.sidebar .container.navigate-container .geo-suggestions {
-  border: 1px solid #ccc;
-  border-radius: 0.5rem;
-  padding: 0 1rem;
+.sidebar .navigate-container .geo-suggestions {
+  padding: 0 0.5rem;
   font-size: 90%;
   height: 100%;
-  max-height: 15rem;
+  max-height: 10rem;
   overflow-y: auto;
   overflow-x: hidden;
 }
 
-.sidebar .container.navigate-container .geo-suggestions .row {
+.sidebar .navigate-container .geo-suggestions .row {
   padding: 0.25rem 0;
 }
 
-.sidebar .container.navigate-container .geo-suggestions .suggestion {
+.sidebar .navigate-container .geo-suggestions .suggestion {
   display: block;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  width: 30rem;
+  width: 22rem;
 }

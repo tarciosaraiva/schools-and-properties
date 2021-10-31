@@ -1,4 +1,4 @@
-import { shallowMount, createLocalVue } from '@vue/test-utils'
+import { mount, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
 
 import { state } from '@/store'
@@ -22,12 +22,15 @@ describe('SidebarFilter', () => {
       'UPDATE_PROPERTY_FILTER_CAR_SPACES': jest.fn(),
       'UPDATE_PROPERTY_FILTER_MAX_PRICE': jest.fn(),
       'UPDATE_SCHOOL_EDUCATION_SECTOR': jest.fn(),
-      'UPDATE_SCHOOL_RATING': jest.fn(),
-      'UPDATE_SCHOOL_ENG_RATING': jest.fn(),
-      'UPDATE_SCHOOL_MATH_RATING': jest.fn()
+      'UPDATE_SCHOOL_PRIMARY_RATING': jest.fn(),
+      'UPDATE_SCHOOL_PRIMARY_ENG_RATING': jest.fn(),
+      'UPDATE_SCHOOL_PRIMARY_MATH_RATING': jest.fn(),
+      'UPDATE_SCHOOL_SECONDARY_RATING': jest.fn(),
+      'UPDATE_SCHOOL_SECONDARY_ENG_RATING': jest.fn(),
+      'UPDATE_SCHOOL_SECONDARY_MATH_RATING': jest.fn()
     }
     store = new Vuex.Store({ state, mutations })
-    wrapper = shallowMount(SidebarFilter, { propsData, store, localVue })
+    wrapper = mount(SidebarFilter, { propsData, store, localVue })
   })
 
   test('is a Vue instance', () => {
@@ -70,25 +73,23 @@ describe('SidebarFilter', () => {
   })
 
   test('education sector default value matches state', () => {
-    const inputs = wrapper.findAll('#s_edu_sector')
-    const checkedElement = inputs.filter(i => i.element.checked)
-    expect(checkedElement).toHaveLength(1)
-    expect(checkedElement.at(0).element.value).toBe(store.state.filter.schools.educationSector)
+    const input = wrapper.find('#s_edu_sector')
+    expect(input.element.value).toBe(store.state.filter.schools.educationSector)
   })
 
   test('overall rating default value match state', () => {
-    const input = wrapper.find('#s_rating')
-    expect(Number(input.element.value)).toBe(store.state.filter.schools.rating)
+    const input = wrapper.find('#s_prim_rating')
+    expect(Number(input.element.value)).toBe(store.state.filter.schools.primary.rating)
   })
 
   test('english rating default value match state', () => {
-    const input = wrapper.find('#s_english_rating')
-    expect(Number(input.element.value)).toBe(store.state.filter.schools.englishRating)
+    const input = wrapper.find('#s_prim_english_rating')
+    expect(Number(input.element.value)).toBe(store.state.filter.schools.primary.englishRating)
   })
 
   test('maths rating default value match state', () => {
-    const input = wrapper.find('#s_maths_rating')
-    expect(Number(input.element.value)).toBe(store.state.filter.schools.mathsRating)
+    const input = wrapper.find('#s_prim_maths_rating')
+    expect(Number(input.element.value)).toBe(store.state.filter.schools.primary.mathsRating)
   })
 
   test('should invoke passed "loadListingFn" when applying filter', () => {
@@ -102,9 +103,12 @@ describe('SidebarFilter', () => {
     ['UPDATE_PROPERTY_FILTER_BATHROOMS', '#p_bathrooms', '3'],
     ['UPDATE_PROPERTY_FILTER_CAR_SPACES', '#p_car_spaces', '2'],
     ['UPDATE_PROPERTY_FILTER_MAX_PRICE', '#p_max_price', '500000'],
-    ['UPDATE_SCHOOL_RATING', '#s_rating', '99'],
-    ['UPDATE_SCHOOL_ENG_RATING', '#s_english_rating', '2'],
-    ['UPDATE_SCHOOL_MATH_RATING', '#s_maths_rating', '3'],
+    ['UPDATE_SCHOOL_PRIMARY_RATING', '#s_prim_rating', '99'],
+    ['UPDATE_SCHOOL_PRIMARY_ENG_RATING', '#s_prim_english_rating', '2'],
+    ['UPDATE_SCHOOL_PRIMARY_MATH_RATING', '#s_prim_maths_rating', '3'],
+    ['UPDATE_SCHOOL_SECONDARY_RATING', '#s_sec_rating', '98'],
+    ['UPDATE_SCHOOL_SECONDARY_ENG_RATING', '#s_sec_english_rating', '1'],
+    ['UPDATE_SCHOOL_SECONDARY_MATH_RATING', '#s_sec_maths_rating', '2'],
   ])(
     'should have committed mutation %p to the store when rating changes',
     (mutation, elementId, value) => {

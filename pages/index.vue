@@ -9,36 +9,28 @@
         :listings="listings"
         :fly-to-center="flyToCenter"
       />
-      <div class="sidebar">
+      <form class="sidebar">
         <sidebar-navigate :geocode-fn="geocode" @navigate="onNavigate" />
         <sidebar-filter :load-listings-fn="loadListings" />
-      </div>
+      </form>
     </main>
     <footer>
-      <small
-        >School zone and locations sourced from
-        <a href="https://www.data.vic.gov.au/" target="blank">Data Vic</a>.
-        School rankings sourced from
-        <a href="https://bettereducation.com.au/" target="blank"
-          >Better Education</a
-        >. Property listings sourced from
-        <a href="https://www.domain.com.au/" target="blank">Domain</a>.
-        <span
-          >House Icons made by
-          <a href="https://icon54.com/" title="Pixel perfect">Pixel perfect</a>
-          from
-          <a href="https://www.flaticon.com/" title="Flaticon"
-            >www.flaticon.com</a
-          ></span
+      <p>
+        The Department of Education and Training’s
+        <a href="https://www.education.vic.gov.au/Pages/disclaimer.aspx"
+          >Disclaimer</a
+        >,
+        <a href="https://www.education.vic.gov.au/Pages/webprivacypolicy.aspx"
+          >Privacy</a
         >
-        <span
-          >School Icons made by
-          <a href="https://www.freepik.com" title="Freepik">Freepik</a> from
-          <a href="https://www.flaticon.com/" title="Flaticon"
-            >www.flaticon.com</a
-          ></span
+        and
+        <a
+          id="copyright-link"
+          href="https://www.education.vic.gov.au/Pages/copyright.aspx"
+          >Copyright</a
         >
-      </small>
+        applies to information on this website.
+      </p>
     </footer>
   </div>
 </template>

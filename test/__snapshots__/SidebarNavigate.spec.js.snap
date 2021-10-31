@@ -1,22 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SidebarNavigate renders correctly with props and store 1`] = `
-<div class="navigate-container container">
-  <h2>Navigate</h2>
-  <form>
-    <fieldset>
-      <label for="geo_go_to">Go to</label>
+<div class="navigate-container">
+  <fieldset>
+    <legend>Navigate</legend>
+    <div class="input-group vertical">
+      <label for="geo_go_to" style="display: none;">Go to location</label>
       <input id="geo_go_to" name="geo_go_to" placeholder="200 St Kilda Road, Melbourne" type="text">
-    </fieldset>
-  </form>
-  <h3>Suggestions for ''</h3>
-  <div class="geo-suggestions">
-    <div class="row">
-      <a class="suggestion column" href="#">my suburb</a>
     </div>
-    <div class="row">
-      <a class="suggestion column" href="#">my other suburb</a>
+    <p>Locations found for ''</p>
+    <div class="geo-suggestions">
+      <div class="row">
+        <a class="suggestion column" href="#">my suburb</a>
+      </div>
+      <div class="row">
+        <a class="suggestion column" href="#">my other suburb</a>
+      </div>
     </div>
-  </div>
+  </fieldset>
 </div>
 `;

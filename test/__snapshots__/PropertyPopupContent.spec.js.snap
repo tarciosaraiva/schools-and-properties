@@ -2,37 +2,33 @@
 
 exports[`PropertyPopupContent renders correctly with props 1`] = `
 <div class="popup-info container">
-  <div class="row">
-    <div class="column">
-      <vue-flux-stub captions images="https://my.image/1.png" options="[object Object]" style="width: 380px;" transitions="[object Object]"></vue-flux-stub>
-    </div>
+  <div class="vue-flux" style="width: 390px;">
+    <!---->
+    <!---->
+    <!---->
   </div>
-  <div class="row property">
-    <span class="column price">AUD 900K</span>
-  </div>
-  <div class="row property">
-    <p class="column address">
+  <div class="property-stats">
+    <p class="price">AUD 900K</p>
+    <p class="address">
       <em>1 My Street, My Suburb</em>
     </p>
-  </div>
-  <div class="row property">
-    <ul class="column">
+    <p class="division">
+      <span>2 rooms</span>
+      <span>2 bathrooms</span>
+      <span>2 car spaces</span>
+      <span>200 sqm</span>
+    </p>
+    <ul>
       <li>
-        f1
+        <em>f1</em>
       </li>
       <li>
-        f2
+        <em>f2</em>
       </li>
     </ul>
   </div>
-  <div class="row property">
-    <span class="column">2 rooms</span>
-    <span class="column">2 rooms</span>
-    <span class="column">2 car spaces</span>
-    <span class="column">200 sqm</span>
-  </div>
-  <div class="row property">
-    <a class="column" href="https://www.domain.com.au/my-property-slug" target="_blank">Go to ad</a>
+  <div class="button-group">
+    <a class="small button" href="https://www.domain.com.au/my-property-slug" target="_blank">Go to ad on domain.com.au</a>
   </div>
 </div>
 `;

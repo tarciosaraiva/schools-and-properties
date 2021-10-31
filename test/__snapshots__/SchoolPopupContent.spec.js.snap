@@ -2,42 +2,110 @@
 
 exports[`SchoolPopupContent renders correctly with props 1`] = `
 <div class="popup-info container">
-  <div class="row">
-    <div class="column">
-      <p class="school-name">
-        <strong>school</strong>
-      </p>
-    </div>
-  </div>
-  <div class="row">
-    <span class="column school-stat-label">Overall rating</span>
-    <span class="column school-stat-value">
+  <p class="school-name">
+    school
+    <br>
+    <small>Government, Primary - 03 9999 8888</small>
+  </p>
+  <p>Primary ratings</p>
+  <dl class="school-stats">
+    <dt class="label">Overall rating</dt>
+    <dd class="value">
       <em>95</em>
-    </span>
-  </div>
-  <div class="row">
-    <span class="column school-stat-label">English rating</span>
-    <span class="column school-stat-value">
+    </dd>
+    <dt class="label">English rating</dt>
+    <dd class="value">
       <em>4</em>
-    </span>
-  </div>
-  <div class="row">
-    <span class="column school-stat-label">Maths rating</span>
-    <span class="column school-stat-value">
+    </dd>
+    <dt class="label">Maths rating</dt>
+    <dd class="value">
       <em>4</em>
-    </span>
-  </div>
-  <div class="row">
-    <span class="column school-stat-label">Enrolments</span>
-    <span class="column school-stat-value">
+    </dd>
+    <dt class="label">Enrolments</dt>
+    <dd class="value">
       <em>500</em>
-    </span>
-  </div>
-  <div class="row">
-    <span class="column school-stat-label">Phone</span>
-    <span class="column school-stat-value">
-      <em>03 9999 8888</em>
-    </span>
-  </div>
+    </dd>
+  </dl>
+  <!---->
+  <!---->
+</div>
+`;
+
+exports[`SchoolPopupContent renders correctly with props and secondary school 1`] = `
+<div class="popup-info container">
+  <p class="school-name">
+    school
+    <br>
+    <small>Government, Pri/Sec - 03 9999 8888</small>
+  </p>
+  <p>Primary ratings</p>
+  <dl class="school-stats">
+    <dt class="label">Overall rating</dt>
+    <dd class="value">
+      <em>95</em>
+    </dd>
+    <dt class="label">English rating</dt>
+    <dd class="value">
+      <em>4</em>
+    </dd>
+    <dt class="label">Maths rating</dt>
+    <dd class="value">
+      <em>4</em>
+    </dd>
+    <dt class="label">Enrolments</dt>
+    <dd class="value">
+      <em>500</em>
+    </dd>
+  </dl>
+  <p>Secondary ratings</p>
+  <dl class="school-stats">
+    <dt class="label">Overall rating</dt>
+    <dd class="value">
+      <em>96</em>
+    </dd>
+    <dt class="label">English rating</dt>
+    <dd class="value">
+      <em>3</em>
+    </dd>
+    <dt class="label">Maths rating</dt>
+    <dd class="value">
+      <em>4</em>
+    </dd>
+    <dt class="label">Enrolments</dt>
+    <dd class="value">
+      <em>200</em>
+    </dd>
+  </dl>
+</div>
+`;
+
+exports[`SchoolPopupContent renders correctly with props and secondary school only 1`] = `
+<div class="popup-info container">
+  <p class="school-name">
+    school
+    <br>
+    <small>Independent, Secondary - 03 9999 8888</small>
+  </p>
+  <!---->
+  <!---->
+  <p>Secondary ratings</p>
+  <dl class="school-stats">
+    <dt class="label">Overall rating</dt>
+    <dd class="value">
+      <em>96</em>
+    </dd>
+    <dt class="label">English rating</dt>
+    <dd class="value">
+      <em>3</em>
+    </dd>
+    <dt class="label">Maths rating</dt>
+    <dd class="value">
+      <em>4</em>
+    </dd>
+    <dt class="label">Enrolments</dt>
+    <dd class="value">
+      <em>200</em>
+    </dd>
+  </dl>
 </div>
 `;

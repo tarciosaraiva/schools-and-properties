@@ -1,4 +1,4 @@
-import { shallowMount } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 import PropertyPopupContent from '@/components/PropertyPopupContent.vue'
 
 describe('PropertyPopupContent', () => {
@@ -17,12 +17,12 @@ describe('PropertyPopupContent', () => {
   }
 
   test('is a Vue instance', () => {
-    const wrapper = shallowMount(PropertyPopupContent, { propsData })
+    const wrapper = mount(PropertyPopupContent, { propsData })
     expect(wrapper.vm).toBeTruthy()
   })
 
   test('renders correctly with props', () => {
-    const wrapper = shallowMount(PropertyPopupContent, { propsData })
+    const wrapper = mount(PropertyPopupContent, { propsData })
     expect(wrapper).toMatchSnapshot()
   })
 })

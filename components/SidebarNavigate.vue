@@ -1,9 +1,9 @@
 <template>
-  <div class="navigate-container container">
-    <h2>Navigate</h2>
-    <form>
-      <fieldset>
-        <label for="geo_go_to">Go to</label>
+  <div class="navigate-container">
+    <fieldset>
+      <legend>Navigate</legend>
+      <div class="input-group vertical">
+        <label for="geo_go_to" style="display:none">Go to location</label>
         <input
           id="geo_go_to"
           v-model="location"
@@ -12,14 +12,14 @@
           name="geo_go_to"
           @keyup="handleKeyUp"
         />
-      </fieldset>
-    </form>
-    <h3 v-if="locations.length">Suggestions for '{{location}}'</h3>
-    <div v-if="locations.length" class="geo-suggestions">
-      <div v-for="loc in locations" :key="loc.name" class="row">
-        <a href="#" class="suggestion column" @click.stop.prevent="navigateTo(loc.center)">{{ loc.name }}</a>
       </div>
-    </div>
+      <p v-if="locations.length">Locations found for '{{location}}'</p>
+      <div v-if="locations.length" class="geo-suggestions">
+        <div v-for="loc in locations" :key="loc.name" class="row">
+          <a href="#" class="suggestion column" @click.stop.prevent="navigateTo(loc.center)">{{ loc.name }}</a>
+        </div>
+      </div>
+    </fieldset>
   </div>
 </template>
 

@@ -20,6 +20,11 @@ export interface PropertiesFilter {
 
 export interface SchoolsFilter {
   educationSector: string,
+  primary: SchoolLevelRating,
+  secondary: SchoolLevelRating,
+}
+
+interface SchoolLevelRating {
   rating: number,
   englishRating: number,
   mathsRating: number
@@ -73,9 +78,16 @@ export const state = () => ({
     },
     schools: {
       educationSector: 'all',
-      rating: 95,
-      englishRating: 4,
-      mathsRating: 4
+      primary: {
+        rating: 95,
+        englishRating: 4,
+        mathsRating: 4
+      },
+      secondary: {
+        rating: 95,
+        englishRating: 4,
+        mathsRating: 4
+      }
     }
   } as ApplicationFilter
 })
@@ -149,14 +161,23 @@ export const mutations: MutationTree<RootState> = {
   UPDATE_SCHOOL_EDUCATION_SECTOR (state, payload) {
     state.filter.schools.educationSector = payload
   },
-  UPDATE_SCHOOL_RATING (state, payload) {
-    state.filter.schools.rating = Number(payload)
+  UPDATE_SCHOOL_PRIMARY_RATING (state, payload) {
+    state.filter.schools.primary.rating = Number(payload)
   },
-  UPDATE_SCHOOL_ENG_RATING (state, payload) {
-    state.filter.schools.englishRating = Number(payload)
+  UPDATE_SCHOOL_PRIMARY_ENG_RATING (state, payload) {
+    state.filter.schools.primary.englishRating = Number(payload)
   },
-  UPDATE_SCHOOL_MATH_RATING (state, payload) {
-    state.filter.schools.mathsRating = Number(payload)
+  UPDATE_SCHOOL_PRIMARY_MATH_RATING (state, payload) {
+    state.filter.schools.primary.mathsRating = Number(payload)
+  },
+  UPDATE_SCHOOL_SECONDARY_RATING (state, payload) {
+    state.filter.schools.secondary.rating = Number(payload)
+  },
+  UPDATE_SCHOOL_SECONDARY_ENG_RATING (state, payload) {
+    state.filter.schools.secondary.englishRating = Number(payload)
+  },
+  UPDATE_SCHOOL_SECONDARY_MATH_RATING (state, payload) {
+    state.filter.schools.secondary.mathsRating = Number(payload)
   },
   ADD_GEOCODE_RESULTS (state, payload) {
     state.geocodeSuggestions = payload.features.map((f: any) => ({
