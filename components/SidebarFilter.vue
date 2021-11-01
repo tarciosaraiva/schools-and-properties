@@ -127,15 +127,23 @@
           </div>
         </div>
       </div>
-      <div class="row">
+      <hr>
+      <div class="row responsive-label">
+        <div class="col-sm-1">
+          <input
+            id="s_show_primary_schools"
+            v-model="sPlotPrimary"
+            type="checkbox"
+          />
+        </div>
         <div class="col-sm">
-          <p>Primary school ratings</p>
+          <label for="s_show_primary_schools">Show primary schools</label>
         </div>
       </div>
       <div class="row">
         <div class="col-sm">
           <div class="input-group vertical">
-            <label for="s_prim_rating">Overall</label>
+            <label for="s_prim_rating">Overall score</label>
             <select id="s_prim_rating" v-model="sPrimRating">
               <option value="100">= 100</option>
               <option value="99">>= 99</option>
@@ -153,7 +161,7 @@
         </div>
         <div class="col-sm">
           <div class="input-group vertical">
-            <label for="s_prim_english_rating">English</label>
+            <label for="s_prim_english_rating">English score</label>
             <select id="s_prim_english_rating" v-model="sPrimEnglishRating">
               <option value="5">= 5</option>
               <option value="4">>= 4</option>
@@ -165,7 +173,7 @@
         </div>
         <div class="col-sm">
           <div class="input-group vertical">
-            <label for="s_prim_maths_rating">Maths</label>
+            <label for="s_prim_maths_rating">Maths score</label>
             <select id="s_prim_maths_rating" v-model="sPrimMathsRating">
               <option value="5">= 5</option>
               <option value="4">>= 4</option>
@@ -176,15 +184,23 @@
           </div>
         </div>
       </div>
-      <div class="row">
+      <hr>
+      <div class="row responsive-label">
+        <div class="col-sm-1">
+          <input
+            id="s_show_secondary_schools"
+            v-model="sPlotSecondary"
+            type="checkbox"
+          />
+        </div>
         <div class="col-sm">
-          <p>Secondary school ratings</p>
+          <label for="s_show_secondary_schools">Show secondary schools</label>
         </div>
       </div>
       <div class="row">
         <div class="col-sm">
           <div class="input-group vertical">
-            <label for="s_sec_rating">Overall</label>
+            <label for="s_sec_rating">Overall score</label>
             <select id="s_sec_rating" v-model="sSecRating">
               <option value="100">= 100</option>
               <option value="99">>= 99</option>
@@ -202,7 +218,7 @@
         </div>
         <div class="col-sm">
           <div class="input-group vertical">
-            <label for="s_sec_english_rating">English</label>
+            <label for="s_sec_english_rating">English score</label>
             <select id="s_sec_english_rating" v-model="sSecEnglishRating">
               <option value="5">= 5</option>
               <option value="4">>= 4</option>
@@ -214,7 +230,7 @@
         </div>
         <div class="col-sm">
           <div class="input-group vertical">
-            <label for="s_sec_maths_rating">Maths</label>
+            <label for="s_sec_maths_rating">Maths score</label>
             <select id="s_sec_maths_rating" v-model="sSecMathsRating">
               <option value="5">= 5</option>
               <option value="4">>= 4</option>
@@ -235,7 +251,10 @@ import { mapState } from 'vuex'
 
 export default Vue.extend({
   props: {
-    loadListingsFn: Function,
+    loadListingsFn: {
+      type: Function,
+      default: () => () => {}
+    },
   },
   computed: {
     pTypes: {
@@ -294,6 +313,14 @@ export default Vue.extend({
         this.$store.commit('UPDATE_SCHOOL_ZONE', value)
       },
     },
+    sPlotPrimary: {
+      get() {
+        return this.filter.schools.primary.plot
+      },
+      set(value) {
+        this.$store.commit('UPDATE_PLOT_PRIMARY_SCHOOLS', value)
+      },
+    },
     sPrimRating: {
       get() {
         return this.filter.schools.primary.rating
@@ -316,6 +343,14 @@ export default Vue.extend({
       },
       set(value) {
         this.$store.commit('UPDATE_SCHOOL_PRIMARY_MATH_RATING', value)
+      },
+    },
+    sPlotSecondary: {
+      get() {
+        return this.filter.schools.secondary.plot
+      },
+      set(value) {
+        this.$store.commit('UPDATE_PLOT_SECONDARY_SCHOOLS', value)
       },
     },
     sSecRating: {

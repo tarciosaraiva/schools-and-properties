@@ -31,7 +31,10 @@ import debounce from 'lodash.debounce'
 
 export default Vue.extend({
   props: {
-    geocodeFn: Function
+    geocodeFn: {
+      type: Function,
+      default: () => () => {}
+    }
   },
   data() {
     return {

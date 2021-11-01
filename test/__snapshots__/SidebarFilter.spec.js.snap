@@ -114,15 +114,19 @@ exports[`SidebarFilter renders correctly with props and store 1`] = `
         </div>
       </div>
     </div>
-    <div class="row">
+    <hr>
+    <div class="row responsive-label">
+      <div class="col-sm-1">
+        <input id="s_show_primary_schools" type="checkbox">
+      </div>
       <div class="col-sm">
-        <p>Primary school ratings</p>
+        <label for="s_show_primary_schools">Show primary schools</label>
       </div>
     </div>
     <div class="row">
       <div class="col-sm">
         <div class="input-group vertical">
-          <label for="s_prim_rating">Overall</label>
+          <label for="s_prim_rating">Overall score</label>
           <select id="s_prim_rating">
             <option value="100">= 100</option>
             <option value="99">&gt;= 99</option>
@@ -140,7 +144,7 @@ exports[`SidebarFilter renders correctly with props and store 1`] = `
       </div>
       <div class="col-sm">
         <div class="input-group vertical">
-          <label for="s_prim_english_rating">English</label>
+          <label for="s_prim_english_rating">English score</label>
           <select id="s_prim_english_rating">
             <option value="5">= 5</option>
             <option value="4">&gt;= 4</option>
@@ -152,7 +156,7 @@ exports[`SidebarFilter renders correctly with props and store 1`] = `
       </div>
       <div class="col-sm">
         <div class="input-group vertical">
-          <label for="s_prim_maths_rating">Maths</label>
+          <label for="s_prim_maths_rating">Maths score</label>
           <select id="s_prim_maths_rating">
             <option value="5">= 5</option>
             <option value="4">&gt;= 4</option>
@@ -163,15 +167,19 @@ exports[`SidebarFilter renders correctly with props and store 1`] = `
         </div>
       </div>
     </div>
-    <div class="row">
+    <hr>
+    <div class="row responsive-label">
+      <div class="col-sm-1">
+        <input id="s_show_secondary_schools" type="checkbox">
+      </div>
       <div class="col-sm">
-        <p>Secondary school ratings</p>
+        <label for="s_show_secondary_schools">Show secondary schools</label>
       </div>
     </div>
     <div class="row">
       <div class="col-sm">
         <div class="input-group vertical">
-          <label for="s_sec_rating">Overall</label>
+          <label for="s_sec_rating">Overall score</label>
           <select id="s_sec_rating">
             <option value="100">= 100</option>
             <option value="99">&gt;= 99</option>
@@ -189,7 +197,7 @@ exports[`SidebarFilter renders correctly with props and store 1`] = `
       </div>
       <div class="col-sm">
         <div class="input-group vertical">
-          <label for="s_sec_english_rating">English</label>
+          <label for="s_sec_english_rating">English score</label>
           <select id="s_sec_english_rating">
             <option value="5">= 5</option>
             <option value="4">&gt;= 4</option>
@@ -201,7 +209,7 @@ exports[`SidebarFilter renders correctly with props and store 1`] = `
       </div>
       <div class="col-sm">
         <div class="input-group vertical">
-          <label for="s_sec_maths_rating">Maths</label>
+          <label for="s_sec_maths_rating">Maths score</label>
           <select id="s_sec_maths_rating">
             <option value="5">= 5</option>
             <option value="4">&gt;= 4</option>

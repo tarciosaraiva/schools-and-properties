@@ -37,7 +37,10 @@ import { School } from '~/store'
 
 export default Vue.extend({
   props: {
-    school: Object
+    school: {
+      type: Object,
+      default: () => ({})
+    }
   },
   computed: {
     hasPrimaryRating () {

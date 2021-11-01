@@ -25,6 +25,7 @@ export interface SchoolsFilter {
 }
 
 interface SchoolLevelRating {
+  plot: boolean,
   rating: number,
   englishRating: number,
   mathsRating: number
@@ -80,11 +81,13 @@ export const state = () => ({
       educationSector: 'all',
       zone: 'none',
       primary: {
+        plot: true,
         rating: 95,
         englishRating: 4,
         mathsRating: 4
       },
       secondary: {
+        plot: true,
         rating: 95,
         englishRating: 4,
         mathsRating: 4
@@ -180,6 +183,9 @@ export const mutations: MutationTree<RootState> = {
   UPDATE_SCHOOL_ZONE (state, payload) {
     state.filter.schools.zone = payload
   },
+  UPDATE_PLOT_PRIMARY_SCHOOLS (state, payload) {
+    state.filter.schools.primary.plot = payload
+  },
   UPDATE_SCHOOL_PRIMARY_RATING (state, payload) {
     state.filter.schools.primary.rating = Number(payload)
   },
@@ -188,6 +194,9 @@ export const mutations: MutationTree<RootState> = {
   },
   UPDATE_SCHOOL_PRIMARY_MATH_RATING (state, payload) {
     state.filter.schools.primary.mathsRating = Number(payload)
+  },
+  UPDATE_PLOT_SECONDARY_SCHOOLS (state, payload) {
+    state.filter.schools.secondary.plot = payload
   },
   UPDATE_SCHOOL_SECONDARY_RATING (state, payload) {
     state.filter.schools.secondary.rating = Number(payload)

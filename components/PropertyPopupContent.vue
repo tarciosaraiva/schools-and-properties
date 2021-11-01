@@ -47,7 +47,10 @@ export default Vue.extend({
     FluxPreloader,
   },
   props: {
-    property: Object,
+    property: {
+      type: Object,
+      default: () => ({})
+    },
   },
   data: () => ({
     vfOptions: {
