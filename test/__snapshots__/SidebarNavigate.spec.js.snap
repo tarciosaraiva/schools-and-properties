@@ -6,7 +6,7 @@ exports[`SidebarNavigate renders correctly with props and store 1`] = `
     <legend>Navigate</legend>
     <div class="input-group vertical">
       <label for="geo_go_to" style="display: none;">Go to location</label>
-      <input id="geo_go_to" name="geo_go_to" placeholder="200 St Kilda Road, Melbourne" type="text">
+      <input autocomplete="false" id="geo_go_to" name="geo_go_to" placeholder="200 St Kilda Road, Melbourne" type="text">
     </div>
     <p>Locations found for ''</p>
     <div class="geo-suggestions">

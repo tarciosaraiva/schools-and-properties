@@ -111,6 +111,21 @@
             </select>
           </div>
         </div>
+        <div class="col-sm">
+          <div class="input-group vertical">
+            <label for="s_school_zones">School zones</label>
+            <select id="s_school_zones" v-model="sZone">
+              <option value="none">None</option>
+              <option value="primary">Primary</option>
+              <option value="p7">Secondary P7</option>
+              <option value="p8">Secondary P8</option>
+              <option value="p9">Secondary P9</option>
+              <option value="p10">Secondary P10</option>
+              <option value="p11">Secondary P11</option>
+              <option value="p12">Secondary P12</option>
+            </select>
+          </div>
+        </div>
       </div>
       <div class="row">
         <div class="col-sm">
@@ -269,6 +284,14 @@ export default Vue.extend({
       },
       set(value) {
         this.$store.commit('UPDATE_SCHOOL_EDUCATION_SECTOR', value)
+      },
+    },
+    sZone: {
+      get() {
+        return this.filter.schools.zone
+      },
+      set(value) {
+        this.$store.commit('UPDATE_SCHOOL_ZONE', value)
       },
     },
     sPrimRating: {

@@ -2,7 +2,7 @@
   <div id="map">
     <a
       href="https://www.maptiler.com"
-      style="position: absolute; left: 10px; bottom: 10px; z-index: 999"
+      style="position: absolute; right: 1rem; bottom: 2rem; z-index: 999"
       ><img
         src="https://api.maptiler.com/resources/logo.svg"
         alt="MapTiler logo"
@@ -52,6 +52,8 @@ export default Vue.extend({
     schoolsFilter: {
       handler (currentFilter, _) {
         this.map.setFilter('school-point', this.getLayerFilter(currentFilter))
+        this.map.setLayoutProperty('primary-schools-fill', 'visibility', this.getPrimaryZoningVisibility(currentFilter))
+        this.map.setLayoutProperty('primary-schools-line', 'visibility', this.getPrimaryZoningVisibility(currentFilter))
       },
       deep: true
     },
@@ -164,6 +166,10 @@ export default Vue.extend({
       ]
     },
 
+    getPrimaryZoningVisibility (schoolsFilter: any) {
+      return schoolsFilter.zone === 'primary' ? 'visible' : 'none'
+    },
+
     mapLoaded () {
       this.setBoundingBox(this.map.getBounds())
 
@@ -190,6 +196,9 @@ export default Vue.extend({
           id: 'primary-schools-fill',
           type: 'fill',
           source: 'primary-schools',
+          layout: {
+            visibility: this.getPrimaryZoningVisibility(this.schoolsFilter)
+          },
           paint: {
             'fill-color': [
               'case',
@@ -203,6 +212,9 @@ export default Vue.extend({
           id: 'primary-schools-line',
           type: 'line',
           source: 'primary-schools',
+          layout: {
+            visibility: this.getPrimaryZoningVisibility(this.schoolsFilter)
+          },
           paint: {
             'line-color': 'rgb(214, 178, 17)',
             'line-width': 2,
@@ -249,11 +261,11 @@ export default Vue.extend({
     },
 
     addControls () {
-      this.map.addControl(new maplibregl.NavigationControl({}), 'bottom-right')
+      this.map.addControl(new maplibregl.NavigationControl({}), 'bottom-left')
       this.map.addControl(new maplibregl.GeolocateControl({
         positionOptions: { enableHighAccuracy: true },
         trackUserLocation: false
-      }))
+      }), 'top-left')
     }
   },
 

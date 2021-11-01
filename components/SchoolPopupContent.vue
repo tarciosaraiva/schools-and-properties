@@ -33,16 +33,18 @@
 <script lang="ts">
 import Vue from 'vue'
 
+import { School } from '~/store'
+
 export default Vue.extend({
   props: {
-    school: Object,
+    school: Object
   },
   computed: {
     hasPrimaryRating () {
-      return this.school.primaryOverallScore !== '#N/A'
+      return (this.school as School).primaryOverallScore !== '#N/A'
     },
     hasSecondaryRating () {
-      return this.school.secondaryOverallScore !== '#N/A'
+      return (this.school as School).secondaryOverallScore !== '#N/A'
     }
   }
 })

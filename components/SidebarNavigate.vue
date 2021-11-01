@@ -10,6 +10,7 @@
           placeholder="200 St Kilda Road, Melbourne"
           type="text"
           name="geo_go_to"
+          autocomplete="false"
           @keyup="handleKeyUp"
         />
       </div>

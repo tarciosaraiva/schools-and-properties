@@ -1,5 +1,4 @@
 import { GetterTree, ActionTree, MutationTree } from 'vuex'
-import { AxiosRequestConfig } from 'axios'
 
 interface PolygonPoints {
   lon: number, lat: number
@@ -20,6 +19,7 @@ export interface PropertiesFilter {
 
 export interface SchoolsFilter {
   educationSector: string,
+  zone: string,
   primary: SchoolLevelRating,
   secondary: SchoolLevelRating,
 }
@@ -78,6 +78,7 @@ export const state = () => ({
     },
     schools: {
       educationSector: 'all',
+      zone: 'none',
       primary: {
         rating: 95,
         englishRating: 4,
@@ -91,6 +92,21 @@ export const state = () => ({
     }
   } as ApplicationFilter
 })
+
+export interface School {
+  schoolName: string,
+  educationSector: string,
+  schoolType: string,
+  phoneNumber: string,
+  primaryOverallScore: string,
+  primaryEnglishScore: string,
+  primaryMathsScore: string,
+  primaryEnrolments: string,
+  secondaryOverallScore: string,
+  secondaryEnglishScore: string,
+  secondaryMathsScore: string,
+  secondaryEnrolments: string
+}
 
 export type RootState = ReturnType<typeof state>
 
@@ -160,6 +176,9 @@ export const mutations: MutationTree<RootState> = {
   },
   UPDATE_SCHOOL_EDUCATION_SECTOR (state, payload) {
     state.filter.schools.educationSector = payload
+  },
+  UPDATE_SCHOOL_ZONE (state, payload) {
+    state.filter.schools.zone = payload
   },
   UPDATE_SCHOOL_PRIMARY_RATING (state, payload) {
     state.filter.schools.primary.rating = Number(payload)
