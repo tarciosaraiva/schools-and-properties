@@ -21,6 +21,7 @@
         <a href="#"><label for="modal-control">Click for attributions to appropriate data sources.</label></a>
         <a href="https://www.buymeacoffee.com/tarciosaraiva" target="blank">Click here to buy me a coffee!</a>
         <a href="https://www.github.com/tarciosaraiva/schools-and-properties" target="blank">Project on Github</a>
+        <a href="https://forms.gle/7xZTuGrb3w7VAUdq6" target="blank">Give us feedback!</a>
         <img class="attribution" src="~/assets/images/poweredby_apm_logo_horizontal_small_rgb.png" alt="Powered by APM" />
       </div>
     </footer>
