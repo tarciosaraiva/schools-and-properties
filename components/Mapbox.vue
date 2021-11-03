@@ -25,12 +25,17 @@ const SCHOOL_POINT_LAYER_NAME = 'school-point'
 export default Vue.extend({
   props: {
     listings: {
-      type: Array as () => PropertyListing[]
+      type: Array as () => PropertyListing[],
+      default: () => ([])
     },
     schoolsFilter: {
-      type: Object as () => SchoolsFilter
+      type: Object as () => SchoolsFilter,
+      default: () => ({})
     },
-    flyToCenter: Array
+    flyToCenter: {
+      type: Array,
+      default: () => ([])
+    }
   },
 
   data() {
@@ -89,6 +94,19 @@ export default Vue.extend({
         }
       })
     },
+  },
+
+  mounted() {
+    this.map = new maplibregl.Map({
+      attributionControl: false,
+      container: 'map',
+      style: `https://api.maptiler.com/maps/streets/style.json?key=${process.env.mapTilerSecret}`,
+      center: [144.9646, -37.0201],
+      zoom: 7,
+    })
+
+    this.addControls()
+    this.map.on('load', this.mapLoaded)
   },
 
   methods: {
@@ -224,19 +242,6 @@ export default Vue.extend({
         'top-left'
       )
     },
-  },
-
-  mounted() {
-    this.map = new maplibregl.Map({
-      attributionControl: false,
-      container: 'map',
-      style: `https://api.maptiler.com/maps/streets/style.json?key=${process.env.mapTilerSecret}`,
-      center: [144.9646, -37.0201],
-      zoom: 7,
-    })
-
-    this.addControls()
-    this.map.on('load', this.mapLoaded)
   },
 })
 </script>
