@@ -6,7 +6,7 @@ exports[`index renders correctly with props 1`] = `
     <h1>Schools and properties</h1>
   </header>
   <main>
-    <mapbox-stub flytocenter></mapbox-stub>
+    <mapbox-stub flytocenter listings schoolsfilter="[object Object]"></mapbox-stub>
     <form class="sidebar">
       <sidebar-navigate-stub geocodefn="[Function]"></sidebar-navigate-stub>
       <sidebar-filter-stub loadlistingsfn="[Function]"></sidebar-filter-stub>
