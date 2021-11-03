@@ -88,6 +88,11 @@
               <option value="800000">800 K</option>
               <option value="900000">900 K</option>
               <option value="1000000">1 M</option>
+              <option value="1100000">1.1 M</option>
+              <option value="1200000">1.2 M</option>
+              <option value="1300000">1.3 M</option>
+              <option value="1400000">1.4 M</option>
+              <option value="1500000">1.5 M</option>
             </select>
           </div>
         </div>
