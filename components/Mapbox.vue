@@ -17,99 +17,33 @@ import maplibregl from 'maplibre-gl'
 
 import PropertyPopupContent from '~/components/PropertyPopupContent.vue'
 import SchoolPopupContent from '~/components/SchoolPopupContent.vue'
-import { PropertyListing } from '~/store/index'
+import { PropertyListing, SchoolsFilter } from '~/store'
+import { dataSources, buildSchoolLocationFilterExpression } from '~/utils/mapbox'
+
+const SCHOOL_POINT_LAYER_NAME = 'school-point'
 
 export default Vue.extend({
-  props: ['listings', 'schoolsFilter', 'flyToCenter'],
+  props: {
+    listings: {
+      type: Array as () => PropertyListing[]
+    },
+    schoolsFilter: {
+      type: Object as () => SchoolsFilter
+    },
+    flyToCenter: {
+      type: Array
+    }
+  },
 
   data() {
     return {
       map: {} as any,
-      currentSelectedZoneId: 0,
       markers: [] as any[],
     }
   },
 
   computed: {
-    streetsStyle: () =>
-      `https://api.maptiler.com/maps/streets/style.json?key=${process.env.mapTilerSecret}`,
-    dataSources: () =>
-      [
-        {
-          id: 'primary-schools',
-          uri: `https://api.maptiler.com/data/${process.env.primaryZones}/features.json?key=${process.env.mapTilerSecret}`,
-          color: {
-            r: 214,
-            g: 178,
-            b: 17
-          },
-          visibilityFn: 'getPrimaryZoningVisibility'
-        },
-        {
-          id: 'p7-schools',
-          uri: `https://api.maptiler.com/data/${process.env.primaryZones}/features.json?key=${process.env.mapTilerSecret}`,
-          color: {
-            r: 46,
-            g: 48,
-            b: 137
-          },
-          visibilityFn: 'getP7ZoningVisibility'
-        },
-        {
-          id: 'p8-schools',
-          uri: `https://api.maptiler.com/data/${process.env.p8Zones}/features.json?key=${process.env.mapTilerSecret}`,
-          color: {
-            r: 46,
-            g: 48,
-            b: 137
-          },
-          visibilityFn: 'getP8ZoningVisibility'
-        },
-        {
-          id: 'p9-schools',
-          uri: `https://api.maptiler.com/data/${process.env.p9Zones}/features.json?key=${process.env.mapTilerSecret}`,
-          color: {
-            r: 46,
-            g: 48,
-            b: 137
-          },
-          visibilityFn: 'getP9ZoningVisibility'
-        },
-        {
-          id: 'p10-schools',
-          uri: `https://api.maptiler.com/data/${process.env.p10Zones}/features.json?key=${process.env.mapTilerSecret}`,
-          color: {
-            r: 46,
-            g: 48,
-            b: 137
-          },
-          visibilityFn: 'getP10ZoningVisibility'
-        },
-        {
-          id: 'p11-schools',
-          uri: `https://api.maptiler.com/data/${process.env.p11Zones}/features.json?key=${process.env.mapTilerSecret}`,
-          color: {
-            r: 46,
-            g: 48,
-            b: 137
-          },
-          visibilityFn: 'getP11ZoningVisibility'
-        },
-        {
-          id: 'p12-schools',
-          uri: `https://api.maptiler.com/data/${process.env.p12Zones}/features.json?key=${process.env.mapTilerSecret}`,
-          color: {
-            r: 46,
-            g: 48,
-            b: 137
-          },
-          visibilityFn: 'getP12ZoningVisibility'
-        },
-        {
-          id: 'school-locations',
-          uri: `https://api.maptiler.com/data/${process.env.schoolLocations}/features.json?key=${process.env.mapTilerSecret}`,
-        },
-      ] as any[],
+    schoolZoneDataSources: () => dataSources.filter((ds: any) => ds.id !== 'school-locations')
   },
 
   watch: {
@@ -120,13 +54,8 @@ export default Vue.extend({
     },
     schoolsFilter: {
       handler(currentFilter, _) {
-        this.map.setFilter('school-point', this.getLayerFilter(currentFilter))
-        this.dataSources.filter((ds: any) => ds.id !== 'school-locations').forEach((ds: any) => {
-          this.map.setLayoutProperty(
-            `${ds.id}-fill`,
-            'visibility',
-            this.evaluateLayerVisibility(ds.id, currentFilter)
-          )
+        this.map.setFilter(SCHOOL_POINT_LAYER_NAME, buildSchoolLocationFilterExpression(currentFilter))
+        this.schoolZoneDataSources.forEach((ds: any) => {
           this.map.setLayoutProperty(
             `${ds.id}-line`,
             'visibility',
@@ -151,9 +80,7 @@ export default Vue.extend({
           })
             .setHTML(`<div id="property-popup-content-${p.id}"></div>`)
             .on('open', () => {
-              new PropertyPopupContent({ propsData: { property: p } }).$mount(
-                `#property-popup-content-${p.id}`
-              )
+              new PropertyPopupContent({ propsData: { property: p } }).$mount(`#property-popup-content-${p.id}`)
             })
 
           const el = document.createElement('div')
@@ -185,12 +112,7 @@ export default Vue.extend({
     },
 
     onSchoolPoiClick(e: any) {
-      const features = e.target.queryRenderedFeatures(e.point, {
-        layers: ['primary-schools-fill', 'school-point'],
-      })
-      const poiFeature = features.filter(
-        (f: any) => f.source === 'school-locations'
-      )[0]
+      const poiFeature = e.features[0]
       const coordinates = poiFeature.geometry.coordinates.slice()
       const props = poiFeature.properties
 
@@ -203,106 +125,10 @@ export default Vue.extend({
       new maplibregl.Popup({ closeButton: false })
         .setHTML(`<div id="school-popup-content-${poiFeature.id}"></div>`)
         .on('open', () => {
-          new SchoolPopupContent({ propsData: { school: props } }).$mount(
-            `#school-popup-content-${poiFeature.id}`
-          )
+          new SchoolPopupContent({ propsData: { school: props } }).$mount(`#school-popup-content-${poiFeature.id}`)
         })
         .setLngLat(coordinates)
         .addTo(e.target)
-
-      const fillFeature = features.filter(
-        (f: any) => f.source === 'primary-schools'
-      )[0]
-
-      if (this.currentSelectedZoneId > 0) {
-        e.target.setFeatureState(
-          { source: 'primary-schools', id: this.currentSelectedZoneId },
-          { selected: false }
-        )
-        this.currentSelectedZoneId = 0
-      }
-
-      if (props.educationSector === 'Government') {
-        e.target.setFeatureState(
-          { source: 'primary-schools', id: fillFeature.id },
-          { selected: true }
-        )
-        this.currentSelectedZoneId = fillFeature.id
-      }
-    },
-
-    getLayerFilter(schoolsFilter: any) {
-      let eduSectorFilter: any = [
-        '==',
-        ['get', 'educationSector'],
-        'Government',
-      ]
-
-      if (schoolsFilter.educationSector === 'NonGovernment') {
-        eduSectorFilter[0] = '!='
-      } else if (schoolsFilter.educationSector === 'all') {
-        eduSectorFilter = null
-      }
-
-      let showPrimarySchoolsFilter: any = []
-
-      if (schoolsFilter.primary.plot) {
-        showPrimarySchoolsFilter = ['in', ['get', 'schoolType'], ['literal', ['Primary', 'Pri/Sec']]]
-      } else {
-        showPrimarySchoolsFilter = ['in', ['get', 'schoolType'], '']
-      }
-
-      const primaryFilter = [
-        'all',
-        eduSectorFilter,
-        showPrimarySchoolsFilter,
-        [
-          '>=',
-          ['get', 'primaryOverallScore'],
-          `${schoolsFilter.primary.rating}`,
-        ],
-        [
-          '>=',
-          ['get', 'primaryEnglishScore'],
-          `${schoolsFilter.primary.englishRating}`,
-        ],
-        [
-          '>=',
-          ['get', 'primaryMathsScore'],
-          `${schoolsFilter.primary.mathsRating}`,
-        ],
-      ].filter((i) => i !== null)
-
-      let showSecondarySchoolsFilter: any = []
-
-      if (schoolsFilter.secondary.plot) {
-        showSecondarySchoolsFilter = ['in', ['get', 'schoolType'], ['literal', ['Secondary', 'Pri/Sec']]]
-      } else {
-        showSecondarySchoolsFilter = ['in', ['get', 'schoolType'], '']
-      }
-
-      const secondaryFilter = [
-        'all',
-        eduSectorFilter,
-        showSecondarySchoolsFilter,
-        [
-          '>=',
-          ['get', 'secondaryOverallScore'],
-          `${schoolsFilter.secondary.rating}`,
-        ],
-        [
-          '>=',
-          ['get', 'secondaryEnglishScore'],
-          `${schoolsFilter.secondary.englishRating}`,
-        ],
-        [
-          '>=',
-          ['get', 'secondaryMathsScore'],
-          `${schoolsFilter.secondary.mathsRating}`,
-        ],
-      ].filter((i) => i !== null)
-
-      return ['any', primaryFilter, secondaryFilter]
     },
 
     evaluateLayerVisibility(datasourceId: string, schoolsFilter: any) {
@@ -334,7 +160,7 @@ export default Vue.extend({
         .on('moveend', this.onZoomOrMoveEvent)
 
       // add data sources
-      this.dataSources.forEach((dataSource: any) => {
+      dataSources.forEach((dataSource: any) => {
         this.map
           .addSource(dataSource.id, {
             type: 'geojson',
@@ -343,24 +169,8 @@ export default Vue.extend({
           })
       })
 
-      this.dataSources.filter((ds: any) => ds.id !== 'school-locations').forEach((dataSource: any) => {
+      this.schoolZoneDataSources.forEach((dataSource: any) => {
         this.map
-          .addLayer({
-            id: `${dataSource.id}-fill`,
-            type: 'fill',
-            source: dataSource.id,
-            layout: {
-              visibility: this.evaluateLayerVisibility(dataSource.id, this.schoolsFilter),
-            },
-            paint: {
-              'fill-color': [
-                'case',
-                ['boolean', ['feature-state', 'selected'], false],
-                `rgba(${dataSource.color.r}, ${dataSource.color.g}, ${dataSource.color.b}, 0.5)`,
-                'rgba(255, 255, 255, 0.1)',
-              ],
-            },
-          })
           .addLayer({
             id: `${dataSource.id}-line`,
             type: 'line',
@@ -377,7 +187,7 @@ export default Vue.extend({
 
       this.map
         .addLayer({
-          id: 'school-point',
+          id: SCHOOL_POINT_LAYER_NAME,
           type: 'symbol',
           source: 'school-locations',
           layout: {
@@ -402,14 +212,14 @@ export default Vue.extend({
             'text-offset': [2, 0],
           },
         })
-        .on('click', 'school-point', this.onSchoolPoiClick)
-        .on('mouseenter', 'school-point', (e: any) => {
+        .on('click', SCHOOL_POINT_LAYER_NAME, this.onSchoolPoiClick)
+        .on('mouseenter', SCHOOL_POINT_LAYER_NAME, (e: any) => {
           e.target.getCanvas().style.cursor = 'pointer'
         })
-        .on('mouseleave', 'school-point', (e: any) => {
+        .on('mouseleave', SCHOOL_POINT_LAYER_NAME, (e: any) => {
           e.target.getCanvas().style.cursor = ''
         })
-        .setFilter('school-point', this.getLayerFilter(this.schoolsFilter))
+        .setFilter(SCHOOL_POINT_LAYER_NAME, buildSchoolLocationFilterExpression(this.schoolsFilter))
     },
 
     addControls() {
@@ -427,7 +237,7 @@ export default Vue.extend({
   mounted() {
     this.map = new maplibregl.Map({
       container: 'map',
-      style: this.streetsStyle,
+      style: `https://api.maptiler.com/maps/streets/style.json?key=${process.env.mapTilerSecret}`,
       center: [144.9646, -37.0201],
       zoom: 7,
     })
