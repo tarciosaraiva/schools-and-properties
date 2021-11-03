@@ -39,8 +39,8 @@ footer .attributions-container .attribution {
   position: absolute;
   top: 0;
   right: 0;
-  max-width: 25rem;
-  width: 100%;
+  min-width: 25rem;
+  z-index: 1000;
 }
 
 .sidebar .responsive-label {

@@ -1,11 +1,11 @@
 import { GetterTree, ActionTree, MutationTree } from 'vuex'
 
-export interface ApplicationFilter {
+interface ApplicationFilter {
   properties: PropertiesFilter,
   schools: SchoolsFilter
 }
 
-export interface PropertiesFilter {
+interface PropertiesFilter {
   types: string[],
   rooms: number,
   bathrooms: number,
@@ -25,11 +25,6 @@ interface SchoolLevelRating {
   rating: number,
   englishRating: number,
   mathsRating: number
-}
-
-export interface SchoolZoneProperties {
-  polygonId: number,
-  listings: any[]
 }
 
 export interface PropertyListing {
@@ -54,6 +49,21 @@ export interface PropertyListing {
   unitNumber: string,
   media: string[],
   listingSlug: string
+}
+
+export interface School {
+  schoolName: string,
+  educationSector: string,
+  schoolType: string,
+  phoneNumber: string,
+  primaryOverallScore: string,
+  primaryEnglishScore: string,
+  primaryMathsScore: string,
+  primaryEnrolments: string,
+  secondaryOverallScore: string,
+  secondaryEnglishScore: string,
+  secondaryMathsScore: string,
+  secondaryEnrolments: string
 }
 
 export const state = () => ({
@@ -91,21 +101,6 @@ export const state = () => ({
     }
   } as ApplicationFilter
 })
-
-export interface School {
-  schoolName: string,
-  educationSector: string,
-  schoolType: string,
-  phoneNumber: string,
-  primaryOverallScore: string,
-  primaryEnglishScore: string,
-  primaryMathsScore: string,
-  primaryEnrolments: string,
-  secondaryOverallScore: string,
-  secondaryEnglishScore: string,
-  secondaryMathsScore: string,
-  secondaryEnrolments: string
-}
 
 export type RootState = ReturnType<typeof state>
 
@@ -223,9 +218,7 @@ export const actions: ActionTree<RootState, RootState> = {
       minBathrooms: filter.properties.bathrooms,
       minCarspaces: filter.properties.carSpaces,
       maxPrice: filter.properties.maxPrice,
-      locations: [{
-        state: 'VIC'
-      }],
+      locations: [{ state: 'VIC' }],
       geoWindow: { box: { topLeft: bounds.nw, bottomRight: bounds.se } }
     }
 
@@ -233,9 +226,7 @@ export const actions: ActionTree<RootState, RootState> = {
     commit('ADD_LISTINGS', listings)
   },
 
-  async geocode ({ commit, state }, query) {
-    const { bounds } = state
-
+  async geocode ({ commit }, query) {
     const params = {
       key: process.env.mapTilerSecret,
       bbox: '141.24847451171752,-39.624732230379166,148.68072548828115,-34.32302549095252',

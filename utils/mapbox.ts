@@ -72,14 +72,12 @@ export const dataSources = [
 
 const filterOutNulls = (filterExpr: any[]) => filterExpr.filter(i => i !== null)
 
-const buildSchoolFilterExpr = (shouldPlot: boolean, schoolType: string) => {
-  let schoolTypeFilterExpr: (string | string[] | [string, [string, string]])[] = []
-
+export const buildSchoolFilterExpr = (shouldPlot: boolean, schoolType: string) => {
   if (shouldPlot) {
     return ['in', ['get', 'schoolType'], ['literal', [schoolType, 'Pri/Sec']]]
   }
 
-  return schoolTypeFilterExpr = ['in', ['get', 'schoolType'], '']
+  return ['in', ['get', 'schoolType'], '']
 }
 
 export const buildSchoolLocationFilterExpression = (schoolsFilter: SchoolsFilter) => {
