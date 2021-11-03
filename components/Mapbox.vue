@@ -30,7 +30,7 @@ export default Vue.extend({
     },
     schoolsFilter: {
       type: Object as () => SchoolsFilter,
-      default: () => ({})
+      default: () => ({} as SchoolsFilter)
     },
     flyToCenter: {
       type: Array,
@@ -98,7 +98,6 @@ export default Vue.extend({
 
   mounted() {
     this.map = new maplibregl.Map({
-      attributionControl: false,
       container: 'map',
       style: `https://api.maptiler.com/maps/streets/style.json?key=${process.env.mapTilerSecret}`,
       center: [144.9646, -37.0201],
@@ -140,7 +139,7 @@ export default Vue.extend({
         .addTo(e.target)
     },
 
-    evaluateLayerVisibility(datasourceId: string, schoolsFilter: any) {
+    evaluateLayerVisibility(datasourceId: string, schoolsFilter: SchoolsFilter) {
       return datasourceId.startsWith(schoolsFilter.zone) ? 'visible' : 'none'
     },
 
@@ -232,7 +231,6 @@ export default Vue.extend({
     },
 
     addControls() {
-      this.map.addControl(new maplibregl.AttributionControl({ compact: false }))
       this.map.addControl(new maplibregl.NavigationControl({}), 'top-left')
       this.map.addControl(
         new maplibregl.GeolocateControl({
