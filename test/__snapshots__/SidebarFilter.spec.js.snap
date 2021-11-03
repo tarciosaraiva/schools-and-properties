@@ -109,12 +109,12 @@ exports[`SidebarFilter renders correctly with props and store 1`] = `
           <select id="s_school_zones">
             <option value="none">None</option>
             <option value="primary">Primary</option>
-            <option value="p7">Secondary P7</option>
-            <option value="p8">Secondary P8</option>
-            <option value="p9">Secondary P9</option>
-            <option value="p10">Secondary P10</option>
-            <option value="p11">Secondary P11</option>
-            <option value="p12">Secondary P12</option>
+            <option value="p7">Secondary Yr 7</option>
+            <option value="p8">Secondary Yr 8</option>
+            <option value="p9">Secondary Yr 9</option>
+            <option value="p10">Secondary Yr 10</option>
+            <option value="p11">Secondary Yr 11</option>
+            <option value="p12">Secondary Yr 12</option>
           </select>
         </div>
       </div>
