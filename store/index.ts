@@ -1,9 +1,5 @@
 import { GetterTree, ActionTree, MutationTree } from 'vuex'
 
-interface PolygonPoints {
-  lon: number, lat: number
-}
-
 export interface ApplicationFilter {
   properties: PropertiesFilter,
   schools: SchoolsFilter
