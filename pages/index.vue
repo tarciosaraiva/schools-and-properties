@@ -15,23 +15,13 @@
       </form>
     </main>
     <footer>
-      <p>
-        The Department of Education and Training’s
-        <a href="https://www.education.vic.gov.au/Pages/disclaimer.aspx"
-          >Disclaimer</a
-        >,
-        <a href="https://www.education.vic.gov.au/Pages/webprivacypolicy.aspx"
-          >Privacy</a
-        >
-        and
-        <a
-          id="copyright-link"
-          href="https://www.education.vic.gov.au/Pages/copyright.aspx"
-          >Copyright</a
-        >
-        applies to information on this website.
-      </p>
+      <div class="attributions-container">
+        <img class="attribution" src="~/assets/images/powered-by-domain-rgb.png" alt="Powered by Domain" />
+        <p>Check our disclaimer to know how we are handling this data and <a href="#"><label for="modal-control">attributions to appropriate data sources</label></a>.</p>
+        <img class="attribution" src="~/assets/images/poweredby_apm_logo_horizontal_small_rgb.png" alt="Powered by APM" />
+      </div>
     </footer>
+    <attribution-modal />
   </div>
 </template>
 
@@ -41,9 +31,10 @@ import { mapGetters, mapActions } from 'vuex'
 import SidebarNavigate from '~/components/SidebarNavigate.vue'
 import SidebarFilter from '~/components/SidebarFilter.vue'
 import Mapbox from '~/components/Mapbox.vue'
+import AttributionModal from '~/components/AttributionModal.vue'
 
 export default Vue.extend({
-  components: { SidebarNavigate, SidebarFilter, Mapbox },
+  components: { SidebarNavigate, SidebarFilter, Mapbox, AttributionModal },
   data() {
     return {
       flyToCenter: [] as number[],

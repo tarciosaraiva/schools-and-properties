@@ -13,14 +13,14 @@ exports[`index renders correctly with props 1`] = `
     </form>
   </main>
   <footer>
-    <p>
-      The Department of Education and Training’s
-      <a href="https://www.education.vic.gov.au/Pages/disclaimer.aspx">Disclaimer</a>,
-      <a href="https://www.education.vic.gov.au/Pages/webprivacypolicy.aspx">Privacy</a>
-      and
-      <a href="https://www.education.vic.gov.au/Pages/copyright.aspx" id="copyright-link">Copyright</a>
-      applies to information on this website.
-    </p>
+    <div class="attributions-container">
+      <img alt="Powered by Domain" class="attribution" src="~/assets/images/powered-by-domain-rgb.png">
+      <p>Check our disclaimer to know how we are handling this data and <a href="#">
+          <label for="modal-control">attributions to appropriate data sources</label>
+        </a>.</p>
+      <img alt="Powered by APM" class="attribution" src="~/assets/images/poweredby_apm_logo_horizontal_small_rgb.png">
+    </div>
   </footer>
+  <attribution-modal-stub></attribution-modal-stub>
 </div>
 `;

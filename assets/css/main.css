@@ -24,6 +24,16 @@ main {
   position: relative;
 }
 
+footer .attributions-container {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+footer .attributions-container .attribution {
+  max-height: 1.5rem;
+}
+
 .sidebar {
   box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.75);
   position: absolute;
