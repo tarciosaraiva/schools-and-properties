@@ -17,7 +17,7 @@
       <p v-if="locations.length">Locations found for '{{location}}'</p>
       <div v-if="locations.length" class="geo-suggestions">
         <div v-for="loc in locations" :key="loc.name" class="row">
-          <a href="#" class="suggestion column" @click.stop.prevent="navigateTo(loc.center)">{{ loc.name }}</a>
+          <a href="#" class="suggestion column" @click.stop.prevent="navigateTo(loc.center, loc.placeType)">{{ loc.name }}</a>
         </div>
       </div>
     </fieldset>
@@ -54,8 +54,8 @@ export default Vue.extend({
     geolocate () {
       this.geocodeFn(this.location)
     },
-    navigateTo (center: any) {
-      this.$emit('navigate', center)
+    navigateTo (center: number[], placeType: string[]) {
+      this.$emit('navigate', center, placeType)
     }
   }
 })

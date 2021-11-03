@@ -201,7 +201,8 @@ export const mutations: MutationTree<RootState> = {
   ADD_GEOCODE_RESULTS (state, payload) {
     state.geocodeSuggestions = payload.features.map((f: any) => ({
       center: f.center,
-      name: f.place_name
+      name: f.place_name,
+      placeType: f.place_type
     }))
   }
 }

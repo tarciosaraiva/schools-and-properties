@@ -7,7 +7,7 @@
       <mapbox
         :schools-filter="schoolsFilter"
         :listings="listings"
-        :fly-to-center="flyToCenter"
+        :fly-to="flyTo"
       />
       <form class="sidebar">
         <sidebar-navigate :geocode-fn="geocode" @navigate="onNavigate" />
@@ -43,7 +43,7 @@ export default Vue.extend({
   components: { SidebarNavigate, SidebarFilter, Mapbox, AttributionModal, DisclaimerModal },
   data() {
     return {
-      flyToCenter: [] as number[],
+      flyTo: {} as Object,
     }
   },
   computed: {
@@ -51,8 +51,8 @@ export default Vue.extend({
   },
   methods: {
     ...mapActions(['loadListings', 'geocode']),
-    onNavigate(center: any) {
-      this.flyToCenter = center
+    onNavigate(center: number[], placeType: string[]) {
+      this.flyTo = { center, placeType }
     },
   },
 })

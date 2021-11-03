@@ -32,9 +32,9 @@ export default Vue.extend({
       type: Object as () => SchoolsFilter,
       default: () => ({} as SchoolsFilter)
     },
-    flyToCenter: {
-      type: Array,
-      default: () => ([])
+    flyTo: {
+      type: Object,
+      default: () => ({})
     }
   },
 
@@ -50,10 +50,9 @@ export default Vue.extend({
   },
 
   watch: {
-    flyToCenter(newCenter, _) {
-      if (newCenter.length === 2) {
-        this.flyMapToCenter(newCenter)
-      }
+    flyTo(newCenter, _) {
+      const zoomLevel = newCenter.placeType.includes('street') ? 16 : 14
+      this.flyMapTo(newCenter.center, zoomLevel)
     },
     schoolsFilter: {
       handler(currentFilter, _) {
@@ -115,8 +114,8 @@ export default Vue.extend({
       this.setBoundingBox(e.target.getBounds())
     },
 
-    flyMapToCenter(center: any) {
-      this.map.flyTo({ center, zoom: 14 })
+    flyMapTo(center: number[], zoom: number ) {
+      this.map.flyTo({ center, zoom })
     },
 
     onSchoolPoiClick(e: any) {
