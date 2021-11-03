@@ -1,5 +1,9 @@
+.maplibregl-popup.mapboxgl-popup {
+  z-index: 300;
+}
+
 .maplibregl-popup-content.mapboxgl-popup-content {
-  padding: 0.25rem
+  padding: 0.25rem;
 }
 
 .popup-info.container {

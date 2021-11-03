@@ -40,7 +40,7 @@ footer .attributions-container .attribution {
   top: 0;
   right: 0;
   min-width: 25rem;
-  z-index: 1000;
+  z-index: 200;
 }
 
 .sidebar .responsive-label {

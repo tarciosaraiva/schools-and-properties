@@ -2,7 +2,7 @@
   <div id="map">
     <a
       href="https://www.maptiler.com"
-      style="position: absolute; right: 1rem; bottom: 2rem; z-index: 999"
+      style="position: absolute; right: 1rem; bottom: 2rem; z-index: 100"
       ><img
         src="https://api.maptiler.com/resources/logo.svg"
         alt="MapTiler logo"
@@ -72,25 +72,18 @@ export default Vue.extend({
         const hasPoi = this.markers.find((m) => m.getLngLat() === lngLat)
 
         if (!hasPoi) {
-          const popup = new maplibregl.Popup({
-            maxWidth: '400px',
-            closeButton: false,
-          })
+          const popup = new maplibregl.Popup({ maxWidth: '400px', closeButton: false, closeOnMove: true })
             .setHTML(`<div id="property-popup-content-${p.id}"></div>`)
             .on('open', () => {
               new PropertyPopupContent({ propsData: { property: p } }).$mount(`#property-popup-content-${p.id}`)
             })
 
-          const el = document.createElement('div')
-          el.style.backgroundImage = `url(${require('~/assets/images/location.png')})`
-          el.style.width = '32px'
-          el.style.height = '32px'
-          el.style.backgroundSize = '100%'
-
-          const marker = new maplibregl.Marker(el)
+          const marker = new maplibregl.Marker({ color: '#b5ad56' })
             .setLngLat([p.longitude, p.latitude])
             .setPopup(popup)
             .addTo(this.map)
+
+          marker.getElement().style.cursor = 'pointer'
 
           this.markers.push(marker)
         }
@@ -120,7 +113,7 @@ export default Vue.extend({
         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360
       }
 
-      new maplibregl.Popup({ closeButton: false })
+      new maplibregl.Popup({ closeButton: false, closeOnMove: true, offset: 20 })
         .setHTML(`<div id="school-popup-content-${poiFeature.id}"></div>`)
         .on('open', () => {
           new SchoolPopupContent({ propsData: { school: props } }).$mount(`#school-popup-content-${poiFeature.id}`)
