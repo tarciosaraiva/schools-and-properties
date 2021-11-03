@@ -17,10 +17,14 @@
     <footer>
       <div class="attributions-container">
         <img class="attribution" src="~/assets/images/powered-by-domain-rgb.png" alt="Powered by Domain" />
-        <p>Check our disclaimer to know how we are handling this data and <a href="#"><label for="modal-control">attributions to appropriate data sources</label></a>.</p>
+        <a href="#"><label for="modal-control-disclaimer">Check our disclaimer to know more.</label></a>
+        <a href="#"><label for="modal-control">Click for attributions to appropriate data sources.</label></a>
+        <a href="https://www.buymeacoffee.com/tarciosaraiva" target="blank">Click here to buy me a coffee!</a>
+        <a href="https://www.github.com/tarciosaraiva/schools-and-properties" target="blank">Project on Github</a>
         <img class="attribution" src="~/assets/images/poweredby_apm_logo_horizontal_small_rgb.png" alt="Powered by APM" />
       </div>
     </footer>
+    <disclaimer-modal />
     <attribution-modal />
   </div>
 </template>
@@ -32,9 +36,10 @@ import SidebarNavigate from '~/components/SidebarNavigate.vue'
 import SidebarFilter from '~/components/SidebarFilter.vue'
 import Mapbox from '~/components/Mapbox.vue'
 import AttributionModal from '~/components/AttributionModal.vue'
+import DisclaimerModal from '~/components/DisclaimerModal.vue'
 
 export default Vue.extend({
-  components: { SidebarNavigate, SidebarFilter, Mapbox, AttributionModal },
+  components: { SidebarNavigate, SidebarFilter, Mapbox, AttributionModal, DisclaimerModal },
   data() {
     return {
       flyToCenter: [] as number[],

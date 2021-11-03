@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DisclaimerModal renders correctly 1`] = `
+<div>
+  <input class="modal" id="modal-control-disclaimer" type="checkbox">
+  <div aria-labelledby="dialog-title" role="dialog">
+    <div class="card large">
+      <label class="modal-close" for="modal-control-disclaimer"></label>
+      <h3 class="section" id="dialog-title">Disclaimer</h3>
+      <p>The information provided by this website is a collation of 3 major data sources, listed in the attributions modal accessed by the link at the footer of this website.</p>
+      <p>The schools displayed in the map are only the ones who have a matching of 90 or above in <a href="https://www.bettereducation.com.au/" target="blank">Better Education</a> website so it's likely you will notice some schools may be missing from the list.</p>
+    </div>
+  </div>
+</div>
+`;
