@@ -86,7 +86,7 @@ export default Vue.extend({
         const hasPoi = this.markers.find((m) => m.getLngLat() === lngLat)
 
         if (!hasPoi) {
-          const popup = new maplibregl.Popup({ maxWidth: '400px', closeButton: false, closeOnMove: true })
+          const popup = new maplibregl.Popup({ maxWidth: '400px', closeButton: false })
             .setHTML(`<div id="property-popup-content-${p.id}"></div>`)
             .on('open', () => {
               new PropertyPopupContent({ propsData: { property: p } }).$mount(`#property-popup-content-${p.id}`)
@@ -139,7 +139,7 @@ export default Vue.extend({
         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360
       }
 
-      new maplibregl.Popup({ closeButton: false, closeOnMove: true, offset: 20 })
+      new maplibregl.Popup({ closeButton: false, offset: 20 })
         .setHTML(`<div id="school-popup-content-${poiFeature.id}"></div>`)
         .on('open', () => {
           new SchoolPopupContent({ propsData: { school: props } }).$mount(`#school-popup-content-${poiFeature.id}`)
