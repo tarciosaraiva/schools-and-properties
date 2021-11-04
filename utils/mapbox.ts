@@ -80,7 +80,7 @@ export const buildSchoolFilterExpr = (shouldPlot: boolean, schoolType: string) =
   return ['in', ['get', 'schoolType'], '']
 }
 
-export const buildSchoolLocationFilterExpression = (schoolsFilter: SchoolsFilter) => {
+export const buildSchoolLocationFilterExpression = (schoolsFilter: SchoolsFilter, primary: boolean = true) => {
   let eduSectorFilter: (string | string[])[] | null = ['==', ['get', 'educationSector'], 'Government']
 
   if (schoolsFilter.educationSector === 'NonGovernment') {
@@ -89,47 +89,73 @@ export const buildSchoolLocationFilterExpression = (schoolsFilter: SchoolsFilter
     eduSectorFilter = null
   }
 
-  const primaryFilter = filterOutNulls([
-    'all',
-    eduSectorFilter,
-    buildSchoolFilterExpr(schoolsFilter.primary.plot, 'Primary'),
-    [
-      '>=',
-      ['get', 'primaryOverallScore'],
-      `${schoolsFilter.primary.rating}`,
-    ],
-    [
-      '>=',
-      ['get', 'primaryEnglishScore'],
-      `${schoolsFilter.primary.englishRating}`,
-    ],
-    [
-      '>=',
-      ['get', 'primaryMathsScore'],
-      `${schoolsFilter.primary.mathsRating}`,
-    ],
-  ])
+  if (primary) {
+    return filterOutNulls([
+      'all',
+      eduSectorFilter,
+      buildSchoolFilterExpr(schoolsFilter.primary.plot, 'Primary'),
+    ])
+  } else {
+    return filterOutNulls([
+      'all',
+      eduSectorFilter,
+      buildSchoolFilterExpr(schoolsFilter.secondary.plot, 'Secondary'),
+    ])
+  }
+}
 
-  const secondaryFilter = filterOutNulls([
-    'all',
-    eduSectorFilter,
-    buildSchoolFilterExpr(schoolsFilter.secondary.plot, 'Secondary'),
-    [
-      '>=',
-      ['get', 'secondaryOverallScore'],
-      `${schoolsFilter.secondary.rating}`,
-    ],
-    [
-      '>=',
-      ['get', 'secondaryEnglishScore'],
-      `${schoolsFilter.secondary.englishRating}`,
-    ],
-    [
-      '>=',
-      ['get', 'secondaryMathsScore'],
-      `${schoolsFilter.secondary.mathsRating}`,
-    ],
-  ])
+export const buildSchoolIconOpacityExpression = (primary: boolean = true) => {
+  const schoolType = primary ? 'Primary' : 'Secondary'
 
-  return ['any', primaryFilter, secondaryFilter]
+  return [
+    'case',
+    [
+      'any',
+      [
+        'all',
+        ['==', ['get', 'schoolType'], schoolType],
+        ['==', ['get', `${schoolType.toLowerCase()}OverallScore`], '#N/A']
+      ],
+      [
+        'all',
+        ['==', ['get', 'schoolType'], 'Pri/Sec'],
+        ['==', ['get', `${schoolType.toLowerCase()}OverallScore`], '#N/A'],
+      ],
+    ],
+    0.65,
+    1
+  ]
+}
+
+export const buildSchoolIconSizeExpression = (schoolsFilter: SchoolsFilter, primaryFilter: boolean = true) => {
+  const { primary, secondary } = schoolsFilter
+  const schoolTypeFilter = primaryFilter ? primary : secondary
+
+  if (!schoolTypeFilter.plot) {
+    return 0
+  }
+
+  const schoolType = primaryFilter ? 'Primary' : 'Secondary'
+
+  const schoolScoreExpr = [
+    [
+      'all',
+      ['in', ['get', 'schoolType'], ['literal', [schoolType, 'Pri/Sec']]],
+      ['!=', ['get', `${schoolType.toLowerCase()}OverallScore`], '#N/A']
+    ],
+    ['to-number', ['get', `${schoolType.toLowerCase()}OverallScore`]]
+  ]
+
+  return [
+    'step',
+    [
+      'case',
+      schoolScoreExpr[0],
+      schoolScoreExpr[1],
+      0
+    ],
+    0.65,
+    schoolTypeFilter.rating,
+    1
+  ]
 }

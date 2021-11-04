@@ -18,9 +18,15 @@ import maplibregl from 'maplibre-gl'
 import PropertyPopupContent from '~/components/PropertyPopupContent.vue'
 import SchoolPopupContent from '~/components/SchoolPopupContent.vue'
 import { PropertyListing, SchoolsFilter } from '~/store'
-import { dataSources, buildSchoolLocationFilterExpression } from '~/utils/mapbox'
+import {
+  dataSources,
+  buildSchoolLocationFilterExpression,
+  buildSchoolIconOpacityExpression,
+  buildSchoolIconSizeExpression
+} from '~/utils/mapbox'
 
-const SCHOOL_POINT_LAYER_NAME = 'school-point'
+const PRIMARY_SCHOOL_POINT_LAYER_NAME = 'primary-school-point'
+const SECONDARY_SCHOOL_POINT_LAYER_NAME = 'secondary-school-point'
 
 export default Vue.extend({
   props: {
@@ -56,7 +62,11 @@ export default Vue.extend({
     },
     schoolsFilter: {
       handler(currentFilter, _) {
-        this.map.setFilter(SCHOOL_POINT_LAYER_NAME, buildSchoolLocationFilterExpression(currentFilter))
+        this.map.setFilter(PRIMARY_SCHOOL_POINT_LAYER_NAME, buildSchoolLocationFilterExpression(currentFilter))
+        this.map.setFilter(SECONDARY_SCHOOL_POINT_LAYER_NAME, buildSchoolLocationFilterExpression(currentFilter, false))
+        this.map.setLayoutProperty(PRIMARY_SCHOOL_POINT_LAYER_NAME, 'icon-size', buildSchoolIconSizeExpression(currentFilter))
+        this.map.setLayoutProperty(SECONDARY_SCHOOL_POINT_LAYER_NAME, 'icon-size', buildSchoolIconSizeExpression(currentFilter, false))
+
         this.schoolZoneDataSources.forEach((ds: any) => {
           this.map.setLayoutProperty(
             `${ds.id}-line`,
@@ -176,6 +186,7 @@ export default Vue.extend({
           })
       })
 
+      // add line layer for data sources
       this.schoolZoneDataSources.forEach((dataSource: any) => {
         this.map
           .addLayer({
@@ -192,41 +203,47 @@ export default Vue.extend({
           })
       })
 
-      this.map
-        .addLayer({
-          id: SCHOOL_POINT_LAYER_NAME,
-          type: 'symbol',
-          source: 'school-locations',
-          layout: {
-            'icon-image': [
-              'case',
-              ['==', ['get', 'schoolType'], 'Primary'],
-              'primary-school',
-              ['!=', ['get', 'schoolType'], 'Primary'],
-              'secondary-school',
-              'primary-school',
-            ],
-            'text-anchor': 'left',
-            'text-justify': 'left',
-            'text-field': [
-              'concat',
-              ['get', 'schoolName'],
-              ' (',
-              ['get', 'educationSector'],
-              ')',
-            ],
-            'text-size': 10,
-            'text-offset': [2, 0],
-          },
-        })
-        .on('click', SCHOOL_POINT_LAYER_NAME, this.onSchoolPoiClick)
-        .on('mouseenter', SCHOOL_POINT_LAYER_NAME, (e: any) => {
-          e.target.getCanvas().style.cursor = 'pointer'
-        })
-        .on('mouseleave', SCHOOL_POINT_LAYER_NAME, (e: any) => {
-          e.target.getCanvas().style.cursor = ''
-        })
-        .setFilter(SCHOOL_POINT_LAYER_NAME, buildSchoolLocationFilterExpression(this.schoolsFilter))
+      const poiLayers = [
+        PRIMARY_SCHOOL_POINT_LAYER_NAME,
+        SECONDARY_SCHOOL_POINT_LAYER_NAME
+      ]
+
+      poiLayers.forEach((layerName: string) => {
+        const primary = layerName === PRIMARY_SCHOOL_POINT_LAYER_NAME
+
+        this.map
+          .addLayer({
+            id: layerName,
+            type: 'symbol',
+            source: 'school-locations',
+            paint: {
+              'icon-opacity': buildSchoolIconOpacityExpression(primary),
+            },
+            filter: buildSchoolLocationFilterExpression(this.schoolsFilter, primary),
+            layout: {
+              'icon-size': buildSchoolIconSizeExpression(this.schoolsFilter, primary),
+              'icon-image': primary ? 'primary-school' : 'secondary-school',
+              'text-anchor': 'left',
+              'text-justify': 'left',
+              'text-field': [
+                'concat',
+                ['get', 'schoolName'],
+                ' (',
+                ['get', 'educationSector'],
+                ')',
+              ],
+              'text-size': 10,
+              'text-offset': [2, 0],
+            },
+          })
+          .on('click', layerName, this.onSchoolPoiClick)
+          .on('mouseenter', layerName, (e: any) => {
+            e.target.getCanvas().style.cursor = 'pointer'
+          })
+          .on('mouseleave', layerName, (e: any) => {
+            e.target.getCanvas().style.cursor = ''
+          })
+      })
     },
 
     addControls() {

@@ -1,4 +1,9 @@
-import { buildSchoolFilterExpr, buildSchoolLocationFilterExpression } from '@/utils/mapbox'
+import {
+  buildSchoolFilterExpr,
+  buildSchoolLocationFilterExpression,
+  buildSchoolIconOpacityExpression,
+  buildSchoolIconSizeExpression
+} from '@/utils/mapbox'
 
 describe('utils/mapbox', () => {
   describe('buildSchoolFilterExpr', () => {
@@ -24,75 +29,129 @@ describe('utils/mapbox', () => {
       }
     }
 
-    test('expression contains no education sector filter', () => {
+    test('primary school expression contains no education sector filter', () => {
       const actual = buildSchoolLocationFilterExpression(schoolsFilter)
       expect(actual).toEqual(
         [
-          'any',
-          [
-            'all',
-            ['in', ['get', 'schoolType'], ['literal', ['Primary', 'Pri/Sec']]],
-            ['>=', ['get', 'primaryOverallScore'], '90'],
-            ['>=', ['get', 'primaryEnglishScore'], '4'],
-            ['>=', ['get', 'primaryMathsScore'], '4'],
-          ],
-          [
-            'all',
-            ['in', ['get', 'schoolType'], ''],
-            ['>=', ['get', 'secondaryOverallScore'], '91'],
-            ['>=', ['get', 'secondaryEnglishScore'], '3'],
-            ['>=', ['get', 'secondaryMathsScore'], '3'],
-          ]
+          'all',
+          ['in', ['get', 'schoolType'], ['literal', ['Primary', 'Pri/Sec']]],
         ]
       )
     })
 
-    test('expression contains "Government" education sector filter', () => {
-      const actual = buildSchoolLocationFilterExpression({...schoolsFilter, educationSector: 'Government'})
+    test('secondary school expression contains no education sector filter', () => {
+      const actual = buildSchoolLocationFilterExpression({...schoolsFilter, secondary: { plot: true }}, false)
       expect(actual).toEqual(
         [
-          'any',
-          [
-            'all',
-            ['==', ['get', 'educationSector'], 'Government'],
-            ['in', ['get', 'schoolType'], ['literal', ['Primary', 'Pri/Sec']]],
-            ['>=', ['get', 'primaryOverallScore'], '90'],
-            ['>=', ['get', 'primaryEnglishScore'], '4'],
-            ['>=', ['get', 'primaryMathsScore'], '4'],
-          ],
-          [
-            'all',
-            ['==', ['get', 'educationSector'], 'Government'],
-            ['in', ['get', 'schoolType'], ''],
-            ['>=', ['get', 'secondaryOverallScore'], '91'],
-            ['>=', ['get', 'secondaryEnglishScore'], '3'],
-            ['>=', ['get', 'secondaryMathsScore'], '3'],
-          ]
+          'all',
+          ['in', ['get', 'schoolType'], ['literal', ['Secondary', 'Pri/Sec']]]
         ]
       )
     })
 
-    test('expression contains a negation of "Government" education sector filter', () => {
+    test('no plot secondary expression contains "Government" education sector filter', () => {
+      const actual = buildSchoolLocationFilterExpression({...schoolsFilter, educationSector: 'Government'}, false)
+      expect(actual).toEqual(
+        [
+          'all',
+          ['==', ['get', 'educationSector'], 'Government'],
+          ['in', ['get', 'schoolType'], '']
+        ]
+      )
+    })
+
+    test('primary schools expression contains a negation of "Government" education sector filter', () => {
       const actual = buildSchoolLocationFilterExpression({...schoolsFilter, educationSector: 'NonGovernment'})
       expect(actual).toEqual(
         [
+          'all',
+          ['!=', ['get', 'educationSector'], 'Government'],
+          ['in', ['get', 'schoolType'], ['literal', ['Primary', 'Pri/Sec']]]
+        ],
+      )
+    })
+  })
+
+  describe('buildSchoolIconOpacityExpression', () => {
+    test('build case expression for primary school', () => {
+      const actual = buildSchoolIconOpacityExpression()
+      expect(actual).toEqual([
+        'case',
+        [
           'any',
           [
             'all',
-            ['!=', ['get', 'educationSector'], 'Government'],
-            ['in', ['get', 'schoolType'], ['literal', ['Primary', 'Pri/Sec']]],
-            ['>=', ['get', 'primaryOverallScore'], '90'],
-            ['>=', ['get', 'primaryEnglishScore'], '4'],
-            ['>=', ['get', 'primaryMathsScore'], '4'],
+            ['==', ['get', 'schoolType'], 'Primary'],
+            ['==', ['get', 'primaryOverallScore'], '#N/A']
           ],
           [
             'all',
-            ['!=', ['get', 'educationSector'], 'Government'],
-            ['in', ['get', 'schoolType'], ''],
-            ['>=', ['get', 'secondaryOverallScore'], '91'],
-            ['>=', ['get', 'secondaryEnglishScore'], '3'],
-            ['>=', ['get', 'secondaryMathsScore'], '3'],
-          ]
+            ['==', ['get', 'schoolType'], 'Pri/Sec'],
+            ['==', ['get', 'primaryOverallScore'], '#N/A'],
+          ],
+        ],
+        0.65,
+        1
+      ])
+    })
+
+    test('build case expression for secondary school', () => {
+      const actual = buildSchoolIconOpacityExpression(false)
+      expect(actual).toEqual([
+        'case',
+        [
+          'any',
+          [
+            'all',
+            ['==', ['get', 'schoolType'], 'Secondary'],
+            ['==', ['get', 'secondaryOverallScore'], '#N/A']
+          ],
+          [
+            'all',
+            ['==', ['get', 'schoolType'], 'Pri/Sec'],
+            ['==', ['get', 'secondaryOverallScore'], '#N/A'],
+          ],
+        ],
+        0.65,
+        1
+      ])
+    })
+  })
+
+  describe('buildSchoolIconSizeExpression', () => {
+    const schoolsFilter = {
+      educationSector: 'all',
+      primary: {
+        plot: true, rating: 90, englishRating: 4, mathsRating: 4
+      },
+      secondary: {
+        plot: false, rating: 91, englishRating: 3, mathsRating: 3
+      }
+    }
+
+    test('should return 0 when layer is not to be plotted', () => {
+      const actual = buildSchoolIconSizeExpression(schoolsFilter, false)
+      expect(actual).toBe(0)
+    })
+
+    test('should build expression when layer is to be plotted', () => {
+      const actual = buildSchoolIconSizeExpression(schoolsFilter, true)
+      expect(actual).toEqual(
+        [
+          'step',
+          [
+            'case',
+            [
+              'all',
+              ['in', ['get', 'schoolType'], ['literal', ['Primary', 'Pri/Sec']]],
+              ['!=', ['get', 'primaryOverallScore'], '#N/A']
+            ],
+            ['to-number', ['get', 'primaryOverallScore']],
+            0
+          ],
+          0.65,
+          90,
+          1
         ]
       )
     })
