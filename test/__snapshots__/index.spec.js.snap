@@ -16,7 +16,7 @@ exports[`index renders correctly with props 1`] = `
     <div class="attributions-container">
       <img alt="Powered by Domain" class="attribution" src="~/assets/images/powered-by-domain-rgb.png">
       <a href="#">
-        <label for="modal-control-disclaimer">Check our disclaimer to know more.</label>
+        <label for="modal-control-disclaimer">About this website.</label>
       </a>
       <a href="#">
         <label for="modal-control">Click for attributions to appropriate data sources.</label>

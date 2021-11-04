@@ -17,7 +17,7 @@
     <footer>
       <div class="attributions-container">
         <img class="attribution" src="~/assets/images/powered-by-domain-rgb.png" alt="Powered by Domain" />
-        <a href="#"><label for="modal-control-disclaimer">Check our disclaimer to know more.</label></a>
+        <a href="#"><label for="modal-control-disclaimer">About this website.</label></a>
         <a href="#"><label for="modal-control">Click for attributions to appropriate data sources.</label></a>
         <a href="https://www.buymeacoffee.com/tarciosaraiva" target="blank">Click here to buy me a coffee!</a>
         <a href="https://www.github.com/tarciosaraiva/schools-and-properties" target="blank">Project on Github</a>
