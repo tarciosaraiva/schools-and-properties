@@ -106,7 +106,9 @@ export type RootState = ReturnType<typeof state>
 
 export const getters: GetterTree<RootState, RootState> = {
   listings: state => state.list,
-  schoolsFilter: state => state.filter.schools
+  schoolsFilter: state => state.filter.schools,
+  propertiesFilter: state => state.filter.properties,
+  locations: state => state.geocodeSuggestions,
 }
 
 export const mutations: MutationTree<RootState> = {

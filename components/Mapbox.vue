@@ -2,7 +2,7 @@
   <div id="map">
     <a
       href="https://www.maptiler.com"
-      style="position: absolute; right: 1rem; bottom: 2rem; z-index: 100"
+      style="position: absolute; left: 1rem; bottom: 1rem; z-index: 100"
       ><img
         src="https://api.maptiler.com/resources/logo.svg"
         alt="MapTiler logo"
@@ -15,6 +15,8 @@ import Vue from 'vue'
 import { mapActions } from 'vuex'
 import maplibregl from 'maplibre-gl'
 
+import PropertyFilterMapControl from '~/utils/PropertyFilterMapControl'
+import SchoolFilterMapControl from '~/utils/SchoolFilterMapControl'
 import PropertyPopupContent from '~/components/PropertyPopupContent.vue'
 import SchoolPopupContent from '~/components/SchoolPopupContent.vue'
 import { PropertyListing, SchoolsFilter } from '~/store'
@@ -41,6 +43,14 @@ export default Vue.extend({
     flyTo: {
       type: Object,
       default: () => ({})
+    },
+    openPropertiesFilterFn: {
+      type: Function,
+      default: () => () => {}
+    },
+    openSchoolsFilterFn: {
+      type: Function,
+      default: () => () => {}
     }
   },
 
@@ -86,7 +96,7 @@ export default Vue.extend({
         const hasPoi = this.markers.find((m) => m.getLngLat() === lngLat)
 
         if (!hasPoi) {
-          const popup = new maplibregl.Popup({ maxWidth: '400px', closeButton: false })
+          const popup = new maplibregl.Popup({ maxWidth: '300px', closeButton: false })
             .setHTML(`<div id="property-popup-content-${p.id}"></div>`)
             .on('open', () => {
               new PropertyPopupContent({ propsData: { property: p } }).$mount(`#property-popup-content-${p.id}`)
@@ -247,14 +257,16 @@ export default Vue.extend({
     },
 
     addControls() {
-      this.map.addControl(new maplibregl.NavigationControl({}), 'top-left')
+      this.map.addControl(new maplibregl.NavigationControl({}), 'bottom-right')
       this.map.addControl(
         new maplibregl.GeolocateControl({
           positionOptions: { enableHighAccuracy: true },
           trackUserLocation: false,
         }),
-        'top-left'
+        'bottom-right'
       )
+      this.map.addControl(new PropertyFilterMapControl(this.$store, this.openPropertiesFilterFn))
+      this.map.addControl(new SchoolFilterMapControl(this.$store, this.openSchoolsFilterFn), 'top-left')
     },
   },
 })

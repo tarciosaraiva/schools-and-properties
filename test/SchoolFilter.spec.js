@@ -1,26 +1,24 @@
 import { mount, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
 
-import { state } from '@/store'
-import SidebarFilter from '@/components/SidebarFilter.vue'
+import { state, getters } from '@/store'
+import SchoolFilter from '~/components/SchoolFilter.vue'
 
 const localVue = createLocalVue()
 localVue.use(Vuex)
 
-describe('SidebarFilter', () => {
+describe('SchoolFilter', () => {
   let store
   let wrapper
   let propsData
   let mutations
 
   beforeEach(() => {
-    propsData = { loadListingsFn: jest.fn() }
+    propsData = { closeFn: jest.fn() }
     mutations = {
-      'UPDATE_PROPERTY_FILTER_TYPE': jest.fn(),
-      'UPDATE_PROPERTY_FILTER_ROOMS': jest.fn(),
-      'UPDATE_PROPERTY_FILTER_BATHROOMS': jest.fn(),
-      'UPDATE_PROPERTY_FILTER_CAR_SPACES': jest.fn(),
-      'UPDATE_PROPERTY_FILTER_MAX_PRICE': jest.fn(),
+      'UPDATE_PLOT_PRIMARY_SCHOOLS': jest.fn(),
+      'UPDATE_PLOT_SECONDARY_SCHOOLS': jest.fn(),
+      'UPDATE_SCHOOL_ZONE': jest.fn(),
       'UPDATE_SCHOOL_EDUCATION_SECTOR': jest.fn(),
       'UPDATE_SCHOOL_PRIMARY_RATING': jest.fn(),
       'UPDATE_SCHOOL_PRIMARY_ENG_RATING': jest.fn(),
@@ -29,8 +27,8 @@ describe('SidebarFilter', () => {
       'UPDATE_SCHOOL_SECONDARY_ENG_RATING': jest.fn(),
       'UPDATE_SCHOOL_SECONDARY_MATH_RATING': jest.fn()
     }
-    store = new Vuex.Store({ state, mutations })
-    wrapper = mount(SidebarFilter, { propsData, store, localVue })
+    store = new Vuex.Store({ state, mutations, getters })
+    wrapper = mount(SchoolFilter, { propsData, store, localVue })
   })
 
   test('is a Vue instance', () => {
@@ -41,40 +39,14 @@ describe('SidebarFilter', () => {
     expect(wrapper).toMatchSnapshot()
   })
 
-  test('property types default values matches state', () => {
-    const houseInput = wrapper.find('#p_house_type')
-    expect(houseInput.element.checked).toBeTruthy()
-
-    const townhouseInput = wrapper.find('#p_townhouse_type')
-    expect(townhouseInput.element.checked).toBeTruthy()
-
-    const unitInput = wrapper.find('#p_unit_type')
-    expect(unitInput.element.checked).toBeFalsy()
-  })
-
-  test('rooms default value match state', () => {
-    const input = wrapper.find('#p_rooms')
-    expect(Number(input.element.value)).toBe(store.state.filter.properties.rooms)
-  })
-
-  test('bathrooms default value match state', () => {
-    const input = wrapper.find('#p_bathrooms')
-    expect(Number(input.element.value)).toBe(store.state.filter.properties.bathrooms)
-  })
-
-  test('car spaces default value match state', () => {
-    const input = wrapper.find('#p_car_spaces')
-    expect(Number(input.element.value)).toBe(store.state.filter.properties.carSpaces)
-  })
-
-  test('max price default value match state', () => {
-    const input = wrapper.find('#p_max_price')
-    expect(Number(input.element.value)).toBe(store.state.filter.properties.maxPrice)
-  })
-
   test('education sector default value matches state', () => {
     const input = wrapper.find('#s_edu_sector')
     expect(input.element.value).toBe(store.state.filter.schools.educationSector)
+  })
+
+  test('school zone default value matches state', () => {
+    const input = wrapper.find('#s_school_zones')
+    expect(input.element.value).toBe(store.state.filter.schools.zone)
   })
 
   test('overall rating default value match state', () => {
@@ -92,17 +64,21 @@ describe('SidebarFilter', () => {
     expect(Number(input.element.value)).toBe(store.state.filter.schools.primary.mathsRating)
   })
 
-  test('should invoke passed "loadListingFn" when applying filter', () => {
-    const button = wrapper.find('button')
-    button.trigger('click')
-    expect(propsData.loadListingsFn).toHaveBeenCalled()
+  test('should have committed mutation "UPDATE_PLOT_PRIMARY_SCHOOLS" to the store when plotting option changes', async () => {
+    const input = wrapper.find('#s_show_primary_schools')
+    await input.setChecked(false)
+    expect(mutations.UPDATE_PLOT_PRIMARY_SCHOOLS).toHaveBeenCalledWith(store.state, false)
+  })
+
+  test('should have committed mutation "UPDATE_PLOT_SECONDARY_SCHOOLS" to the store when plotting option changes', async () => {
+    const input = wrapper.find('#s_show_secondary_schools')
+    await input.setChecked(false)
+    expect(mutations.UPDATE_PLOT_SECONDARY_SCHOOLS).toHaveBeenCalledWith(store.state, false)
   })
 
   test.each([
-    ['UPDATE_PROPERTY_FILTER_ROOMS', '#p_rooms', '2'],
-    ['UPDATE_PROPERTY_FILTER_BATHROOMS', '#p_bathrooms', '3'],
-    ['UPDATE_PROPERTY_FILTER_CAR_SPACES', '#p_car_spaces', '2'],
-    ['UPDATE_PROPERTY_FILTER_MAX_PRICE', '#p_max_price', '500000'],
+    ['UPDATE_SCHOOL_ZONE', '#s_school_zones', 'primary'],
+    ['UPDATE_SCHOOL_EDUCATION_SECTOR', '#s_edu_sector', 'NonGovernment'],
     ['UPDATE_SCHOOL_PRIMARY_RATING', '#s_prim_rating', '99'],
     ['UPDATE_SCHOOL_PRIMARY_ENG_RATING', '#s_prim_english_rating', '2'],
     ['UPDATE_SCHOOL_PRIMARY_MATH_RATING', '#s_prim_maths_rating', '3'],

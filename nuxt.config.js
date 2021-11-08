@@ -40,7 +40,8 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    'mini.css',
+    'normalize.css',
+    'plain-css',
     '@/assets/css/main.css',
     '@/assets/css/sidebar.css',
     '@/assets/css/popup.css'
@@ -57,7 +58,14 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/typescript
     '@nuxt/typescript-build',
+    '@nuxtjs/fontawesome'
   ],
+
+  fontawesome: {
+    icons: {
+      solid: ['faBed', 'faBath', 'faCar', 'faDollarSign', 'faSync', 'faSlidersH', 'faCaretSquareDown', 'faCaretSquareUp', 'faSchool', 'faSearchLocation'],
+    }
+  },
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [

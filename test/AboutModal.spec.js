@@ -1,11 +1,11 @@
 import { mount } from '@vue/test-utils'
-import DisclaimerModal from '@/components/DisclaimerModal.vue'
+import AboutModal from '~/components/AboutModal.vue'
 
-describe('DisclaimerModal', () => {
+describe('AboutModal', () => {
   let wrapper
 
   beforeEach(() => {
-    wrapper = mount(DisclaimerModal)
+    wrapper = mount(AboutModal, { propsData: { closeFn: jest.fn() } })
   })
 
   test('is a Vue instance', () => {

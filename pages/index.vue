@@ -1,58 +1,85 @@
 <template>
   <div id="app">
-    <header>
-      <h1>Schools and properties</h1>
+    <header class="pl-row">
+      <h1 class="pl-col-md-6 pl-col-sm-12">Schools and properties</h1>
+      <navigate class="pl-col-md-6 pl-col-sm-12" :geocode-fn="geocode" :suggestions="locations" @navigate="onNavigate" />
     </header>
     <main>
       <mapbox
         :schools-filter="schoolsFilter"
         :listings="listings"
         :fly-to="flyTo"
+        :open-properties-filter-fn="openPropertyFilter"
+        :open-schools-filter-fn="openSchoolFilter"
       />
-      <form class="sidebar">
-        <sidebar-navigate :geocode-fn="geocode" @navigate="onNavigate" />
-        <sidebar-filter :load-listings-fn="loadListings" />
-      </form>
     </main>
-    <footer>
-      <div class="attributions-container">
+    <footer class="pl-row">
+      <div class="d-flex pl-col justify-content-between align-items-center">
         <img class="attribution" src="~/assets/images/powered-by-domain-rgb.png" alt="Powered by Domain" />
-        <a href="#"><label for="modal-control-disclaimer">About this website.</label></a>
-        <a href="#"><label for="modal-control">Click for attributions to appropriate data sources.</label></a>
-        <a href="https://www.buymeacoffee.com/tarciosaraiva" target="blank">Click here to buy me a coffee!</a>
-        <a href="https://www.github.com/tarciosaraiva/schools-and-properties" target="blank">Project on Github</a>
-        <a href="https://forms.gle/7xZTuGrb3w7VAUdq6" target="blank">Give us feedback!</a>
+        <a href="#" @click.stop.prevent="openAbout"><small>About</small></a>
+        <a href="#" @click.stop.prevent="openAttributions"><small>Attributions</small></a>
         <img class="attribution" src="~/assets/images/poweredby_apm_logo_horizontal_small_rgb.png" alt="Powered by APM" />
       </div>
     </footer>
-    <disclaimer-modal />
-    <attribution-modal />
+    <attribution-modal v-show="showAttributions" :close-fn="closeAttributions" />
+    <property-filter v-show="showPropertyFilter" :close-fn="closePropertyFilter" />
+    <school-filter v-show="showSchoolFilter" :close-fn="closeSchoolFilter" />
+    <about-modal v-show="showAbout" :close-fn="closeAbout" />
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import { mapGetters, mapActions } from 'vuex'
-import SidebarNavigate from '~/components/SidebarNavigate.vue'
-import SidebarFilter from '~/components/SidebarFilter.vue'
+import Navigate from '~/components/Navigate.vue'
+import PropertyFilter from '~/components/PropertyFilter.vue'
+import SchoolFilter from '~/components/SchoolFilter.vue'
 import Mapbox from '~/components/Mapbox.vue'
 import AttributionModal from '~/components/AttributionModal.vue'
-import DisclaimerModal from '~/components/DisclaimerModal.vue'
+import AboutModal from '~/components/AboutModal.vue'
 
 export default Vue.extend({
-  components: { SidebarNavigate, SidebarFilter, Mapbox, AttributionModal, DisclaimerModal },
+  components: { Navigate, PropertyFilter, SchoolFilter, Mapbox, AttributionModal, AboutModal },
   data() {
     return {
+      showPropertyFilter: false,
+      showSchoolFilter: false,
+      showAttributions: false,
+      showAbout: false,
       flyTo: {} as Object,
     }
   },
   computed: {
-    ...mapGetters(['listings', 'schoolsFilter']),
+    ...mapGetters(['listings', 'schoolsFilter', 'locations']),
   },
   methods: {
-    ...mapActions(['loadListings', 'geocode']),
+    ...mapActions(['geocode']),
     onNavigate(center: number[], placeType: string[]) {
       this.flyTo = { center, placeType }
+    },
+    openAttributions () {
+      this.showAttributions = true
+    },
+    closeAttributions () {
+      this.showAttributions = false
+    },
+    openAbout () {
+      this.showAbout = true
+    },
+    closeAbout () {
+      this.showAbout = false
+    },
+    openPropertyFilter () {
+      this.showPropertyFilter = true
+    },
+    closePropertyFilter () {
+      this.showPropertyFilter = false
+    },
+    openSchoolFilter () {
+      this.showSchoolFilter = true
+    },
+    closeSchoolFilter () {
+      this.showSchoolFilter = false
     },
   },
 })

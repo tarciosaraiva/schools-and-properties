@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Modal should match snapshot 1`] = `
+<transition-stub name="modal">
+  <div class="modal-mask">
+    <div class="modal-wrapper">
+      <div class="modal-container">
+        <div class="modal-header"> default header </div>
+        <div class="modal-body"> default body </div>
+        <div class="modal-footer text-right">
+          <button class="pl-button full small">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</transition-stub>
+`;

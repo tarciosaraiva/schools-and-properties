@@ -4,7 +4,7 @@
       :options="vfOptions"
       :images="property.media"
       :transitions="vfTransitions"
-      style="width:390px"
+      style="width:290px"
     >
       <template #preloader>
         <flux-preloader />

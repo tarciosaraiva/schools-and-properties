@@ -5,7 +5,7 @@ describe('AttributionModal', () => {
   let wrapper
 
   beforeEach(() => {
-    wrapper = mount(AttributionModal)
+    wrapper = mount(AttributionModal, { propsData: { closeFn: jest.fn() } })
   })
 
   test('is a Vue instance', () => {

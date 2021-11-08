@@ -2,7 +2,7 @@
 
 exports[`PropertyPopupContent renders correctly with props 1`] = `
 <div class="popup-info container">
-  <div class="vue-flux" style="width: 390px;">
+  <div class="vue-flux" style="width: 290px;">
     <!---->
     <!---->
     <!---->
