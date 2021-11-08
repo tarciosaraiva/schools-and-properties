@@ -3,7 +3,8 @@
 }
 
 .maplibregl-popup-content.mapboxgl-popup-content {
-  padding: 0.25rem;
+  border: 1px solid #ccc;
+  padding: 0.5rem;
 }
 
 .popup-info.container {
@@ -43,9 +44,14 @@
   white-space: nowrap;
 }
 
+.popup-info.container .property-stats p {
+  margin-bottom: 0.25rem;
+}
+
 .popup-info.container .property-stats .price {
   font-weight: bold;
   font-size: 120%;
+  margin-top: 0.5rem;
 }
 
 .popup-info.container .property-stats .address {
@@ -53,18 +59,21 @@
 }
 
 .popup-info.container .property-stats .division {
+  align-items: center;
   display: flex;
   justify-content: space-between;
-  text-decoration: underline;
 }
 
 .popup-info.container .property-stats ul {
+  border: 1px solid #ccc;
   column-count: 3;
   list-style-type: none;
   margin: var(--universal-margin);
-  padding: 0;
+  margin-bottom: 0.5rem;
 }
 
 .popup-info.container .property-stats ul li {
-  margin-bottom: 0.25rem;
+  padding: 0.25rem;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
 }

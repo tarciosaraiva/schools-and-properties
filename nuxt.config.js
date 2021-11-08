@@ -64,6 +64,7 @@ export default {
   fontawesome: {
     icons: {
       solid: ['faBed', 'faBath', 'faCar', 'faDollarSign', 'faSync', 'faSlidersH', 'faCaretSquareDown', 'faCaretSquareUp', 'faSchool', 'faSearchLocation'],
+      regular: ['faSquare']
     }
   },
 
