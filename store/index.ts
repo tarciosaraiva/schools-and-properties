@@ -109,6 +109,15 @@ export const getters: GetterTree<RootState, RootState> = {
   schoolsFilter: state => state.filter.schools,
   propertiesFilter: state => state.filter.properties,
   locations: state => state.geocodeSuggestions,
+  listingPois: state => state.list.map(l => ({
+    type: 'Feature',
+    id: l.id,
+    geometry: {
+      type: 'Point',
+      coordinates: [l.longitude, l.latitude]
+    },
+    properties: { ...l }
+  }))
 }
 
 export const mutations: MutationTree<RootState> = {

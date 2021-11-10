@@ -1,5 +1,5 @@
 // @ts-ignore
-import SchoolViewFilterMapControl from '~/components/SchoolViewFilterMapControl.vue'
+import SchoolViewFilterMapControl from '~/components/school/SchoolViewFilterMapControl.vue'
 
 export default class SchoolFilterMapControl {
   _container: HTMLDivElement | null = null

@@ -7,7 +7,7 @@
     <main>
       <mapbox
         :schools-filter="schoolsFilter"
-        :listings="listings"
+        :listing-pois="listingPois"
         :fly-to="flyTo"
         :open-properties-filter-fn="openPropertyFilter"
         :open-schools-filter-fn="openSchoolFilter"
@@ -32,8 +32,8 @@
 import Vue from 'vue'
 import { mapGetters, mapActions } from 'vuex'
 import Navigate from '~/components/Navigate.vue'
-import PropertyFilter from '~/components/PropertyFilter.vue'
-import SchoolFilter from '~/components/SchoolFilter.vue'
+import PropertyFilter from '~/components/property/PropertyFilter.vue'
+import SchoolFilter from '~/components/school/SchoolFilter.vue'
 import Mapbox from '~/components/Mapbox.vue'
 import AttributionModal from '~/components/AttributionModal.vue'
 import AboutModal from '~/components/AboutModal.vue'
@@ -50,7 +50,7 @@ export default Vue.extend({
     }
   },
   computed: {
-    ...mapGetters(['listings', 'schoolsFilter', 'locations']),
+    ...mapGetters(['schoolsFilter', 'locations', 'listingPois']),
   },
   methods: {
     ...mapActions(['geocode']),

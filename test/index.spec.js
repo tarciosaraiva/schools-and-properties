@@ -23,7 +23,7 @@ describe('index', () => {
   beforeEach(() => {
     const actions = { loadListings: jest.fn(), geocode: jest.fn() }
     const getters = {
-      listings: jest.fn(),
+      listingPois: jest.fn(),
       schoolsFilter: jest.fn(),
       locations: jest.fn()
     }

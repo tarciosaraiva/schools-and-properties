@@ -2,7 +2,7 @@
   <div id="map">
     <a
       href="https://www.maptiler.com"
-      style="position: absolute; left: 1rem; bottom: 1rem; z-index: 100"
+      style="position: absolute; left: 14rem; bottom: 1rem; z-index: 100"
       ><img
         src="https://api.maptiler.com/resources/logo.svg"
         alt="MapTiler logo"
@@ -17,14 +17,15 @@ import maplibregl from 'maplibre-gl'
 
 import PropertyFilterMapControl from '~/utils/PropertyFilterMapControl'
 import SchoolFilterMapControl from '~/utils/SchoolFilterMapControl'
-import PropertyPopupContent from '~/components/PropertyPopupContent.vue'
-import SchoolPopupContent from '~/components/SchoolPopupContent.vue'
-import { PropertyListing, SchoolsFilter } from '~/store'
+import SchoolLegendMapControl from '~/utils/SchoolLegendMapControl'
+import PropertyPopupContent from '~/components/property/PropertyPopupContent.vue'
+import SchoolPopupContent from '~/components/school/SchoolPopupContent.vue'
+import { SchoolsFilter } from '~/store'
 import {
   dataSources,
   buildSchoolLocationFilterExpression,
-  buildSchoolIconOpacityExpression,
-  buildSchoolIconSizeExpression
+  buildSchoolIconSizeExpression,
+  buildSchoolIconImageExpression
 } from '~/utils/mapbox'
 
 const PRIMARY_SCHOOL_POINT_LAYER_NAME = 'primary-school-point'
@@ -32,8 +33,8 @@ const SECONDARY_SCHOOL_POINT_LAYER_NAME = 'secondary-school-point'
 
 export default Vue.extend({
   props: {
-    listings: {
-      type: Array as () => PropertyListing[],
+    listingPois: {
+      type: Array as () => any[],
       default: () => ([])
     },
     schoolsFilter: {
@@ -87,32 +88,12 @@ export default Vue.extend({
       },
       deep: true,
     },
-    listings(newListings, _) {
-      // clear so as the filter changes we only get properties matching it
-      this.markers.forEach((m) => m.remove())
-
-      newListings.forEach((p: PropertyListing) => {
-        const lngLat = [p.longitude, p.latitude]
-        const hasPoi = this.markers.find((m) => m.getLngLat() === lngLat)
-
-        if (!hasPoi) {
-          const popup = new maplibregl.Popup({ maxWidth: '300px', closeButton: false })
-            .setHTML(`<div id="property-popup-content-${p.id}"></div>`)
-            .on('open', () => {
-              new PropertyPopupContent({ propsData: { property: p } }).$mount(`#property-popup-content-${p.id}`)
-            })
-
-          const marker = new maplibregl.Marker({ color: '#b5ad56' })
-            .setLngLat([p.longitude, p.latitude])
-            .setPopup(popup)
-            .addTo(this.map)
-
-          marker.getElement().style.cursor = 'pointer'
-
-          this.markers.push(marker)
-        }
+    listingPois(newPois, _) {
+      this.map.getSource('properties').setData({
+        type: 'FeatureCollection',
+        features: newPois
       })
-    },
+    }
   },
 
   mounted() {
@@ -149,13 +130,36 @@ export default Vue.extend({
         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360
       }
 
-      new maplibregl.Popup({ closeButton: false, offset: 20 })
+      new maplibregl.Popup({ closeButton: false, offset: [0, -42] })
         .setHTML(`<div id="school-popup-content-${poiFeature.id}"></div>`)
         .on('open', () => {
           new SchoolPopupContent({ propsData: { school: props } }).$mount(`#school-popup-content-${poiFeature.id}`)
         })
         .setLngLat(coordinates)
         .addTo(e.target)
+    },
+
+    onPropertyPointClick(e: any) {
+      const poiFeature = e.features[0]
+      const coordinates = poiFeature.geometry.coordinates.slice()
+      const props = poiFeature.properties
+
+      props.features = JSON.parse(props.features)
+      props.media = JSON.parse(props.media)
+
+      // Ensure that if the map is zoomed out such that multiple copies of the feature are visible, the
+      // popup appears over the copy being pointed to.
+      while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+        coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360
+      }
+
+      new maplibregl.Popup({ maxWidth: '300px', closeButton: false, offset: [0, -42] })
+          .setHTML(`<div id="property-popup-content-${props.id}"></div>`)
+          .on('open', () => {
+            new PropertyPopupContent({ propsData: { property: props } }).$mount(`#property-popup-content-${props.id}`)
+          })
+          .setLngLat(coordinates)
+          .addTo(e.target)
     },
 
     evaluateLayerVisibility(datasourceId: string, schoolsFilter: SchoolsFilter) {
@@ -166,18 +170,42 @@ export default Vue.extend({
       this.setBoundingBox(this.map.getBounds())
 
       this.map.loadImage(
-        require('~/assets/images/primary-school.png'),
+        require('~/assets/images/primary-school-unrated.png'),
         (err: any, img: any) => {
           if (err) throw err
-          this.map.addImage('primary-school', img)
+          this.map.addImage('primary-school-unrated', img)
         }
       )
 
       this.map.loadImage(
-        require('~/assets/images/secondary-school.png'),
+        require('~/assets/images/primary-school-rated.png'),
         (err: any, img: any) => {
           if (err) throw err
-          this.map.addImage('secondary-school', img)
+          this.map.addImage('primary-school-rated', img)
+        }
+      )
+
+      this.map.loadImage(
+        require('~/assets/images/secondary-school-unrated.png'),
+        (err: any, img: any) => {
+          if (err) throw err
+          this.map.addImage('secondary-school-unrated', img)
+        }
+      )
+
+      this.map.loadImage(
+        require('~/assets/images/secondary-school-rated.png'),
+        (err: any, img: any) => {
+          if (err) throw err
+          this.map.addImage('secondary-school-rated', img)
+        }
+      )
+
+      this.map.loadImage(
+        require('~/assets/images/property-location.png'),
+        (err: any, img: any) => {
+          if (err) throw err
+          this.map.addImage('property-location', img)
         }
       )
 
@@ -213,6 +241,31 @@ export default Vue.extend({
           })
       })
 
+      this.map
+        .addSource('properties', {
+          type: 'geojson',
+          data: {
+            type: 'FeatureCollection',
+            features: []
+          }
+        })
+        .addLayer({
+          id: 'properties-poi',
+          type: 'symbol',
+          source: 'properties',
+          layout: {
+            'icon-image': 'property-location',
+            'icon-offset': [0, -16]
+          }
+        })
+        .on('click', 'properties-poi', this.onPropertyPointClick)
+        .on('mouseenter', 'properties-poi', (e: any) => {
+          e.target.getCanvas().style.cursor = 'pointer'
+        })
+        .on('mouseleave', 'properties-poi', (e: any) => {
+          e.target.getCanvas().style.cursor = ''
+        })
+
       const poiLayers = [
         PRIMARY_SCHOOL_POINT_LAYER_NAME,
         SECONDARY_SCHOOL_POINT_LAYER_NAME
@@ -226,24 +279,10 @@ export default Vue.extend({
             id: layerName,
             type: 'symbol',
             source: 'school-locations',
-            paint: {
-              'icon-opacity': buildSchoolIconOpacityExpression(primary),
-            },
             filter: buildSchoolLocationFilterExpression(this.schoolsFilter, primary),
             layout: {
               'icon-size': buildSchoolIconSizeExpression(this.schoolsFilter, primary),
-              'icon-image': primary ? 'primary-school' : 'secondary-school',
-              'text-anchor': 'left',
-              'text-justify': 'left',
-              'text-field': [
-                'concat',
-                ['get', 'schoolName'],
-                ' (',
-                ['get', 'educationSector'],
-                ')',
-              ],
-              'text-size': 10,
-              'text-offset': [2, 0],
+              'icon-image': buildSchoolIconImageExpression(primary),
             },
           })
           .on('click', layerName, this.onSchoolPoiClick)
@@ -267,6 +306,7 @@ export default Vue.extend({
       )
       this.map.addControl(new PropertyFilterMapControl(this.$store, this.openPropertiesFilterFn))
       this.map.addControl(new SchoolFilterMapControl(this.$store, this.openSchoolsFilterFn), 'top-left')
+      this.map.addControl(new SchoolLegendMapControl(), 'bottom-left')
     },
   },
 })

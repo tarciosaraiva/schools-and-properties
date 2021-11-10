@@ -7,7 +7,7 @@ exports[`index renders correctly with props 1`] = `
     <navigate-stub class="pl-col-md-6 pl-col-sm-12" geocodefn="[Function]" suggestions></navigate-stub>
   </header>
   <main>
-    <mapbox-stub flyto="[object Object]" listings openpropertiesfilterfn="[Function]" openschoolsfilterfn="[Function]" schoolsfilter="[object Object]"></mapbox-stub>
+    <mapbox-stub flyto="[object Object]" listingpois openpropertiesfilterfn="[Function]" openschoolsfilterfn="[Function]" schoolsfilter="[object Object]"></mapbox-stub>
   </main>
   <footer class="pl-row">
     <div class="d-flex pl-col justify-content-between align-items-center">

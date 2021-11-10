@@ -104,9 +104,9 @@ export const buildSchoolLocationFilterExpression = (schoolsFilter: SchoolsFilter
   }
 }
 
-export const buildSchoolIconOpacityExpression = (primary: boolean = true) => {
+export const buildSchoolIconImageExpression = (primary: boolean = true) => {
   const schoolType = primary ? 'Primary' : 'Secondary'
-
+  const lowerCaseSchoolType = schoolType.toLowerCase()
   return [
     'case',
     [
@@ -114,16 +114,16 @@ export const buildSchoolIconOpacityExpression = (primary: boolean = true) => {
       [
         'all',
         ['==', ['get', 'schoolType'], schoolType],
-        ['==', ['get', `${schoolType.toLowerCase()}OverallScore`], '#N/A']
+        ['==', ['get', `${lowerCaseSchoolType}OverallScore`], '#N/A']
       ],
       [
         'all',
         ['==', ['get', 'schoolType'], 'Pri/Sec'],
-        ['==', ['get', `${schoolType.toLowerCase()}OverallScore`], '#N/A'],
+        ['==', ['get', `${lowerCaseSchoolType}OverallScore`], '#N/A'],
       ],
     ],
-    0.65,
-    1
+    `${lowerCaseSchoolType}-school-unrated`,
+    `${lowerCaseSchoolType}-school-rated`
   ]
 }
 

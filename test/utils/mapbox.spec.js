@@ -1,7 +1,7 @@
 import {
   buildSchoolFilterExpr,
   buildSchoolLocationFilterExpression,
-  buildSchoolIconOpacityExpression,
+  buildSchoolIconImageExpression,
   buildSchoolIconSizeExpression
 } from '@/utils/mapbox'
 
@@ -72,9 +72,9 @@ describe('utils/mapbox', () => {
     })
   })
 
-  describe('buildSchoolIconOpacityExpression', () => {
+  describe('buildSchoolIconImageExpression', () => {
     test('build case expression for primary school', () => {
-      const actual = buildSchoolIconOpacityExpression()
+      const actual = buildSchoolIconImageExpression()
       expect(actual).toEqual([
         'case',
         [
@@ -90,13 +90,13 @@ describe('utils/mapbox', () => {
             ['==', ['get', 'primaryOverallScore'], '#N/A'],
           ],
         ],
-        0.65,
-        1
+        'primary-school-unrated',
+        'primary-school-rated'
       ])
     })
 
     test('build case expression for secondary school', () => {
-      const actual = buildSchoolIconOpacityExpression(false)
+      const actual = buildSchoolIconImageExpression(false)
       expect(actual).toEqual([
         'case',
         [
@@ -112,8 +112,8 @@ describe('utils/mapbox', () => {
             ['==', ['get', 'secondaryOverallScore'], '#N/A'],
           ],
         ],
-        0.65,
-        1
+        'secondary-school-unrated',
+        'secondary-school-rated'
       ])
     })
   })

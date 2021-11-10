@@ -1,5 +1,5 @@
 // @ts-ignore
-import PropertyViewFilterMapControl from '~/components/PropertyViewFilterMapControl.vue'
+import PropertyViewFilterMapControl from '~/components/property/PropertyViewFilterMapControl.vue'
 
 export default class PropertyFilterMapControl {
   _container: HTMLDivElement | null = null
