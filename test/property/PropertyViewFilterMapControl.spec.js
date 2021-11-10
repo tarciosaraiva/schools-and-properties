@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import Vuex from 'vuex'
 
 import { state, getters } from '@/store'
-import PropertyViewFilterMapControl from '@/components/PropertyViewFilterMapControl.vue'
+import PropertyViewFilterMapControl from '@/components/property/PropertyViewFilterMapControl.vue'
 
 library.add(fas)
 

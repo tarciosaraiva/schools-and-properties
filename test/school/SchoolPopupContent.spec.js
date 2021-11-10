@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import SchoolPopupContent from '@/components/SchoolPopupContent.vue'
+import SchoolPopupContent from '~/components/school/SchoolPopupContent.vue'
 
 describe('SchoolPopupContent', () => {
   const propsData = {

@@ -4,7 +4,7 @@ import { fas } from '@fortawesome/free-solid-svg-icons'
 import { far } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-import PropertyPopupContent from '@/components/PropertyPopupContent.vue'
+import PropertyPopupContent from '@/components/property/PropertyPopupContent.vue'
 
 library.add(fas)
 library.add(far)

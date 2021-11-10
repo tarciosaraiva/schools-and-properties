@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import Vuex from 'vuex'
 
 import { state, getters } from '@/store'
-import SchoolViewFilterMapControl from '@/components/SchoolViewFilterMapControl.vue'
+import SchoolViewFilterMapControl from '~/components/school/SchoolViewFilterMapControl.vue'
 
 library.add(fas)
 

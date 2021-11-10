@@ -2,7 +2,7 @@ import { mount, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
 
 import { state, getters } from '@/store'
-import PropertyFilter from '~/components/PropertyFilter.vue'
+import PropertyFilter from '~/components/property/PropertyFilter.vue'
 
 const localVue = createLocalVue()
 localVue.use(Vuex)

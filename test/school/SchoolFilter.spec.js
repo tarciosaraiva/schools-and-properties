@@ -2,7 +2,7 @@ import { mount, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
 
 import { state, getters } from '@/store'
-import SchoolFilter from '~/components/SchoolFilter.vue'
+import SchoolFilter from '~/components/school/SchoolFilter.vue'
 
 const localVue = createLocalVue()
 localVue.use(Vuex)
