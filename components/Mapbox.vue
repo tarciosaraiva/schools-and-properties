@@ -99,7 +99,7 @@ export default Vue.extend({
   mounted() {
     this.map = new maplibregl.Map({
       container: 'map',
-      style: `https://api.maptiler.com/maps/streets/style.json?key=${process.env.mapTilerSecret}`,
+      style: `https://api.maptiler.com/maps/7c11fa2c-a280-4ffd-aa8f-ba3d52ab1368/style.json?key=${process.env.mapTilerSecret}`,
       center: [144.9646, -37.0201],
       zoom: 7,
     })
