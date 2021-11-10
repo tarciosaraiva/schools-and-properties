@@ -65,26 +65,6 @@
             </li>
           </ul>
         </li>
-        <li>
-          House Icons made by
-          <a href="https://icon54.com/" target="blank" title="Pixel perfect"
-            >Pixel perfect</a
-          >
-          from
-          <a href="https://www.flaticon.com/" target="blank" title="Flaticon"
-            >www.flaticon.com</a
-          >
-        </li>
-        <li>
-          School Icons made by
-          <a href="https://www.freepik.com" target="blank" title="Freepik"
-            >Freepik</a
-          >
-          from
-          <a href="https://www.flaticon.com/" target="blank" title="Flaticon"
-            >www.flaticon.com</a
-          >
-        </li>
       </ul>
     </template>
   </modal>
