@@ -145,11 +145,39 @@ footer .attribution {
 }
 
 .mapboxgl-ctrl.property-filter-view-ctrl,
-.mapboxgl-ctrl.schools-filter-view-ctrl {
+.mapboxgl-ctrl.schools-filter-view-ctrl,
+.mapboxgl-ctrl.schools-legend-view-ctrl {
   background-color: rgba(255, 255, 255, 0.85);
   color: #333;
   font-size: 1rem;
   padding: 0;
+}
+
+.mapboxgl-ctrl.schools-legend-view-ctrl {
+  border-radius: 4px;
+}
+
+.mapboxgl-ctrl.schools-legend-view-ctrl .school-legend-view h6 {
+  margin-bottom: 0;
+}
+
+.mapboxgl-ctrl.schools-legend-view-ctrl .school-legend-view .collapsable {
+  height: 0;
+  overflow-y: hidden;
+  padding: 0;
+  transition: all 0.3s ease;
+}
+
+.mapboxgl-ctrl.schools-legend-view-ctrl .school-legend-view .collapsable.expanded {
+  height: 145px;
+}
+
+.mapboxgl-ctrl.schools-legend-view-ctrl div {
+  padding: 0.25rem;
+}
+
+.mapboxgl-ctrl.schools-legend-view-ctrl div small {
+  margin-left: 1rem;
 }
 
 .mapboxgl-ctrl.property-filter-view-ctrl {

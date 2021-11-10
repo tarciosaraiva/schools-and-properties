@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SchoolLegendMapControl renders correctly when collapsed 1`] = `
+<div class="school-legend-view">
+  <div class="d-flex align-items-center justify-content-between">
+    <h6>Legend</h6>
+    <a href="#">
+      <svg aria-hidden="true" class="svg-inline--fa fa-caret-square-up fa-w-14" data-icon="caret-square-up" data-prefix="fas" focusable="false" role="img" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
+        <path class="" d="M0 432V80c0-26.51 21.49-48 48-48h352c26.51 0 48 21.49 48 48v352c0 26.51-21.49 48-48 48H48c-26.51 0-48-21.49-48-48zm355.515-140.485l-123.03-123.03c-4.686-4.686-12.284-4.686-16.971 0L92.485 291.515c-7.56 7.56-2.206 20.485 8.485 20.485h246.059c10.691 0 16.045-12.926 8.486-20.485z" fill="currentColor" />
+      </svg>
+    </a>
+  </div>
+  <div class="collapsable">
+    <div class="d-flex align-items-center justify-content-between">
+      <img alt="Primary school unrated" src="~/assets/images/primary-school-unrated-small.png">
+      <small>Primary school unrated</small>
+    </div>
+    <div class="d-flex align-items-center justify-content-between">
+      <img alt="Primary school unrated" src="~/assets/images/primary-school-rated-small.png">
+      <small>Primary school rated</small>
+    </div>
+    <div class="d-flex align-items-center justify-content-between">
+      <img alt="Secondary school unrated" src="~/assets/images/secondary-school-unrated-small.png">
+      <small>Secondary school unrated</small>
+    </div>
+    <div class="d-flex align-items-center justify-content-between">
+      <img alt="Secondary school unrated" src="~/assets/images/secondary-school-rated-small.png">
+      <small>Secondary school rated</small>
+    </div>
+    <div class="d-flex align-items-center justify-content-between">
+      <img alt="Property marker" src="~/assets/images/property-location-small.png">
+      <small>Property marker</small>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`SchoolLegendMapControl renders correctly when expanded 1`] = `
+<div class="school-legend-view">
+  <div class="d-flex align-items-center justify-content-between">
+    <h6>Legend</h6>
+    <a href="#">
+      <svg aria-hidden="true" class="svg-inline--fa fa-caret-square-down fa-w-14" data-icon="caret-square-down" data-prefix="fas" focusable="false" role="img" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
+        <path class="" d="M448 80v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V80c0-26.5 21.5-48 48-48h352c26.5 0 48 21.5 48 48zM92.5 220.5l123 123c4.7 4.7 12.3 4.7 17 0l123-123c7.6-7.6 2.2-20.5-8.5-20.5H101c-10.7 0-16.1 12.9-8.5 20.5z" fill="currentColor" />
+      </svg>
+    </a>
+  </div>
+  <div class="collapsable expanded">
+    <div class="d-flex align-items-center justify-content-between">
+      <img alt="Primary school unrated" src="~/assets/images/primary-school-unrated-small.png">
+      <small>Primary school unrated</small>
+    </div>
+    <div class="d-flex align-items-center justify-content-between">
+      <img alt="Primary school unrated" src="~/assets/images/primary-school-rated-small.png">
+      <small>Primary school rated</small>
+    </div>
+    <div class="d-flex align-items-center justify-content-between">
+      <img alt="Secondary school unrated" src="~/assets/images/secondary-school-unrated-small.png">
+      <small>Secondary school unrated</small>
+    </div>
+    <div class="d-flex align-items-center justify-content-between">
+      <img alt="Secondary school unrated" src="~/assets/images/secondary-school-rated-small.png">
+      <small>Secondary school rated</small>
+    </div>
+    <div class="d-flex align-items-center justify-content-between">
+      <img alt="Property marker" src="~/assets/images/property-location-small.png">
+      <small>Property marker</small>
+    </div>
+  </div>
+</div>
+`;
