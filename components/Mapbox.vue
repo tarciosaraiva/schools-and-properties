@@ -130,7 +130,7 @@ export default Vue.extend({
         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360
       }
 
-      new maplibregl.Popup({ closeButton: false, offset: [0, -42] })
+      new maplibregl.Popup({ closeButton: false, offset: [0, -22] })
         .setHTML(`<div id="school-popup-content-${poiFeature.id}"></div>`)
         .on('open', () => {
           new SchoolPopupContent({ propsData: { school: props } }).$mount(`#school-popup-content-${poiFeature.id}`)
