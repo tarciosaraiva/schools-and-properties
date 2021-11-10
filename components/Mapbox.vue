@@ -57,8 +57,7 @@ export default Vue.extend({
 
   data() {
     return {
-      map: {} as any,
-      markers: [] as any[],
+      map: {} as any
     }
   },
 
@@ -130,7 +129,21 @@ export default Vue.extend({
         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360
       }
 
-      new maplibregl.Popup({ closeButton: false, offset: [0, -22] })
+      const markerHeight = 40
+      const markerRadius = 40
+      const linearOffset = 25
+      const popupOffsets: any = {
+        'top': [0, 0],
+        'top-left': [0, 0],
+        'top-right': [0, 0],
+        'bottom': [0, -markerHeight],
+        'bottom-left': [linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+        'bottom-right': [-linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+        'left': [markerRadius, (markerHeight - markerRadius) * -1],
+        'right': [-markerRadius, (markerHeight - markerRadius) * -1]
+      }
+
+      new maplibregl.Popup({ closeButton: false, offset: popupOffsets })
         .setHTML(`<div id="school-popup-content-${poiFeature.id}"></div>`)
         .on('open', () => {
           new SchoolPopupContent({ propsData: { school: props } }).$mount(`#school-popup-content-${poiFeature.id}`)
@@ -153,7 +166,22 @@ export default Vue.extend({
         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360
       }
 
-      new maplibregl.Popup({ maxWidth: '300px', closeButton: false, offset: [0, -42] })
+      // use trick from documentation to place the popup within the viewbox
+      const markerHeight = 40
+      const markerRadius = 20
+      const linearOffset = 25
+      const popupOffsets: any = {
+        'top': [0, 0],
+        'top-left': [0, 0],
+        'top-right': [0, 0],
+        'bottom': [0, -markerHeight],
+        'bottom-left': [linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+        'bottom-right': [-linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+        'left': [markerRadius, (markerHeight - markerRadius) * -1],
+        'right': [-markerRadius, (markerHeight - markerRadius) * -1]
+      }
+
+      new maplibregl.Popup({ maxWidth: '300px', closeButton: false, offset: popupOffsets })
           .setHTML(`<div id="property-popup-content-${props.id}"></div>`)
           .on('open', () => {
             new PropertyPopupContent({ propsData: { property: props } }).$mount(`#property-popup-content-${props.id}`)
@@ -214,7 +242,7 @@ export default Vue.extend({
         .on('zoomend', this.onZoomOrMoveEvent)
         .on('moveend', this.onZoomOrMoveEvent)
 
-      // add data sources
+      // add data sources for school zones / pois
       dataSources.forEach((dataSource: any) => {
         this.map
           .addSource(dataSource.id, {
@@ -224,7 +252,7 @@ export default Vue.extend({
           })
       })
 
-      // add line layer for data sources
+      // add line layer for school zone data sources
       this.schoolZoneDataSources.forEach((dataSource: any) => {
         this.map
           .addLayer({
@@ -241,6 +269,37 @@ export default Vue.extend({
           })
       })
 
+      const poiLayers = [
+        PRIMARY_SCHOOL_POINT_LAYER_NAME,
+        SECONDARY_SCHOOL_POINT_LAYER_NAME
+      ]
+
+      // add school locations layers
+      poiLayers.forEach((layerName: string) => {
+        const primary = layerName === PRIMARY_SCHOOL_POINT_LAYER_NAME
+
+        this.map
+          .addLayer({
+            id: layerName,
+            type: 'symbol',
+            source: 'school-locations',
+            filter: buildSchoolLocationFilterExpression(this.schoolsFilter, primary),
+            layout: {
+              'icon-size': buildSchoolIconSizeExpression(this.schoolsFilter, primary),
+              'icon-image': buildSchoolIconImageExpression(primary),
+              'icon-offset': [0, -16]
+            },
+          })
+          .on('click', layerName, this.onSchoolPoiClick)
+          .on('mouseenter', layerName, (e: any) => {
+            e.target.getCanvas().style.cursor = 'pointer'
+          })
+          .on('mouseleave', layerName, (e: any) => {
+            e.target.getCanvas().style.cursor = ''
+          })
+      })
+
+      // add source and layer for property points
       this.map
         .addSource('properties', {
           type: 'geojson',
@@ -265,34 +324,6 @@ export default Vue.extend({
         .on('mouseleave', 'properties-poi', (e: any) => {
           e.target.getCanvas().style.cursor = ''
         })
-
-      const poiLayers = [
-        PRIMARY_SCHOOL_POINT_LAYER_NAME,
-        SECONDARY_SCHOOL_POINT_LAYER_NAME
-      ]
-
-      poiLayers.forEach((layerName: string) => {
-        const primary = layerName === PRIMARY_SCHOOL_POINT_LAYER_NAME
-
-        this.map
-          .addLayer({
-            id: layerName,
-            type: 'symbol',
-            source: 'school-locations',
-            filter: buildSchoolLocationFilterExpression(this.schoolsFilter, primary),
-            layout: {
-              'icon-size': buildSchoolIconSizeExpression(this.schoolsFilter, primary),
-              'icon-image': buildSchoolIconImageExpression(primary),
-            },
-          })
-          .on('click', layerName, this.onSchoolPoiClick)
-          .on('mouseenter', layerName, (e: any) => {
-            e.target.getCanvas().style.cursor = 'pointer'
-          })
-          .on('mouseleave', layerName, (e: any) => {
-            e.target.getCanvas().style.cursor = ''
-          })
-      })
     },
 
     addControls() {
