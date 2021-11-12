@@ -39,6 +39,7 @@ export default {
     p10Zones: 'f2434a55-5a6b-4568-a27e-36681391d821',
     p11Zones: 'b37e727a-e712-4291-81dd-15d552559208',
     p12Zones: '6bbd7b86-379e-4e58-9e72-e50a5dc1269f',
+    domain: process.env.DOMAIN
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css

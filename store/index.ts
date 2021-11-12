@@ -247,7 +247,7 @@ export const actions: ActionTree<RootState, RootState> = {
       }
 
       const geocodeResults = await this.$axios.$get(`https://api.maptiler.com/geocoding/${searchTerm}.json`, { params })
-      const schoolsResults = await this.$axios.$get('/schools/schools.json')
+      const schoolsResults = await this.$axios.$get(`//${process.env.domain}/schools/schools.json`)
       const mappedSchoolResults = schoolsResults.map((s: any) => ({
         center: [s.lon, s.lat],
         place_name: s.schoolName,
