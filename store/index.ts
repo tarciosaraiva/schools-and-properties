@@ -210,7 +210,7 @@ export const mutations: MutationTree<RootState> = {
     state.filter.schools.secondary.mathsRating = Number(payload)
   },
   ADD_GEOCODE_RESULTS (state, payload) {
-    state.geocodeSuggestions = payload.features.map((f: any) => ({
+    state.geocodeSuggestions = payload.map((f: any) => ({
       center: f.center,
       name: f.place_name,
       placeType: f.place_type
@@ -238,15 +238,26 @@ export const actions: ActionTree<RootState, RootState> = {
     commit('ADD_LISTINGS', listings)
   },
 
-  async geocode ({ commit }, query) {
-    const params = {
-      key: process.env.mapTilerSecret,
-      bbox: '141.24847451171752,-39.624732230379166,148.68072548828115,-34.32302549095252',
-      language: 'en'
-    }
+  async geocode ({ commit }, searchTerm) {
+    if (searchTerm) {
+      const params = {
+        key: process.env.mapTilerSecret,
+        bbox: '141.24847451171752,-39.624732230379166,148.68072548828115,-34.32302549095252',
+        language: 'en'
+      }
 
-    const geocodeResults = await this.$axios.$get(`https://api.maptiler.com/geocoding/${query}.json`, { params })
-    commit('ADD_GEOCODE_RESULTS', geocodeResults)
+      const geocodeResults = await this.$axios.$get(`https://api.maptiler.com/geocoding/${searchTerm}.json`, { params })
+      const schoolsResults = await this.$axios.$get('/schools/schools.json')
+      const mappedSchoolResults = schoolsResults.map((s: any) => ({
+        center: [s.lon, s.lat],
+        place_name: s.schoolName,
+        place_type: 'school'
+      })).filter((s: any) => s.place_name.toLowerCase().includes(searchTerm))
+
+      commit('ADD_GEOCODE_RESULTS', [...geocodeResults.features, ...mappedSchoolResults])
+    } else {
+      commit('ADD_GEOCODE_RESULTS', [])
+    }
   },
 
   setBoundingBox({ commit }, payload) {

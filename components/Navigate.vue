@@ -6,7 +6,7 @@
       <input
         id="geo_go_to"
         v-model="search"
-        placeholder="Enter address, suburb, region or area to navigate"
+        placeholder="Enter address, suburb, region or school name to navigate"
         type="text"
         name="geo_go_to"
         autocomplete="false"
@@ -17,7 +17,8 @@
       />
     </div>
     <ul v-show="isOpen" class="geo-suggestions">
-      <li v-for="(sug, i) in suggestions" :key="i" :class="{ 'is-active': i === arrowCounter }">
+      <li v-for="(sug, i) in suggestions" :key="i" class="d-flex align-items-center" :class="{ 'is-active': i === arrowCounter }">
+        <font-awesome-icon :icon="sug.placeType === 'school' ? 'school' : 'map-marked-alt'" />
         <a href="#"
           class="suggestion"
           @click.stop.prevent="navigateTo(sug)">
@@ -38,7 +39,7 @@ export default Vue.extend({
       type: Array,
       default: () => [] as any[]
     },
-    geocodeFn: {
+    searchCallback: {
       type: Function,
       default: () => () => {}
     }
@@ -59,7 +60,7 @@ export default Vue.extend({
     }
   },
   created () {
-    this.geolocate = debounce(this.geolocate, 300, { leading: false, trailing: true })
+    this.triggerSearch = debounce(this.triggerSearch, 300, { leading: false, trailing: true })
   },
   mounted() {
     document.addEventListener('click', this.handleClickOutside)
@@ -80,10 +81,10 @@ export default Vue.extend({
       }
     },
     handleKeyUp() {
-      this.geolocate()
+      this.triggerSearch()
     },
-    geolocate () {
-      this.geocodeFn(this.search)
+    triggerSearch () {
+      this.searchCallback(this.search)
     },
     navigateTo (location: any) {
       this.isOpen = false

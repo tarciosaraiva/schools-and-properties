@@ -2,7 +2,7 @@
   <div id="app">
     <header class="pl-row">
       <h1 class="pl-col-md-6 pl-col-sm-12">Schools and properties</h1>
-      <navigate class="pl-col-md-6 pl-col-sm-12" :geocode-fn="geocode" :suggestions="locations" @navigate="onNavigate" />
+      <navigate class="pl-col-md-6 pl-col-sm-12" :search-callback="searchCallback" :suggestions="locations" @navigate="onNavigate" />
     </header>
     <main>
       <mapbox
@@ -54,6 +54,9 @@ export default Vue.extend({
   },
   methods: {
     ...mapActions(['geocode']),
+    searchCallback(searchTerm: string) {
+      this.geocode(searchTerm)
+    },
     onNavigate(center: number[], placeType: string[]) {
       this.flyTo = { center, placeType }
     },

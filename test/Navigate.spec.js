@@ -32,7 +32,7 @@ describe('Navigate', () => {
 
   beforeEach(() => {
     jest.useFakeTimers('modern')
-    propsData = { geocodeFn: jest.fn() }
+    propsData = { searchCallback: jest.fn() }
     wrapper = mount(Navigate, { propsData, localVue })
   })
 
@@ -48,19 +48,19 @@ describe('Navigate', () => {
     expect(wrapper).toMatchSnapshot()
   })
 
-  test('should trigger geocodeFn when debounced', () => {
+  test('should trigger searchCallback when debounced', () => {
     const input = wrapper.find('#geo_go_to')
     input.setValue('my suburb')
     input.trigger('keyup')
 
     // debounce function should not have been triggered yet
     jest.advanceTimersByTime(200)
-    expect(propsData.geocodeFn).not.toHaveBeenCalled()
+    expect(propsData.searchCallback).not.toHaveBeenCalled()
 
     // when 400ms have passed debounce function should have been triggered
     // and geolocate function is called and returned by now
     jest.advanceTimersByTime(200)
-    expect(propsData.geocodeFn).toHaveBeenCalledWith('my suburb')
+    expect(propsData.searchCallback).toHaveBeenCalledWith('my suburb')
   })
 
   test('renders correctly with suggestions', async () => {

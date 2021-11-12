@@ -4,7 +4,7 @@ exports[`index renders correctly with props 1`] = `
 <div id="app">
   <header class="pl-row">
     <h1 class="pl-col-md-6 pl-col-sm-12">Schools and properties</h1>
-    <navigate-stub class="pl-col-md-6 pl-col-sm-12" geocodefn="[Function]" suggestions></navigate-stub>
+    <navigate-stub class="pl-col-md-6 pl-col-sm-12" searchcallback="[Function]" suggestions></navigate-stub>
   </header>
   <main>
     <mapbox-stub flyto="[object Object]" listingpois openpropertiesfilterfn="[Function]" openschoolsfilterfn="[Function]" schoolsfilter="[object Object]"></mapbox-stub>
