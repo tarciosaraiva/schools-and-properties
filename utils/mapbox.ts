@@ -3,7 +3,7 @@ import { SchoolsFilter } from '~/store'
 export const dataSources = [
   {
     id: 'primary-schools',
-    uri: `school-zone-sources/Primary_Integrated_2022.geojson`,
+    uri: 'school-zone-sources/Primary_Integrated_2022.geojson',
     color: {
       r: 214,
       g: 178,

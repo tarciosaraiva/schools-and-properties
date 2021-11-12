@@ -11,7 +11,7 @@ library.add(fas)
 
 const localVue = createLocalVue()
 localVue.use(Vuex)
-localVue.component('font-awesome-icon', FontAwesomeIcon)
+localVue.component('FontAwesomeIcon', FontAwesomeIcon)
 
 describe('SchoolViewFilterMapControl', () => {
   const propsData = {

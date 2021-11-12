@@ -8,7 +8,7 @@ import Navigate from '~/components/Navigate.vue'
 library.add(fas)
 
 const localVue = createLocalVue()
-localVue.component('font-awesome-icon', FontAwesomeIcon)
+localVue.component('FontAwesomeIcon', FontAwesomeIcon)
 
 const executeSearch = async (wrapper) => {
   const input = wrapper.find('#geo_go_to')

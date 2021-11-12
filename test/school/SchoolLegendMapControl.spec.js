@@ -8,7 +8,7 @@ import SchoolLegendMapControl from '~/components/school/SchoolLegendMapControl.v
 library.add(fas)
 
 const localVue = createLocalVue()
-localVue.component('font-awesome-icon', FontAwesomeIcon)
+localVue.component('FontAwesomeIcon', FontAwesomeIcon)
 
 describe('SchoolLegendMapControl', () => {
   test('is a Vue instance', () => {

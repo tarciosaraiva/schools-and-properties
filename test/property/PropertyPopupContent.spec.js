@@ -10,7 +10,7 @@ library.add(fas)
 library.add(far)
 
 const localVue = createLocalVue()
-localVue.component('font-awesome-icon', FontAwesomeIcon)
+localVue.component('FontAwesomeIcon', FontAwesomeIcon)
 
 describe('PropertyPopupContent', () => {
   const propsData = {
