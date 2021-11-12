@@ -1,9 +1,5 @@
 <template>
   <div class="school-legend-view">
-    <div class="d-flex align-items-center justify-content-between">
-      <h6>Legend</h6>
-      <a href="#" @click.stop.prevent="toggleCollapse"><font-awesome-icon :icon="iconName" /></a>
-    </div>
     <div class="collapsable" :class="collapsed ? '' : 'expanded'">
       <div class="d-flex align-items-center justify-content-between">
         <img src="~/assets/images/primary-school-unrated-small.png" alt="Primary school unrated">
@@ -25,6 +21,10 @@
         <img src="~/assets/images/property-location-small.png" alt="Property marker">
         <small>Property marker</small>
       </div>
+    </div>
+    <div class="d-flex align-items-center justify-content-between">
+      <h6>Legend</h6>
+      <a href="#" @click.stop.prevent="toggleCollapse"><font-awesome-icon :icon="iconName" /></a>
     </div>
   </div>
 </template>

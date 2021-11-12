@@ -19,14 +19,26 @@
         <em>{{ property.displayableAddress }}</em>
       </p>
       <p class="division">
-        <font-awesome-icon icon="bed"/>
-        <span>{{property.bedrooms}}</span>
-        <font-awesome-icon icon="bath"/>
-        <span>{{property.bathrooms}}</span>
-        <font-awesome-icon icon="car"/>
-        <span>{{property.carspaces}}</span>
-        <font-awesome-icon v-show="property.landArea" :icon="['far', 'square']"/>
-        <span v-show="property.landArea">{{property.landArea}} sqm</span>
+        <span v-show="property.bedrooms">
+          <font-awesome-icon icon="bed"/>
+          &nbsp;
+          <span>{{property.bedrooms}}</span>
+        </span>
+        <span v-show="property.bathrooms">
+          <font-awesome-icon icon="bath"/>
+          &nbsp;
+          <span>{{property.bathrooms}}</span>
+        </span>
+        <span v-show="property.carspaces">
+          <font-awesome-icon icon="car"/>
+          &nbsp;
+          <span>{{property.carspaces}}</span>
+        </span>
+        <span v-show="property.landArea">
+          <font-awesome-icon v-show="property.landArea" :icon="['far', 'square']"/>
+          &nbsp;
+          <span>{{property.landArea}} sqm</span>
+        </span>
       </p>
       <ul v-show="property.features">
         <li v-for="f in property.features" :key="f">

@@ -99,8 +99,10 @@ export default Vue.extend({
     this.map = new maplibregl.Map({
       container: 'map',
       style: `https://api.maptiler.com/maps/7c11fa2c-a280-4ffd-aa8f-ba3d52ab1368/style.json?key=${process.env.mapTilerSecret}`,
-      center: [144.9646, -37.0201],
-      zoom: 7,
+      center: [145, -37.65],
+      minZoom: 7,
+      zoom: 8,
+      fadeDuration: 100
     })
 
     this.addControls()
