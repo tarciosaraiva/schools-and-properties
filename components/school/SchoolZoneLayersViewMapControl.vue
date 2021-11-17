@@ -1,7 +1,7 @@
 <template>
   <div class="layer-container">
-    <button @click="toggleControl">
-      <font-awesome-icon icon="layer-group" size="lg" title="Display school zones control"/>
+    <button @click="toggleControl" title="Display school zones control">
+      <font-awesome-icon icon="layer-group" size="lg" />
     </button>
     <div class="layer-options" :class="collapsed ? '' : 'expanded'">
       <label class="checkbox">
