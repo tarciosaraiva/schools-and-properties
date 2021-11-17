@@ -1,7 +1,7 @@
 <template>
-  <a href="#" class="pl-button small full" @click.prevent.stop="openSchoolFilter">
-    <font-awesome-icon icon="school" size="lg"/>
-  </a>
+  <button @click="openSchoolFilter">
+    <font-awesome-icon icon="school" size="lg" title="Show schools filter dialog"/>
+  </button>
 </template>
 
 <script lang="ts">
