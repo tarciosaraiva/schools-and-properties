@@ -1,8 +1,7 @@
 import {
   buildSchoolFilterExpr,
   buildSchoolLocationFilterExpression,
-  buildSchoolIconImageExpression,
-  buildSchoolIconSizeExpression
+  buildSchoolIconImageExpression
 } from '@/utils/mapbox'
 
 describe('utils/mapbox', () => {
@@ -130,45 +129,6 @@ describe('utils/mapbox', () => {
         'secondary-school-unrated',
         'secondary-school-rated'
       ])
-    })
-  })
-
-  describe('buildSchoolIconSizeExpression', () => {
-    const schoolsFilter = {
-      educationSector: 'all',
-      primary: {
-        plot: true, rating: 90, englishRating: 4, mathsRating: 4
-      },
-      secondary: {
-        plot: false, rating: 91, englishRating: 3, mathsRating: 3
-      }
-    }
-
-    test('should return 0 when layer is not to be plotted', () => {
-      const actual = buildSchoolIconSizeExpression(schoolsFilter, false)
-      expect(actual).toBe(0)
-    })
-
-    test('should build expression when layer is to be plotted', () => {
-      const actual = buildSchoolIconSizeExpression(schoolsFilter, true)
-      expect(actual).toEqual(
-        [
-          'step',
-          [
-            'case',
-            [
-              'all',
-              ['in', ['get', 'schoolType'], ['literal', ['Primary', 'Pri/Sec']]],
-              ['!=', ['get', 'primaryOverallScore'], '#N/A']
-            ],
-            ['to-number', ['get', 'primaryOverallScore']],
-            0
-          ],
-          0.65,
-          90,
-          1
-        ]
-      )
     })
   })
 })

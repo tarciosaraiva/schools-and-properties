@@ -130,36 +130,3 @@ export const buildSchoolIconImageExpression = (primary: boolean = true) => {
     `${lowerCaseSchoolType}-school-rated`
   ]
 }
-
-export const buildSchoolIconSizeExpression = (schoolsFilter: SchoolsFilter, primaryFilter: boolean = true) => {
-  const { primary, secondary } = schoolsFilter
-  const schoolTypeFilter = primaryFilter ? primary : secondary
-
-  if (!schoolTypeFilter.plot) {
-    return 0
-  }
-
-  const schoolType = primaryFilter ? 'Primary' : 'Secondary'
-
-  const schoolScoreExpr = [
-    [
-      'all',
-      ['in', ['get', 'schoolType'], ['literal', [schoolType, 'Pri/Sec']]],
-      ['!=', ['get', `${schoolType.toLowerCase()}OverallScore`], '#N/A']
-    ],
-    ['to-number', ['get', `${schoolType.toLowerCase()}OverallScore`]]
-  ]
-
-  return [
-    'step',
-    [
-      'case',
-      schoolScoreExpr[0],
-      schoolScoreExpr[1],
-      0
-    ],
-    0.65,
-    schoolTypeFilter.rating,
-    1
-  ]
-}
