@@ -35,16 +35,18 @@ describe('utils/mapbox', () => {
         [
           'all',
           ['in', ['get', 'schoolType'], ['literal', ['Primary', 'Pri/Sec']]],
+          ['>=', ['to-number', ['get', 'primaryOverallScore']], 90]
         ]
       )
     })
 
     test('secondary school expression contains no education sector filter', () => {
-      const actual = buildSchoolLocationFilterExpression({...schoolsFilter, secondary: { plot: true }}, false)
+      const actual = buildSchoolLocationFilterExpression({...schoolsFilter, secondary: { plot: true, rating: 91 }}, false)
       expect(actual).toEqual(
         [
           'all',
-          ['in', ['get', 'schoolType'], ['literal', ['Secondary', 'Pri/Sec']]]
+          ['in', ['get', 'schoolType'], ['literal', ['Secondary', 'Pri/Sec']]],
+          ['>=', ['to-number', ['get', 'secondaryOverallScore']], 91]
         ]
       )
     })
@@ -55,7 +57,8 @@ describe('utils/mapbox', () => {
         [
           'all',
           ['==', ['get', 'educationSector'], 'Government'],
-          ['in', ['get', 'schoolType'], '']
+          ['in', ['get', 'schoolType'], ''],
+          ['>=', ['to-number', ['get', 'secondaryOverallScore']], 91]
         ]
       )
     })
@@ -66,7 +69,19 @@ describe('utils/mapbox', () => {
         [
           'all',
           ['!=', ['get', 'educationSector'], 'Government'],
-          ['in', ['get', 'schoolType'], ['literal', ['Primary', 'Pri/Sec']]]
+          ['in', ['get', 'schoolType'], ['literal', ['Primary', 'Pri/Sec']]],
+          ['>=', ['to-number', ['get', 'primaryOverallScore']], 90]
+        ],
+      )
+    })
+
+    test('primary schools expression contains no rating filter when all schools are to be shown', () => {
+      const actual = buildSchoolLocationFilterExpression({...schoolsFilter, educationSector: 'NonGovernment', primary: { rating: 0 }})
+      expect(actual).toEqual(
+        [
+          'all',
+          ['!=', ['get', 'educationSector'], 'Government'],
+          ['in', ['get', 'schoolType'], '']
         ],
       )
     })

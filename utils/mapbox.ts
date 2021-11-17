@@ -5,63 +5,63 @@ export const dataSources = [
     id: 'primary-schools',
     uri: 'school-zone-sources/Primary_Integrated_2022.geojson',
     color: {
-      r: 214,
-      g: 178,
-      b: 17
+      r: 39,
+      g: 174,
+      b: 96
     }
   },
   {
     id: 'p7-schools',
     uri: 'school-zone-sources/Secondary_Integrated_Year7_2022.geojson',
     color: {
-      r: 46,
-      g: 48,
-      b: 137
+      r: 52,
+      g: 152,
+      b: 219
     }
   },
   {
     id: 'p8-schools',
     uri: 'school-zone-sources/Secondary_Integrated_Year8_2022.geojson',
     color: {
-      r: 46,
-      g: 48,
-      b: 137
+      r: 52,
+      g: 152,
+      b: 219
     }
   },
   {
     id: 'p9-schools',
     uri: 'school-zone-sources/Secondary_Integrated_Year9_2022.geojson',
     color: {
-      r: 46,
-      g: 48,
-      b: 137
+      r: 52,
+      g: 152,
+      b: 219
     }
   },
   {
     id: 'p10-schools',
     uri: 'school-zone-sources/Secondary_Integrated_Year10_2022.geojson',
     color: {
-      r: 46,
-      g: 48,
-      b: 137
+      r: 52,
+      g: 152,
+      b: 219
     }
   },
   {
     id: 'p11-schools',
     uri: 'school-zone-sources/Secondary_Integrated_Year11_2022.geojson',
     color: {
-      r: 46,
-      g: 48,
-      b: 137
+      r: 52,
+      g: 152,
+      b: 219
     }
   },
   {
     id: 'p12-schools',
     uri: 'school-zone-sources/Secondary_Integrated_Year12_2022.geojson',
     color: {
-      r: 46,
-      g: 48,
-      b: 137
+      r: 52,
+      g: 152,
+      b: 219
     }
   },
   {
@@ -80,7 +80,7 @@ export const buildSchoolFilterExpr = (shouldPlot: boolean, schoolType: string) =
   return ['in', ['get', 'schoolType'], '']
 }
 
-export const buildSchoolLocationFilterExpression = (schoolsFilter: SchoolsFilter, primary: boolean = true) => {
+export const buildSchoolLocationFilterExpression = (schoolsFilter: SchoolsFilter, primaryFilter: boolean = true) => {
   let eduSectorFilter: (string | string[])[] | null = ['==', ['get', 'educationSector'], 'Government']
 
   if (schoolsFilter.educationSector === 'NonGovernment') {
@@ -89,19 +89,23 @@ export const buildSchoolLocationFilterExpression = (schoolsFilter: SchoolsFilter
     eduSectorFilter = null
   }
 
-  if (primary) {
-    return filterOutNulls([
-      'all',
-      eduSectorFilter,
-      buildSchoolFilterExpr(schoolsFilter.primary.plot, 'Primary'),
-    ])
-  } else {
-    return filterOutNulls([
-      'all',
-      eduSectorFilter,
-      buildSchoolFilterExpr(schoolsFilter.secondary.plot, 'Secondary'),
-    ])
+  const { primary, secondary } = schoolsFilter
+  const schoolTypeFilter = primaryFilter ? primary : secondary
+  const schoolType = primaryFilter ? 'Primary' : 'Secondary'
+  const lowerCaseSchoolType = schoolType.toLowerCase()
+
+  let overallScoreFilter: (string | number | (string | string[])[])[] | null = ['>=', ['to-number', ['get', `${lowerCaseSchoolType}OverallScore`]], schoolTypeFilter.rating]
+
+  if (schoolTypeFilter.rating === 0) {
+    overallScoreFilter = null
   }
+
+  return filterOutNulls([
+    'all',
+    eduSectorFilter,
+    buildSchoolFilterExpr(schoolTypeFilter.plot, schoolType),
+    overallScoreFilter
+  ])
 }
 
 export const buildSchoolIconImageExpression = (primary: boolean = true) => {

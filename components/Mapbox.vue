@@ -18,18 +18,20 @@ import maplibregl from 'maplibre-gl'
 import PropertyFilterMapControl from '~/utils/PropertyFilterMapControl'
 import SchoolFilterMapControl from '~/utils/SchoolFilterMapControl'
 import SchoolLegendMapControl from '~/utils/SchoolLegendMapControl'
+import SchoolZoneLayersMapControl from '~/utils/SchoolZoneLayersMapControl'
 import PropertyPopupContent from '~/components/property/PropertyPopupContent.vue'
 import SchoolPopupContent from '~/components/school/SchoolPopupContent.vue'
 import { SchoolsFilter } from '~/store'
 import {
   dataSources,
   buildSchoolLocationFilterExpression,
-  buildSchoolIconSizeExpression,
   buildSchoolIconImageExpression
 } from '~/utils/mapbox'
 
 const PRIMARY_SCHOOL_POINT_LAYER_NAME = 'primary-school-point'
 const SECONDARY_SCHOOL_POINT_LAYER_NAME = 'secondary-school-point'
+const STREET_ZOOM = 16
+const SUBURB_ZOOM = 14
 
 export default Vue.extend({
   props: {
@@ -57,7 +59,8 @@ export default Vue.extend({
 
   data() {
     return {
-      map: {} as any
+      map: {} as any,
+      visibleLayers: [] as string[]
     }
   },
 
@@ -67,23 +70,13 @@ export default Vue.extend({
 
   watch: {
     flyTo(newCenter, _) {
-      const zoomLevel = newCenter.placeType.includes('street') ? 16 : 14
+      const zoomLevel = newCenter.placeType.includes('street') ? STREET_ZOOM : SUBURB_ZOOM
       this.flyMapTo(newCenter.center, zoomLevel)
     },
     schoolsFilter: {
       handler(currentFilter, _) {
         this.map.setFilter(PRIMARY_SCHOOL_POINT_LAYER_NAME, buildSchoolLocationFilterExpression(currentFilter))
         this.map.setFilter(SECONDARY_SCHOOL_POINT_LAYER_NAME, buildSchoolLocationFilterExpression(currentFilter, false))
-        this.map.setLayoutProperty(PRIMARY_SCHOOL_POINT_LAYER_NAME, 'icon-size', buildSchoolIconSizeExpression(currentFilter))
-        this.map.setLayoutProperty(SECONDARY_SCHOOL_POINT_LAYER_NAME, 'icon-size', buildSchoolIconSizeExpression(currentFilter, false))
-
-        this.schoolZoneDataSources.forEach((ds: any) => {
-          this.map.setLayoutProperty(
-            `${ds.id}-line`,
-            'visibility',
-            this.evaluateLayerVisibility(ds.id, currentFilter)
-          )
-        })
       },
       deep: true,
     },
@@ -111,6 +104,25 @@ export default Vue.extend({
 
   methods: {
     ...mapActions(['setBoundingBox']),
+
+    toggleLayer (layerPrefix: string) {
+      const layerName = `${layerPrefix}-schools`
+
+      if (this.visibleLayers.includes(layerName)) {
+        const layerIdx = this.visibleLayers.indexOf(layerName)
+        this.visibleLayers.splice(layerIdx, 1)
+      } else {
+        this.visibleLayers.push(layerName)
+      }
+
+      this.schoolZoneDataSources.forEach((ds: any) => {
+        this.map.setLayoutProperty(
+          `${ds.id}-line`,
+          'visibility',
+          this.evaluateLayerVisibility(ds.id)
+        )
+      })
+    },
 
     onZoomOrMoveEvent(e: any) {
       this.setBoundingBox(e.target.getBounds())
@@ -192,8 +204,8 @@ export default Vue.extend({
           .addTo(e.target)
     },
 
-    evaluateLayerVisibility(datasourceId: string, schoolsFilter: SchoolsFilter) {
-      return datasourceId.startsWith(schoolsFilter.zone) ? 'visible' : 'none'
+    evaluateLayerVisibility(datasourceId: string) {
+      return this.visibleLayers.includes(datasourceId) ? 'visible' : 'none'
     },
 
     mapLoaded() {
@@ -262,7 +274,7 @@ export default Vue.extend({
             type: 'line',
             source: dataSource.id,
             layout: {
-              visibility: this.evaluateLayerVisibility(dataSource.id, this.schoolsFilter),
+              visibility: this.evaluateLayerVisibility(dataSource.id),
             },
             paint: {
               'line-color': `rgb(${dataSource.color.r}, ${dataSource.color.g}, ${dataSource.color.b})`,
@@ -287,7 +299,6 @@ export default Vue.extend({
             source: 'school-locations',
             filter: buildSchoolLocationFilterExpression(this.schoolsFilter, primary),
             layout: {
-              'icon-size': buildSchoolIconSizeExpression(this.schoolsFilter, primary),
               'icon-image': buildSchoolIconImageExpression(primary),
               'icon-offset': [0, -16]
             },
@@ -339,6 +350,7 @@ export default Vue.extend({
       )
       this.map.addControl(new PropertyFilterMapControl(this.$store, this.openPropertiesFilterFn))
       this.map.addControl(new SchoolFilterMapControl(this.$store, this.openSchoolsFilterFn), 'top-left')
+      this.map.addControl(new SchoolZoneLayersMapControl(this.$store, this.toggleLayer), 'top-left')
       this.map.addControl(new SchoolLegendMapControl(), 'bottom-left')
     },
   },
