@@ -78,7 +78,8 @@ export default {
         'faCaretSquareUp',
         'faSchool',
         'faSearchLocation',
-        'faMapMarkedAlt'
+        'faMapMarkedAlt',
+        'faLayerGroup'
       ],
       regular: ['faSquare']
     }
