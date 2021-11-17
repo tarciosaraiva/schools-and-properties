@@ -1,6 +1,6 @@
 <template>
   <div class="layer-container">
-    <button @click="toggleControl" title="Display school zones control">
+    <button title="Display school zones control" @click="toggleControl">
       <font-awesome-icon icon="layer-group" size="lg" />
     </button>
     <div class="layer-options" :class="collapsed ? '' : 'expanded'">

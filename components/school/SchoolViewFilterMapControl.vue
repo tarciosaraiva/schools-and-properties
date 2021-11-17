@@ -1,5 +1,5 @@
 <template>
-  <button @click="openSchoolFilter" title="Show schools filter dialog">
+  <button title="Show schools filter dialog" @click="openSchoolFilter">
     <font-awesome-icon icon="school" size="lg" />
   </button>
 </template>
