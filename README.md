@@ -1,3 +1,5 @@
+<a href="https://www.buymeacoffee.com/tarciosaraiva" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-red.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+
 # schools-and-properties
 
 > A simple SPA that leverages from data captured from different domains and provides tools to plot and visualize said that to aid people in making decisions on where to live.
