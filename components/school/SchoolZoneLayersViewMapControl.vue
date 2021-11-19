@@ -41,7 +41,18 @@ export default Vue.extend({
       collapsed: true
     }
   },
+  mounted() {
+    document.addEventListener('click', this.handleClickOutside)
+  },
+  destroyed() {
+    document.removeEventListener('click', this.handleClickOutside)
+  },
   methods: {
+    handleClickOutside(event: any) {
+      if (!this.$el.contains(event.target)) {
+        this.collapsed = true;
+      }
+    },
     handleChecked (e: any) {
       this.toggleLayer(e.target.value)
     },
@@ -77,7 +88,7 @@ export default Vue.extend({
   border: 1px solid #ccc;
   padding: 0.75rem;
   height: auto;
-  width: auto;
+  width: 9rem;
 }
 
 .layer-container .layer-options .checkbox {
