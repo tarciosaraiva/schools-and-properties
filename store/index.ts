@@ -88,15 +88,11 @@ export const state = () => ({
       zone: 'none',
       primary: {
         plot: true,
-        rating: 95,
-        englishRating: 4,
-        mathsRating: 4
+        rating: 0,
       },
       secondary: {
         plot: true,
-        rating: 95,
-        englishRating: 4,
-        mathsRating: 4
+        rating: 0,
       }
     }
   } as ApplicationFilter

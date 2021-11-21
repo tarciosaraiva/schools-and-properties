@@ -22,7 +22,8 @@
     "nuxt": "^2.15.7",
     "offscreen-canvas": "^0.1.1",
     "plain-css": "^1.0.7",
-    "vue-flux": "^6.4.0"
+    "vue-flux": "^6.4.0",
+    "vue-slider-component": "^3.2.15"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.14.7",

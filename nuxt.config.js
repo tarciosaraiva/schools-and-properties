@@ -46,6 +46,7 @@ export default {
   css: [
     'normalize.css',
     'plain-css',
+    'vue-slider-component/theme/default.css',
     '@/assets/css/main.css',
     '@/assets/css/sidebar.css',
     '@/assets/css/popup.css'
@@ -72,14 +73,14 @@ export default {
         'faBath',
         'faCar',
         'faDollarSign',
-        'faSync',
-        'faSlidersH',
         'faCaretSquareDown',
         'faCaretSquareUp',
         'faSchool',
         'faSearchLocation',
         'faMapMarkedAlt',
-        'faLayerGroup'
+        'faLayerGroup',
+        'faCheck',
+        'faHome'
       ],
       regular: ['faSquare']
     }

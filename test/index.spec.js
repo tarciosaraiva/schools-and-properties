@@ -65,16 +65,6 @@ describe('index', () => {
     expect(wrapper.vm.showAbout).toBeFalsy()
   })
 
-  test('set showPropertyFilter to true when "openPropertyFilter"', () => {
-    wrapper.vm.openPropertyFilter()
-    expect(wrapper.vm.showPropertyFilter).toBeTruthy()
-  })
-
-  test('set showPropertyFilter to false when "closePropertyFilter"', () => {
-    wrapper.vm.closePropertyFilter()
-    expect(wrapper.vm.showPropertyFilter).toBeFalsy()
-  })
-
   test('set showSchoolFilter to true when "openSchoolFilter"', () => {
     wrapper.vm.openSchoolFilter()
     expect(wrapper.vm.showSchoolFilter).toBeTruthy()

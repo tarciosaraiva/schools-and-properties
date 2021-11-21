@@ -1,0 +1,105 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PropertyBedsFilterViewMapControl renders correctly when collapsed 1`] = `
+<div class="layer-container">
+  <button title="Show number of bedrooms filter control">
+    3
+    <svg aria-hidden="true" class="svg-inline--fa fa-bed fa-w-20" data-icon="bed" data-prefix="fas" focusable="false" role="img" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg">
+      <path class="" d="M176 256c44.11 0 80-35.89 80-80s-35.89-80-80-80-80 35.89-80 80 35.89 80 80 80zm352-128H304c-8.84 0-16 7.16-16 16v144H64V80c0-8.84-7.16-16-16-16H16C7.16 64 0 71.16 0 80v352c0 8.84 7.16 16 16 16h32c8.84 0 16-7.16 16-16v-48h512v48c0 8.84 7.16 16 16 16h32c8.84 0 16-7.16 16-16V240c0-61.86-50.14-112-112-112z" fill="currentColor" />
+    </svg>
+  </button>
+  <button style="display: none;" title="Query listings with current number of bedrooms">
+    <svg aria-hidden="true" class="svg-inline--fa fa-check fa-w-16 fa-lg" data-icon="check" data-prefix="fas" focusable="false" role="img" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+      <path class="" d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z" fill="currentColor" />
+    </svg>
+  </button>
+  <div class="layer-options">
+    <div class="vue-slider vue-slider-ltr" style="padding: 7px 0px; width: auto; height: 4px;">
+      <div class="vue-slider-rail">
+        <div class="vue-slider-process" style="height: 100%; top: 0px; left: 0%; width: 40%; transition-property: width,left; transition-duration: 0.5s;"></div>
+        <div class="vue-slider-marks">
+          <div class="vue-slider-mark vue-slider-mark-active" style="height: 100%; width: 4px; left: 0%;">
+            <div class="vue-slider-mark-step vue-slider-mark-step-active"></div>
+            <div class="vue-slider-mark-label vue-slider-mark-label-active">1</div>
+          </div>
+          <div class="vue-slider-mark vue-slider-mark-active" style="height: 100%; width: 4px; left: 20%;">
+            <div class="vue-slider-mark-step vue-slider-mark-step-active"></div>
+            <div class="vue-slider-mark-label vue-slider-mark-label-active">2</div>
+          </div>
+          <div class="vue-slider-mark vue-slider-mark-active" style="height: 100%; width: 4px; left: 40%;">
+            <div class="vue-slider-mark-step vue-slider-mark-step-active"></div>
+            <div class="vue-slider-mark-label vue-slider-mark-label-active">3</div>
+          </div>
+          <div class="vue-slider-mark" style="height: 100%; width: 4px; left: 60%;">
+            <div class="vue-slider-mark-step"></div>
+            <div class="vue-slider-mark-label">4</div>
+          </div>
+          <div class="vue-slider-mark" style="height: 100%; width: 4px; left: 80%;">
+            <div class="vue-slider-mark-step"></div>
+            <div class="vue-slider-mark-label">5</div>
+          </div>
+          <div class="vue-slider-mark" style="height: 100%; width: 4px; left: 100%;">
+            <div class="vue-slider-mark-step"></div>
+            <div class="vue-slider-mark-label">6</div>
+          </div>
+        </div>
+        <div aria-orientation="horizontal" aria-valuemax="6" aria-valuemin="1" aria-valuenow="3" aria-valuetext="3" class="vue-slider-dot" role="slider" style="width: 14px; height: 14px; transform: translate(-50%, -50%); top: 50%; left: 40%; transition: left 0.5s;" tabindex="0">
+          <div class="vue-slider-dot-handle"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`PropertyBedsFilterViewMapControl renders correctly when expanded 1`] = `
+<div class="layer-container">
+  <button title="Show number of bedrooms filter control">
+    3
+    <svg aria-hidden="true" class="svg-inline--fa fa-bed fa-w-20" data-icon="bed" data-prefix="fas" focusable="false" role="img" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg">
+      <path class="" d="M176 256c44.11 0 80-35.89 80-80s-35.89-80-80-80-80 35.89-80 80 35.89 80 80 80zm352-128H304c-8.84 0-16 7.16-16 16v144H64V80c0-8.84-7.16-16-16-16H16C7.16 64 0 71.16 0 80v352c0 8.84 7.16 16 16 16h32c8.84 0 16-7.16 16-16v-48h512v48c0 8.84 7.16 16 16 16h32c8.84 0 16-7.16 16-16V240c0-61.86-50.14-112-112-112z" fill="currentColor" />
+    </svg>
+  </button>
+  <button style title="Query listings with current number of bedrooms">
+    <svg aria-hidden="true" class="svg-inline--fa fa-check fa-w-16 fa-lg" data-icon="check" data-prefix="fas" focusable="false" role="img" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+      <path class="" d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z" fill="currentColor" />
+    </svg>
+  </button>
+  <div class="layer-options expanded">
+    <div class="vue-slider vue-slider-ltr" style="padding: 7px 0px; width: auto; height: 4px;">
+      <div class="vue-slider-rail">
+        <div class="vue-slider-process" style="height: 100%; top: 0px; left: 0%; width: 40%; transition-property: width,left; transition-duration: 0.5s;"></div>
+        <div class="vue-slider-marks">
+          <div class="vue-slider-mark vue-slider-mark-active" style="height: 100%; width: 4px; left: 0%;">
+            <div class="vue-slider-mark-step vue-slider-mark-step-active"></div>
+            <div class="vue-slider-mark-label vue-slider-mark-label-active">1</div>
+          </div>
+          <div class="vue-slider-mark vue-slider-mark-active" style="height: 100%; width: 4px; left: 20%;">
+            <div class="vue-slider-mark-step vue-slider-mark-step-active"></div>
+            <div class="vue-slider-mark-label vue-slider-mark-label-active">2</div>
+          </div>
+          <div class="vue-slider-mark vue-slider-mark-active" style="height: 100%; width: 4px; left: 40%;">
+            <div class="vue-slider-mark-step vue-slider-mark-step-active"></div>
+            <div class="vue-slider-mark-label vue-slider-mark-label-active">3</div>
+          </div>
+          <div class="vue-slider-mark" style="height: 100%; width: 4px; left: 60%;">
+            <div class="vue-slider-mark-step"></div>
+            <div class="vue-slider-mark-label">4</div>
+          </div>
+          <div class="vue-slider-mark" style="height: 100%; width: 4px; left: 80%;">
+            <div class="vue-slider-mark-step"></div>
+            <div class="vue-slider-mark-label">5</div>
+          </div>
+          <div class="vue-slider-mark" style="height: 100%; width: 4px; left: 100%;">
+            <div class="vue-slider-mark-step"></div>
+            <div class="vue-slider-mark-label">6</div>
+          </div>
+        </div>
+        <div aria-orientation="horizontal" aria-valuemax="6" aria-valuemin="1" aria-valuenow="3" aria-valuetext="3" class="vue-slider-dot" role="slider" style="width: 14px; height: 14px; transform: translate(-50%, -50%); top: 50%; left: 40%; transition: left 0.5s;" tabindex="0">
+          <div class="vue-slider-dot-handle"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

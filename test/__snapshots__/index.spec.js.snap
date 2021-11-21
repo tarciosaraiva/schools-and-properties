@@ -7,7 +7,7 @@ exports[`index renders correctly with props 1`] = `
     <navigate-stub class="pl-col-md-6 pl-col-sm-12" searchcallback="[Function]" suggestions></navigate-stub>
   </header>
   <main>
-    <mapbox-stub flyto="[object Object]" listingpois openpropertiesfilterfn="[Function]" openschoolsfilterfn="[Function]" schoolsfilter="[object Object]"></mapbox-stub>
+    <mapbox-stub flyto="[object Object]" listingpois openschoolsfilterfn="[Function]" schoolsfilter="[object Object]"></mapbox-stub>
   </main>
   <footer class="pl-row">
     <div class="d-flex pl-col justify-content-between align-items-center">
@@ -22,7 +22,6 @@ exports[`index renders correctly with props 1`] = `
     </div>
   </footer>
   <attribution-modal-stub closefn="[Function]" style="display: none;"></attribution-modal-stub>
-  <property-filter-stub closefn="[Function]" style="display: none;"></property-filter-stub>
   <school-filter-stub closefn="[Function]" style="display: none;"></school-filter-stub>
   <about-modal-stub closefn="[Function]" style="display: none;"></about-modal-stub>
 </div>

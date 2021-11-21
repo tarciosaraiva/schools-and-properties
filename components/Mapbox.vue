@@ -15,10 +15,10 @@ import Vue from 'vue'
 import { mapActions } from 'vuex'
 import maplibregl from 'maplibre-gl'
 
-import PropertyFilterMapControl from '~/utils/PropertyFilterMapControl'
 import SchoolFilterMapControl from '~/utils/SchoolFilterMapControl'
 import SchoolLegendMapControl from '~/utils/SchoolLegendMapControl'
 import SchoolZoneLayersMapControl from '~/utils/SchoolZoneLayersMapControl'
+import PropertyFiltersMapControl from '~/utils/PropertyFiltersMapControl'
 import PropertyPopupContent from '~/components/property/PropertyPopupContent.vue'
 import SchoolPopupContent from '~/components/school/SchoolPopupContent.vue'
 import { SchoolsFilter } from '~/store'
@@ -46,10 +46,6 @@ export default Vue.extend({
     flyTo: {
       type: Object,
       default: () => ({})
-    },
-    openPropertiesFilterFn: {
-      type: Function,
-      default: () => () => {}
     },
     openSchoolsFilterFn: {
       type: Function,
@@ -91,7 +87,7 @@ export default Vue.extend({
   mounted() {
     this.map = new maplibregl.Map({
       container: 'map',
-      style: `https://api.maptiler.com/maps/7c11fa2c-a280-4ffd-aa8f-ba3d52ab1368/style.json?key=${process.env.mapTilerSecret}`,
+      style: `https://api.maptiler.com/maps/streets/style.json?key=${process.env.mapTilerSecret}`,
       center: [145, -37.65],
       minZoom: 7,
       zoom: 8,
@@ -348,7 +344,12 @@ export default Vue.extend({
         }),
         'bottom-right'
       )
-      this.map.addControl(new PropertyFilterMapControl(this.$store, this.openPropertiesFilterFn))
+
+      this.map.addControl(new PropertyFiltersMapControl(this.$store, 'types'))
+      this.map.addControl(new PropertyFiltersMapControl(this.$store, 'beds'))
+      this.map.addControl(new PropertyFiltersMapControl(this.$store, 'baths'))
+      this.map.addControl(new PropertyFiltersMapControl(this.$store, 'cars'))
+      this.map.addControl(new PropertyFiltersMapControl(this.$store, 'price'))
       this.map.addControl(new SchoolFilterMapControl(this.$store, this.openSchoolsFilterFn), 'top-left')
       this.map.addControl(new SchoolZoneLayersMapControl(this.$store, this.toggleLayer), 'top-left')
       this.map.addControl(new SchoolLegendMapControl(), 'bottom-left')

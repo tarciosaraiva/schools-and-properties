@@ -9,7 +9,6 @@
         :schools-filter="schoolsFilter"
         :listing-pois="listingPois"
         :fly-to="flyTo"
-        :open-properties-filter-fn="openPropertyFilter"
         :open-schools-filter-fn="openSchoolFilter"
       />
     </main>
@@ -22,7 +21,6 @@
       </div>
     </footer>
     <attribution-modal v-show="showAttributions" :close-fn="closeAttributions" />
-    <property-filter v-show="showPropertyFilter" :close-fn="closePropertyFilter" />
     <school-filter v-show="showSchoolFilter" :close-fn="closeSchoolFilter" />
     <about-modal v-show="showAbout" :close-fn="closeAbout" />
   </div>
@@ -32,17 +30,15 @@
 import Vue from 'vue'
 import { mapGetters, mapActions } from 'vuex'
 import Navigate from '~/components/Navigate.vue'
-import PropertyFilter from '~/components/property/PropertyFilter.vue'
 import SchoolFilter from '~/components/school/SchoolFilter.vue'
 import Mapbox from '~/components/Mapbox.vue'
 import AttributionModal from '~/components/AttributionModal.vue'
 import AboutModal from '~/components/AboutModal.vue'
 
 export default Vue.extend({
-  components: { Navigate, PropertyFilter, SchoolFilter, Mapbox, AttributionModal, AboutModal },
+  components: { Navigate, SchoolFilter, Mapbox, AttributionModal, AboutModal },
   data() {
     return {
-      showPropertyFilter: false,
       showSchoolFilter: false,
       showAttributions: false,
       showAbout: false,
@@ -71,12 +67,6 @@ export default Vue.extend({
     },
     closeAbout () {
       this.showAbout = false
-    },
-    openPropertyFilter () {
-      this.showPropertyFilter = true
-    },
-    closePropertyFilter () {
-      this.showPropertyFilter = false
     },
     openSchoolFilter () {
       this.showSchoolFilter = true
