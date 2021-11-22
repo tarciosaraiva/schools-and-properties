@@ -23,6 +23,15 @@ import Vue from 'vue'
 import { mapGetters, mapActions } from 'vuex'
 import VueSlider from 'vue-slider-component'
 
+  // Add below code sample to your component
+  declare module 'vue/types/vue' {
+    interface Vue {
+      collapsed: boolean;
+      handleClickOutside: () => void;
+      loadListings: () => void;
+    }
+  }
+
 export default Vue.extend({
   components: { VueSlider },
   data () {

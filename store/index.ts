@@ -141,7 +141,7 @@ export const mutations: MutationTree<RootState> = {
           streetNumber: listing.propertyDetails.streetNumber,
           suburb: listing.propertyDetails.suburb,
           unitNumber: listing.propertyDetails.unitNumber,
-          media: listing.media.map((m: any) => m.url),
+          media: (listing.media && listing.media.length) ? listing.media.map((m: any) => m.url) : [],
           listingSlug: listing.listingSlug
         }
 
