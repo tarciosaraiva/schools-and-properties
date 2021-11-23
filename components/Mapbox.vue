@@ -25,7 +25,8 @@ import { SchoolsFilter } from '~/store'
 import {
   dataSources,
   buildSchoolLocationFilterExpression,
-  buildSchoolIconImageExpression
+  buildSchoolIconImageExpression,
+  loadImages
 } from '~/utils/mapbox'
 
 const PRIMARY_SCHOOL_POINT_LAYER_NAME = 'primary-school-point'
@@ -239,13 +240,7 @@ export default Vue.extend({
         }
       )
 
-      this.map.loadImage(
-        require('~/assets/images/property-location.png'),
-        (err: any, img: any) => {
-          if (err) throw err
-          this.map.addImage('property-location', img)
-        }
-      )
+      loadImages(this.map)
 
       // add isolated events
       this.map

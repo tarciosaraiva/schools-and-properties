@@ -130,3 +130,31 @@ export const buildSchoolIconImageExpression = (primary: boolean = true) => {
     `${lowerCaseSchoolType}-school-rated`
   ]
 }
+
+export const loadImages = (map: any) => {
+  const images = [
+    'primary-school-unrated',
+    'primary-school-rated',
+    'secondary-school-unrated',
+    'secondary-school-rated',
+    'property-location',
+  ]
+
+  images.forEach(imageName => {
+    map.loadImage(
+      require(`~/assets/images/${imageName}.png`),
+      (err: any, img: any) => {
+        if (err) throw err
+        map.addImage(imageName, img)
+      }
+    )
+
+    map.loadImage(
+      require(`~/assets/images/mobile-${imageName}.png`),
+      (err: any, img: any) => {
+        if (err) throw err
+        map.addImage(`mobile-${imageName}`, img)
+      }
+    )
+  })
+}

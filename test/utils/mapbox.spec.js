@@ -2,7 +2,7 @@ import {
   buildSchoolFilterExpr,
   buildSchoolLocationFilterExpression,
   buildSchoolIconImageExpression
-} from '@/utils/mapbox'
+} from '~/utils/mapbox'
 
 describe('utils/mapbox', () => {
   describe('buildSchoolFilterExpr', () => {
