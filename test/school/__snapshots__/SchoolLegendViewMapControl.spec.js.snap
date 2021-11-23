@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SchoolLegendMapControl renders correctly when collapsed 1`] = `
+exports[`SchoolLegendViewMapControl renders correctly when collapsed 1`] = `
 <div class="school-legend-view">
   <div class="collapsable">
     <div class="d-flex align-items-center justify-content-between">
@@ -35,7 +35,7 @@ exports[`SchoolLegendMapControl renders correctly when collapsed 1`] = `
 </div>
 `;
 
-exports[`SchoolLegendMapControl renders correctly when expanded 1`] = `
+exports[`SchoolLegendViewMapControl renders correctly when expanded 1`] = `
 <div class="school-legend-view">
   <div class="collapsable expanded">
     <div class="d-flex align-items-center justify-content-between">

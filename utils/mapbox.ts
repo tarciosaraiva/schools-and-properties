@@ -108,7 +108,7 @@ export const buildSchoolLocationFilterExpression = (schoolsFilter: SchoolsFilter
   ])
 }
 
-export const buildSchoolIconImageExpression = (primary: boolean = true) => {
+export const buildSchoolIconImageExpression = (primary: boolean = true, mobilePrefix: string = '') => {
   const schoolType = primary ? 'Primary' : 'Secondary'
   const lowerCaseSchoolType = schoolType.toLowerCase()
   return [
@@ -126,8 +126,8 @@ export const buildSchoolIconImageExpression = (primary: boolean = true) => {
         ['==', ['get', `${lowerCaseSchoolType}OverallScore`], '#N/A'],
       ],
     ],
-    `${lowerCaseSchoolType}-school-unrated`,
-    `${lowerCaseSchoolType}-school-rated`
+    `${mobilePrefix}${lowerCaseSchoolType}-school-unrated`,
+    `${mobilePrefix}${lowerCaseSchoolType}-school-rated`
   ]
 }
 

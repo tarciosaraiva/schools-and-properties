@@ -15,13 +15,17 @@ import Vue from 'vue'
 import { mapActions } from 'vuex'
 import maplibregl from 'maplibre-gl'
 
-import SchoolFilterMapControl from '~/utils/SchoolFilterMapControl'
-import SchoolLegendMapControl from '~/utils/SchoolLegendMapControl'
-import SchoolZoneLayersMapControl from '~/utils/SchoolZoneLayersMapControl'
-import PropertyFiltersMapControl from '~/utils/PropertyFiltersMapControl'
 import PropertyPopupContent from '~/components/property/PropertyPopupContent.vue'
 import SchoolPopupContent from '~/components/school/SchoolPopupContent.vue'
 import { SchoolsFilter } from '~/store'
+
+import {
+  SchoolFilterMapControl,
+  SchoolLegendMapControl,
+  SchoolZoneLayersMapControl,
+  PropertyFiltersMapControl
+} from '~/mapControls'
+
 import {
   dataSources,
   buildSchoolLocationFilterExpression,
@@ -206,39 +210,13 @@ export default Vue.extend({
     },
 
     mapLoaded() {
+      let mobilePrefix = ''
+
+      if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        mobilePrefix = 'mobile-'
+      }
+
       this.setBoundingBox(this.map.getBounds())
-
-      this.map.loadImage(
-        require('~/assets/images/primary-school-unrated.png'),
-        (err: any, img: any) => {
-          if (err) throw err
-          this.map.addImage('primary-school-unrated', img)
-        }
-      )
-
-      this.map.loadImage(
-        require('~/assets/images/primary-school-rated.png'),
-        (err: any, img: any) => {
-          if (err) throw err
-          this.map.addImage('primary-school-rated', img)
-        }
-      )
-
-      this.map.loadImage(
-        require('~/assets/images/secondary-school-unrated.png'),
-        (err: any, img: any) => {
-          if (err) throw err
-          this.map.addImage('secondary-school-unrated', img)
-        }
-      )
-
-      this.map.loadImage(
-        require('~/assets/images/secondary-school-rated.png'),
-        (err: any, img: any) => {
-          if (err) throw err
-          this.map.addImage('secondary-school-rated', img)
-        }
-      )
 
       loadImages(this.map)
 
@@ -290,7 +268,7 @@ export default Vue.extend({
             source: 'school-locations',
             filter: buildSchoolLocationFilterExpression(this.schoolsFilter, primary),
             layout: {
-              'icon-image': buildSchoolIconImageExpression(primary),
+              'icon-image': buildSchoolIconImageExpression(primary, mobilePrefix),
               'icon-offset': [0, -16]
             },
           })
@@ -317,7 +295,7 @@ export default Vue.extend({
           type: 'symbol',
           source: 'properties',
           layout: {
-            'icon-image': 'property-location',
+            'icon-image': `${mobilePrefix}property-location`,
             'icon-offset': [0, -16]
           }
         })

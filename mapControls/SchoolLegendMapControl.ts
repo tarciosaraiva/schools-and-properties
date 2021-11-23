@@ -1,13 +1,13 @@
 // @ts-ignore
-import SchoolLegendMapControl from '~/components/school/SchoolLegendMapControl.vue'
+import SchoolLegendViewMapControl from '~/components/school/SchoolLegendViewMapControl.vue'
 
-export default class SchoolFilterMapControl {
+export default class SchoolLegendMapControl {
   _container: HTMLDivElement | null = null
   _map: any
   _vm: any
 
   constructor () {
-    this._vm = new SchoolLegendMapControl()
+    this._vm = new SchoolLegendViewMapControl()
   }
 
   onAdd (map: any) {
