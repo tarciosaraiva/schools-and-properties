@@ -240,6 +240,7 @@ export default Vue.extend({
             source: 'school-locations',
             filter: buildSchoolLocationFilterExpression(this.schoolsFilter, primary),
             layout: {
+              'icon-anchor': 'bottom',
               'icon-image': buildSchoolIconImageExpression(primary, mobilePrefix),
             }
           })
@@ -266,6 +267,7 @@ export default Vue.extend({
           type: 'symbol',
           source: 'properties',
           layout: {
+            'icon-anchor': 'bottom',
             'icon-image': `${mobilePrefix}property-location`,
             'icon-ignore-placement': true
           }
