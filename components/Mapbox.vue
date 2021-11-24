@@ -30,7 +30,8 @@ import {
   dataSources,
   buildSchoolLocationFilterExpression,
   buildSchoolIconImageExpression,
-  loadImages
+  loadImages,
+  getPopupOffsets
 } from '~/utils/mapbox'
 
 const PRIMARY_SCHOOL_POINT_LAYER_NAME = 'primary-school-point'
@@ -144,21 +145,7 @@ export default Vue.extend({
         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360
       }
 
-      const markerHeight = 40
-      const markerRadius = 40
-      const linearOffset = 25
-      const popupOffsets: any = {
-        'top': [0, 0],
-        'top-left': [0, 0],
-        'top-right': [0, 0],
-        'bottom': [0, -markerHeight],
-        'bottom-left': [linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
-        'bottom-right': [-linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
-        'left': [markerRadius, (markerHeight - markerRadius) * -1],
-        'right': [-markerRadius, (markerHeight - markerRadius) * -1]
-      }
-
-      new maplibregl.Popup({ closeButton: false, offset: popupOffsets })
+      new maplibregl.Popup({ closeButton: false, offset: getPopupOffsets() })
         .setHTML(`<div id="school-popup-content-${poiFeature.id}"></div>`)
         .on('open', () => {
           new SchoolPopupContent({ propsData: { school: props } }).$mount(`#school-popup-content-${poiFeature.id}`)
@@ -181,22 +168,7 @@ export default Vue.extend({
         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360
       }
 
-      // use trick from documentation to place the popup within the viewbox
-      const markerHeight = 40
-      const markerRadius = 20
-      const linearOffset = 25
-      const popupOffsets: any = {
-        'top': [0, 0],
-        'top-left': [0, 0],
-        'top-right': [0, 0],
-        'bottom': [0, -markerHeight],
-        'bottom-left': [linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
-        'bottom-right': [-linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
-        'left': [markerRadius, (markerHeight - markerRadius) * -1],
-        'right': [-markerRadius, (markerHeight - markerRadius) * -1]
-      }
-
-      new maplibregl.Popup({ maxWidth: '300px', closeButton: false, offset: popupOffsets })
+      new maplibregl.Popup({ maxWidth: '300px', closeButton: false, offset: getPopupOffsets() })
           .setHTML(`<div id="property-popup-content-${props.id}"></div>`)
           .on('open', () => {
             new PropertyPopupContent({ propsData: { property: props } }).$mount(`#property-popup-content-${props.id}`)
@@ -269,8 +241,7 @@ export default Vue.extend({
             filter: buildSchoolLocationFilterExpression(this.schoolsFilter, primary),
             layout: {
               'icon-image': buildSchoolIconImageExpression(primary, mobilePrefix),
-              'icon-offset': [0, -16]
-            },
+            }
           })
           .on('click', layerName, this.onSchoolPoiClick)
           .on('mouseenter', layerName, (e: any) => {
@@ -296,7 +267,7 @@ export default Vue.extend({
           source: 'properties',
           layout: {
             'icon-image': `${mobilePrefix}property-location`,
-            'icon-offset': [0, -16]
+            'icon-ignore-placement': true
           }
         })
         .on('click', 'properties-poi', this.onPropertyPointClick)

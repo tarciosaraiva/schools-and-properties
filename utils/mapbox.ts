@@ -158,3 +158,19 @@ export const loadImages = (map: any) => {
     )
   })
 }
+
+export const getPopupOffsets = (): any => {
+  const markerHeight = 20
+  const markerRadius = 20
+  const linearOffset = 20
+  return {
+    'top': [0, markerHeight],
+    'top-left': [0, markerHeight],
+    'top-right': [0, markerHeight],
+    'bottom': [0, -markerHeight],
+    'bottom-left': [linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+    'bottom-right': [-linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+    'left': [markerRadius, (markerHeight - markerRadius) * -1],
+    'right': [-markerRadius, (markerHeight - markerRadius) * -1]
+  }
+}
