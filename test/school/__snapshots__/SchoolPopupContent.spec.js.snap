@@ -28,6 +28,10 @@ exports[`SchoolPopupContent renders correctly with props 1`] = `
   </dl>
   <!---->
   <!---->
+  <!---->
+  <!---->
+  <!---->
+  <!---->
 </div>
 `;
 
@@ -57,6 +61,8 @@ exports[`SchoolPopupContent renders correctly with props and secondary school 1`
       <em>500</em>
     </dd>
   </dl>
+  <!---->
+  <!---->
   <p>Secondary ratings</p>
   <dl class="school-stats">
     <dt class="label">Overall rating</dt>
@@ -76,6 +82,8 @@ exports[`SchoolPopupContent renders correctly with props and secondary school 1`
       <em>200</em>
     </dd>
   </dl>
+  <!---->
+  <!---->
 </div>
 `;
 
@@ -88,6 +96,8 @@ exports[`SchoolPopupContent renders correctly with props and secondary school on
   </p>
   <!---->
   <!---->
+  <!---->
+  <!---->
   <p>Secondary ratings</p>
   <dl class="school-stats">
     <dt class="label">Overall rating</dt>
@@ -107,5 +117,7 @@ exports[`SchoolPopupContent renders correctly with props and secondary school on
       <em>200</em>
     </dd>
   </dl>
+  <!---->
+  <!---->
 </div>
 `;
