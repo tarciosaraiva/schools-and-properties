@@ -14,7 +14,7 @@ export default class SchoolZoneLayersMapControl {
     this._map = map
     this._container = document.createElement('div')
     this._container.id = 'school-zones-view'
-    this._container.className = 'maplibregl-ctrl maplibregl-ctrl-group mapboxgl-ctrl mapboxgl-ctrl-group'
+    this._container.className = 'school-ctrl maplibregl-ctrl maplibregl-ctrl-group mapboxgl-ctrl mapboxgl-ctrl-group'
     this._container.appendChild(this._vm.$mount().$el)
     return this._container;
   }
