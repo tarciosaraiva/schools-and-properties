@@ -80,7 +80,8 @@ export default {
         'faMapMarkedAlt',
         'faLayerGroup',
         'faCheck',
-        'faHome'
+        'faHome',
+        'faSync'
       ],
       regular: ['faSquare']
     }

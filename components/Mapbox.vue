@@ -291,11 +291,7 @@ export default Vue.extend({
         'bottom-right'
       )
 
-      this.map.addControl(new PropertyFiltersMapControl(this.$store, 'types'))
-      this.map.addControl(new PropertyFiltersMapControl(this.$store, 'beds'))
-      this.map.addControl(new PropertyFiltersMapControl(this.$store, 'baths'))
-      this.map.addControl(new PropertyFiltersMapControl(this.$store, 'cars'))
-      this.map.addControl(new PropertyFiltersMapControl(this.$store, 'price'))
+      this.map.addControl(new PropertyFiltersMapControl(this.$store))
       this.map.addControl(new SchoolFilterMapControl(this.$store, this.openSchoolsFilterFn), 'top-left')
       this.map.addControl(new SchoolZoneLayersMapControl(this.$store, this.toggleLayer), 'top-left')
       this.map.addControl(new SchoolLegendMapControl(), 'bottom-left')
