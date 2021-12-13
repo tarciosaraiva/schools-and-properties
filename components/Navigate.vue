@@ -19,7 +19,8 @@
     <ul v-show="isOpen" class="geo-suggestions">
       <li v-for="(sug, i) in suggestions" :key="i" class="d-flex align-items-center" :class="{ 'is-active': i === arrowCounter }">
         <font-awesome-icon :icon="sug.placeType === 'school' ? 'school' : 'map-marked-alt'" />
-        <a href="#"
+        <a
+          href="#"
           class="suggestion"
           @click.stop.prevent="navigateTo(sug)">
           {{ sug.name }}
