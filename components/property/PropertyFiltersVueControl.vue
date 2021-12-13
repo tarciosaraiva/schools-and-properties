@@ -24,7 +24,7 @@
     <button v-show="expanded" title="Apply filter" @click="handleChange">
       <font-awesome-icon icon="check" size="lg" :style="{ color: 'rgba(39, 174, 96)' }" />
     </button>
-    <ul class="layer-options types" :class="expanded && controlToShow === 'PropertyType' ? 'expanded' : ''">
+    <ul class="property layer-options types" :class="expanded && controlToShow === 'PropertyType' ? 'expanded' : ''">
       <li>
         <label for="p_house_type">
           <input id="p_house_type" v-model="propertyTypes" type="checkbox" value="House" /> House
@@ -41,7 +41,7 @@
         </label>
       </li>
     </ul>
-    <div class="layer-options beds" :class="expanded && controlToShow === 'Bedrooms' ? 'expanded' : ''">
+    <div class="property layer-options beds" :class="expanded && controlToShow === 'Bedrooms' ? 'expanded' : ''">
       <vue-slider
         v-model="bedrooms"
         :min="1"
@@ -49,7 +49,7 @@
         :marks="true"
         :tooltip="'none'" />
     </div>
-    <div class="layer-options baths" :class="expanded && controlToShow === 'Bathrooms' ? 'expanded' : ''">
+    <div class="property layer-options baths" :class="expanded && controlToShow === 'Bathrooms' ? 'expanded' : ''">
       <vue-slider
         v-model="bathrooms"
         :min="1"
@@ -57,7 +57,7 @@
         :marks="true"
         :tooltip="'none'" />
     </div>
-    <div class="layer-options cars" :class="expanded && controlToShow === 'CarSpaces' ? 'expanded' : ''">
+    <div class="property layer-options cars" :class="expanded && controlToShow === 'CarSpaces' ? 'expanded' : ''">
       <vue-slider
         v-model="carSpaces"
         :min="1"
@@ -65,7 +65,7 @@
         :marks="true"
         :tooltip="'none'" />
     </div>
-    <div class="layer-options price" :class="expanded && controlToShow === 'MaxPrice' ? 'expanded' : ''">
+    <div class="property layer-options price" :class="expanded && controlToShow === 'MaxPrice' ? 'expanded' : ''">
       <select id="p_max_price" v-model="maxPrice">
         <option value="500000">500 K</option>
         <option value="550000">550 K</option>
@@ -217,3 +217,40 @@ export default Vue.extend({
   }
 })
 </script>
+
+<style scoped>
+.layer-container .property.layer-options {
+  left: initial;
+  max-height: 6rem;
+  right: 48px;
+}
+
+.layer-container .property.layer-options.expanded {
+  height: 3.65rem;
+  width: 15rem;
+}
+
+.layer-container .property.layer-options.expanded.types {
+  padding: 0.5rem;
+  height: 5rem;
+  width: 8rem;
+}
+
+.layer-container .property.layer-options.expanded.beds {
+  top: 40px;
+}
+
+.layer-container .property.layer-options.expanded.baths {
+  top: 80px;
+}
+
+.layer-container .property.layer-options.expanded.cars {
+  top: 120px;
+}
+
+.layer-container .property.layer-options.expanded.price {
+  padding: 0.5rem;
+  width: 10rem;
+  top: 160px;
+}
+</style>

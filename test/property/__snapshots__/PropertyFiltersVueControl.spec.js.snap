@@ -40,7 +40,7 @@ exports[`PropertyFiltersVueControl renders correctly when collapsed 1`] = `
       <path class="" d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z" fill="currentColor" />
     </svg>
   </button>
-  <ul class="layer-options types">
+  <ul class="property layer-options types">
     <li>
       <label for="p_house_type">
         <input id="p_house_type" type="checkbox" value="House"> House
@@ -57,7 +57,7 @@ exports[`PropertyFiltersVueControl renders correctly when collapsed 1`] = `
       </label>
     </li>
   </ul>
-  <div class="layer-options beds">
+  <div class="property layer-options beds">
     <div class="vue-slider vue-slider-ltr" style="padding: 7px 0px; width: auto; height: 4px;">
       <div class="vue-slider-rail">
         <div class="vue-slider-process" style="height: 100%; top: 0px; left: 0%; width: 40%; transition-property: width,left; transition-duration: 0.5s;"></div>
@@ -93,7 +93,7 @@ exports[`PropertyFiltersVueControl renders correctly when collapsed 1`] = `
       </div>
     </div>
   </div>
-  <div class="layer-options baths">
+  <div class="property layer-options baths">
     <div class="vue-slider vue-slider-ltr" style="padding: 7px 0px; width: auto; height: 4px;">
       <div class="vue-slider-rail">
         <div class="vue-slider-process" style="height: 100%; top: 0px; left: 0%; width: 20%; transition-property: width,left; transition-duration: 0.5s;"></div>
@@ -129,7 +129,7 @@ exports[`PropertyFiltersVueControl renders correctly when collapsed 1`] = `
       </div>
     </div>
   </div>
-  <div class="layer-options cars">
+  <div class="property layer-options cars">
     <div class="vue-slider vue-slider-ltr" style="padding: 7px 0px; width: auto; height: 4px;">
       <div class="vue-slider-rail">
         <div class="vue-slider-process" style="height: 100%; top: 0px; left: 0%; width: 0%; transition-property: width,left; transition-duration: 0.5s;"></div>
@@ -165,7 +165,7 @@ exports[`PropertyFiltersVueControl renders correctly when collapsed 1`] = `
       </div>
     </div>
   </div>
-  <div class="layer-options price">
+  <div class="property layer-options price">
     <select id="p_max_price">
       <option value="500000">500 K</option>
       <option value="550000">550 K</option>
@@ -244,7 +244,7 @@ exports[`PropertyFiltersVueControl renders correctly when expanded for "Bathroom
       <path class="" d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z" fill="currentColor" />
     </svg>
   </button>
-  <ul class="layer-options types">
+  <ul class="property layer-options types">
     <li>
       <label for="p_house_type">
         <input id="p_house_type" type="checkbox" value="House"> House
@@ -261,7 +261,7 @@ exports[`PropertyFiltersVueControl renders correctly when expanded for "Bathroom
       </label>
     </li>
   </ul>
-  <div class="layer-options beds">
+  <div class="property layer-options beds">
     <div class="vue-slider vue-slider-ltr" style="padding: 7px 0px; width: auto; height: 4px;">
       <div class="vue-slider-rail">
         <div class="vue-slider-process" style="height: 100%; top: 0px; left: 0%; width: 40%; transition-property: width,left; transition-duration: 0.5s;"></div>
@@ -297,7 +297,7 @@ exports[`PropertyFiltersVueControl renders correctly when expanded for "Bathroom
       </div>
     </div>
   </div>
-  <div class="layer-options baths expanded">
+  <div class="property layer-options baths expanded">
     <div class="vue-slider vue-slider-ltr" style="padding: 7px 0px; width: auto; height: 4px;">
       <div class="vue-slider-rail">
         <div class="vue-slider-process" style="height: 100%; top: 0px; left: 0%; width: 20%; transition-property: width,left; transition-duration: 0.5s;"></div>
@@ -333,7 +333,7 @@ exports[`PropertyFiltersVueControl renders correctly when expanded for "Bathroom
       </div>
     </div>
   </div>
-  <div class="layer-options cars">
+  <div class="property layer-options cars">
     <div class="vue-slider vue-slider-ltr" style="padding: 7px 0px; width: auto; height: 4px;">
       <div class="vue-slider-rail">
         <div class="vue-slider-process" style="height: 100%; top: 0px; left: 0%; width: 0%; transition-property: width,left; transition-duration: 0.5s;"></div>
@@ -369,7 +369,7 @@ exports[`PropertyFiltersVueControl renders correctly when expanded for "Bathroom
       </div>
     </div>
   </div>
-  <div class="layer-options price">
+  <div class="property layer-options price">
     <select id="p_max_price">
       <option value="500000">500 K</option>
       <option value="550000">550 K</option>
@@ -448,7 +448,7 @@ exports[`PropertyFiltersVueControl renders correctly when expanded for "Bedrooms
       <path class="" d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z" fill="currentColor" />
     </svg>
   </button>
-  <ul class="layer-options types">
+  <ul class="property layer-options types">
     <li>
       <label for="p_house_type">
         <input id="p_house_type" type="checkbox" value="House"> House
@@ -465,7 +465,7 @@ exports[`PropertyFiltersVueControl renders correctly when expanded for "Bedrooms
       </label>
     </li>
   </ul>
-  <div class="layer-options beds expanded">
+  <div class="property layer-options beds expanded">
     <div class="vue-slider vue-slider-ltr" style="padding: 7px 0px; width: auto; height: 4px;">
       <div class="vue-slider-rail">
         <div class="vue-slider-process" style="height: 100%; top: 0px; left: 0%; width: 40%; transition-property: width,left; transition-duration: 0.5s;"></div>
@@ -501,7 +501,7 @@ exports[`PropertyFiltersVueControl renders correctly when expanded for "Bedrooms
       </div>
     </div>
   </div>
-  <div class="layer-options baths">
+  <div class="property layer-options baths">
     <div class="vue-slider vue-slider-ltr" style="padding: 7px 0px; width: auto; height: 4px;">
       <div class="vue-slider-rail">
         <div class="vue-slider-process" style="height: 100%; top: 0px; left: 0%; width: 20%; transition-property: width,left; transition-duration: 0.5s;"></div>
@@ -537,7 +537,7 @@ exports[`PropertyFiltersVueControl renders correctly when expanded for "Bedrooms
       </div>
     </div>
   </div>
-  <div class="layer-options cars">
+  <div class="property layer-options cars">
     <div class="vue-slider vue-slider-ltr" style="padding: 7px 0px; width: auto; height: 4px;">
       <div class="vue-slider-rail">
         <div class="vue-slider-process" style="height: 100%; top: 0px; left: 0%; width: 0%; transition-property: width,left; transition-duration: 0.5s;"></div>
@@ -573,7 +573,7 @@ exports[`PropertyFiltersVueControl renders correctly when expanded for "Bedrooms
       </div>
     </div>
   </div>
-  <div class="layer-options price">
+  <div class="property layer-options price">
     <select id="p_max_price">
       <option value="500000">500 K</option>
       <option value="550000">550 K</option>
@@ -652,7 +652,7 @@ exports[`PropertyFiltersVueControl renders correctly when expanded for "CarSpace
       <path class="" d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z" fill="currentColor" />
     </svg>
   </button>
-  <ul class="layer-options types">
+  <ul class="property layer-options types">
     <li>
       <label for="p_house_type">
         <input id="p_house_type" type="checkbox" value="House"> House
@@ -669,7 +669,7 @@ exports[`PropertyFiltersVueControl renders correctly when expanded for "CarSpace
       </label>
     </li>
   </ul>
-  <div class="layer-options beds">
+  <div class="property layer-options beds">
     <div class="vue-slider vue-slider-ltr" style="padding: 7px 0px; width: auto; height: 4px;">
       <div class="vue-slider-rail">
         <div class="vue-slider-process" style="height: 100%; top: 0px; left: 0%; width: 40%; transition-property: width,left; transition-duration: 0.5s;"></div>
@@ -705,7 +705,7 @@ exports[`PropertyFiltersVueControl renders correctly when expanded for "CarSpace
       </div>
     </div>
   </div>
-  <div class="layer-options baths">
+  <div class="property layer-options baths">
     <div class="vue-slider vue-slider-ltr" style="padding: 7px 0px; width: auto; height: 4px;">
       <div class="vue-slider-rail">
         <div class="vue-slider-process" style="height: 100%; top: 0px; left: 0%; width: 20%; transition-property: width,left; transition-duration: 0.5s;"></div>
@@ -741,7 +741,7 @@ exports[`PropertyFiltersVueControl renders correctly when expanded for "CarSpace
       </div>
     </div>
   </div>
-  <div class="layer-options cars expanded">
+  <div class="property layer-options cars expanded">
     <div class="vue-slider vue-slider-ltr" style="padding: 7px 0px; width: auto; height: 4px;">
       <div class="vue-slider-rail">
         <div class="vue-slider-process" style="height: 100%; top: 0px; left: 0%; width: 0%; transition-property: width,left; transition-duration: 0.5s;"></div>
@@ -777,7 +777,7 @@ exports[`PropertyFiltersVueControl renders correctly when expanded for "CarSpace
       </div>
     </div>
   </div>
-  <div class="layer-options price">
+  <div class="property layer-options price">
     <select id="p_max_price">
       <option value="500000">500 K</option>
       <option value="550000">550 K</option>
@@ -856,7 +856,7 @@ exports[`PropertyFiltersVueControl renders correctly when expanded for "MaxPrice
       <path class="" d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z" fill="currentColor" />
     </svg>
   </button>
-  <ul class="layer-options types">
+  <ul class="property layer-options types">
     <li>
       <label for="p_house_type">
         <input id="p_house_type" type="checkbox" value="House"> House
@@ -873,7 +873,7 @@ exports[`PropertyFiltersVueControl renders correctly when expanded for "MaxPrice
       </label>
     </li>
   </ul>
-  <div class="layer-options beds">
+  <div class="property layer-options beds">
     <div class="vue-slider vue-slider-ltr" style="padding: 7px 0px; width: auto; height: 4px;">
       <div class="vue-slider-rail">
         <div class="vue-slider-process" style="height: 100%; top: 0px; left: 0%; width: 40%; transition-property: width,left; transition-duration: 0.5s;"></div>
@@ -909,7 +909,7 @@ exports[`PropertyFiltersVueControl renders correctly when expanded for "MaxPrice
       </div>
     </div>
   </div>
-  <div class="layer-options baths">
+  <div class="property layer-options baths">
     <div class="vue-slider vue-slider-ltr" style="padding: 7px 0px; width: auto; height: 4px;">
       <div class="vue-slider-rail">
         <div class="vue-slider-process" style="height: 100%; top: 0px; left: 0%; width: 20%; transition-property: width,left; transition-duration: 0.5s;"></div>
@@ -945,7 +945,7 @@ exports[`PropertyFiltersVueControl renders correctly when expanded for "MaxPrice
       </div>
     </div>
   </div>
-  <div class="layer-options cars">
+  <div class="property layer-options cars">
     <div class="vue-slider vue-slider-ltr" style="padding: 7px 0px; width: auto; height: 4px;">
       <div class="vue-slider-rail">
         <div class="vue-slider-process" style="height: 100%; top: 0px; left: 0%; width: 0%; transition-property: width,left; transition-duration: 0.5s;"></div>
@@ -981,7 +981,7 @@ exports[`PropertyFiltersVueControl renders correctly when expanded for "MaxPrice
       </div>
     </div>
   </div>
-  <div class="layer-options price expanded">
+  <div class="property layer-options price expanded">
     <select id="p_max_price">
       <option value="500000">500 K</option>
       <option value="550000">550 K</option>
@@ -1060,7 +1060,7 @@ exports[`PropertyFiltersVueControl renders correctly when expanded for "Property
       <path class="" d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z" fill="currentColor" />
     </svg>
   </button>
-  <ul class="layer-options types expanded">
+  <ul class="property layer-options types expanded">
     <li>
       <label for="p_house_type">
         <input id="p_house_type" type="checkbox" value="House"> House
@@ -1077,7 +1077,7 @@ exports[`PropertyFiltersVueControl renders correctly when expanded for "Property
       </label>
     </li>
   </ul>
-  <div class="layer-options beds">
+  <div class="property layer-options beds">
     <div class="vue-slider vue-slider-ltr" style="padding: 7px 0px; width: auto; height: 4px;">
       <div class="vue-slider-rail">
         <div class="vue-slider-process" style="height: 100%; top: 0px; left: 0%; width: 40%; transition-property: width,left; transition-duration: 0.5s;"></div>
@@ -1113,7 +1113,7 @@ exports[`PropertyFiltersVueControl renders correctly when expanded for "Property
       </div>
     </div>
   </div>
-  <div class="layer-options baths">
+  <div class="property layer-options baths">
     <div class="vue-slider vue-slider-ltr" style="padding: 7px 0px; width: auto; height: 4px;">
       <div class="vue-slider-rail">
         <div class="vue-slider-process" style="height: 100%; top: 0px; left: 0%; width: 20%; transition-property: width,left; transition-duration: 0.5s;"></div>
@@ -1149,7 +1149,7 @@ exports[`PropertyFiltersVueControl renders correctly when expanded for "Property
       </div>
     </div>
   </div>
-  <div class="layer-options cars">
+  <div class="property layer-options cars">
     <div class="vue-slider vue-slider-ltr" style="padding: 7px 0px; width: auto; height: 4px;">
       <div class="vue-slider-rail">
         <div class="vue-slider-process" style="height: 100%; top: 0px; left: 0%; width: 0%; transition-property: width,left; transition-duration: 0.5s;"></div>
@@ -1185,7 +1185,7 @@ exports[`PropertyFiltersVueControl renders correctly when expanded for "Property
       </div>
     </div>
   </div>
-  <div class="layer-options price">
+  <div class="property layer-options price">
     <select id="p_max_price">
       <option value="500000">500 K</option>
       <option value="550000">550 K</option>

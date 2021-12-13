@@ -3,7 +3,7 @@
     <button title="Display school zones control" @click="toggleControl">
       <font-awesome-icon icon="layer-group" size="lg" />
     </button>
-    <div class="layer-options" :class="collapsed ? '' : 'expanded'">
+    <div class="school layer-options" :class="collapsed ? '' : 'expanded'">
       <label class="checkbox">
         <input type="checkbox" value="primary" @click="handleChecked"> Primary
       </label>
@@ -64,44 +64,29 @@ export default Vue.extend({
 </script>
 
 <style scoped>
-.layer-container {
-  position: relative;
-}
-
-.layer-container .layer-options {
-  background: rgba(255, 255, 255, 0.85);
-  border-radius: 4px;
-  border: 0;
-  height: 0;
-  left: 40px;
+.layer-container .school.layer-options {
+  left: 48px;
   max-height: 260px;
-  overflow-x: hidden;
-  overflow-y: auto;
-  padding: 0;
-  position: absolute;
-  top: 0;
-  transition: all 0.3s ease;
-  width: 0;
+  right: 0;
 }
 
-.layer-container .layer-options.expanded {
-  border: 1px solid #ccc;
+.layer-container .school.layer-options.expanded {
   padding: 0.75rem;
   height: auto;
   width: 9rem;
 }
 
-.layer-container .layer-options .checkbox {
+.layer-container .school.layer-options .checkbox {
   padding: 0.25rem 0;
   font-size: 120%;
   white-space: nowrap;
 }
 
-.layer-container .layer-options .checkbox:first-child {
+.layer-container .school.layer-options .checkbox:first-child {
   padding-top: 0;
 }
 
-.layer-container .layer-options .checkbox:last-child {
+.layer-container .school.layer-options .checkbox:last-child {
   padding-bottom: 0;
   margin-bottom: 0;
 }

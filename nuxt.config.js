@@ -47,9 +47,7 @@ export default {
     'normalize.css',
     'plain-css',
     'vue-slider-component/theme/default.css',
-    '@/assets/css/main.css',
-    '@/assets/css/sidebar.css',
-    '@/assets/css/popup.css'
+    '@/assets/css/app.css',
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins

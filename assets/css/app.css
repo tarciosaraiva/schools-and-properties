@@ -27,13 +27,6 @@ header h1 {
   font-size: 1.6rem;
 }
 
-@media (min-width: 768px) {
-  header h1 {
-    font-size: 2rem;
-    margin-bottom: 0;
-  }
-}
-
 main {
   display: flex;
   flex-grow: 1;
@@ -94,6 +87,11 @@ footer .attribution {
 }
 
 @media (min-width: 768px) {
+  header h1 {
+    font-size: 2rem;
+    margin-bottom: 0;
+  }
+
   .modal-container {
     padding: 15px 30px;
     width: 30rem;
@@ -148,20 +146,6 @@ footer .attribution {
 .mapboxgl-ctrl.school-ctrl button {
   height: 40px;
   width: 40px;
-}
-
-.mapboxgl-ctrl.property-ctrl .types.layer-options.expanded {
-  height: 5rem;
-  width: 8rem;
-}
-
-.mapboxgl-ctrl.property-ctrl .price.layer-options.expanded {
-  width: 10rem;
-}
-
-.mapboxgl-ctrl.property-ctrl .types.layer-options.expanded,
-.mapboxgl-ctrl.property-ctrl .price.layer-options.expanded {
-  padding: 0.5rem;
 }
 
 .mapboxgl-ctrl.property-filter-view-ctrl,
@@ -224,8 +208,6 @@ form input, select {
   border-radius: 4px;
   border: 0;
   height: 0;
-  right: 48px;
-  max-height: 6rem;
   overflow-x: auto;
   overflow-y: hidden;
   padding: 0;
@@ -238,6 +220,144 @@ form input, select {
 .layer-container .layer-options.expanded {
   border: 1px solid #ccc;
   padding: 0.5rem 1.5rem 0rem;
-  height: 3.65rem;
-  width: 15rem;
+}
+
+.maplibregl-popup.mapboxgl-popup {
+  z-index: 300;
+}
+
+.maplibregl-popup-content.mapboxgl-popup-content {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
+  padding: 0.5rem;
+}
+
+.popup-info.container {
+  padding: 0;
+}
+
+.popup-info.container .school-name {
+  border-bottom: 1px solid #ccc;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.popup-info.container .school-name small {
+  color: #999;
+}
+
+.popup-info.container .school-stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: var(--universal-margin)
+}
+
+.popup-info.container .school-stats .label {
+  font-size: 0.85rem;
+  max-width: 120px;
+  text-decoration: underline;
+  width: 100%;
+  white-space: nowrap;
+}
+
+.popup-info.container .school-stats .value {
+  font-size: 0.85rem;
+  font-weight: bold;
+  max-width: 150px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.popup-info.container .property-stats p {
+  margin-bottom: 0.25rem;
+}
+
+.popup-info.container .property-stats .price {
+  font-weight: bold;
+  font-size: 120%;
+  margin-top: 0.5rem;
+}
+
+.popup-info.container .property-stats .address {
+  font-weight: bold;
+}
+
+.popup-info.container .property-stats .division {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.popup-info.container .property-stats ul {
+  border: 1px solid #ccc;
+  column-count: 3;
+  list-style-type: none;
+  margin: var(--universal-margin);
+  margin-bottom: 0.5rem;
+}
+
+.popup-info.container .property-stats ul li {
+  padding: 0.25rem;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+}
+
+/* framework override */
+header .navigate-container input {
+  margin: 0;
+  padding-left: 2.25rem;
+}
+
+header .navigate-container .search-box {
+  position: relative;
+}
+
+header .navigate-container .geo-suggestions {
+  background-color: #f5f5f5;
+  border: 1px solid rgba(51,51,51,.8);
+  border-radius: 4px;
+  max-height: 30rem;
+  max-width: 24rem;
+  padding: 0;
+  position: absolute;
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: inherit;
+  z-index: 500;
+}
+
+@media (min-width: 768px) {
+  header .navigate-container .geo-suggestions {
+    max-width: 22rem;
+  }
+}
+
+@media (min-width: 992px) {
+  header .navigate-container .geo-suggestions {
+    max-width: 29rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  header .navigate-container .geo-suggestions {
+    max-width: 35rem;
+  }
+}
+
+header .navigate-container .geo-suggestions li {
+  padding-left: 0.5rem;
+}
+
+header .navigate-container .geo-suggestions li.is-active,
+header .navigate-container .geo-suggestions li:hover {
+  background-color: #ddd;
+}
+
+header .navigate-container .geo-suggestions .suggestion {
+  display: block;
+  overflow: hidden;
+  padding: 0.25rem 0.5rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
 }
