@@ -50,3 +50,20 @@ export default Vue.extend({
   }
 })
 </script>
+
+<style scoped>
+.school-legend-view h6 {
+  margin-bottom: 0;
+}
+
+.school-legend-view .collapsable {
+  height: 0;
+  overflow-y: hidden;
+  padding: 0;
+  transition: all 0.3s ease;
+}
+
+.school-legend-view .collapsable.expanded {
+  height: 145px;
+}
+</style>

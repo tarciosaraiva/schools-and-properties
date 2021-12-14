@@ -109,3 +109,64 @@ export default Vue.extend({
   }
 })
 </script>
+
+<style scoped>
+.navigate-container input {
+  margin: 0;
+  padding-left: 2.25rem;
+}
+
+.navigate-container .search-box {
+  position: relative;
+}
+
+.navigate-container .geo-suggestions {
+  background-color: #f5f5f5;
+  border: 1px solid rgba(51,51,51,.8);
+  border-radius: 4px;
+  max-height: 30rem;
+  max-width: 24rem;
+  padding: 0;
+  position: absolute;
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: inherit;
+  z-index: 500;
+}
+
+@media (min-width: 768px) {
+  .navigate-container .geo-suggestions {
+    max-width: 22rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .navigate-container .geo-suggestions {
+    max-width: 29rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .navigate-container .geo-suggestions {
+    max-width: 35rem;
+  }
+}
+
+.navigate-container .geo-suggestions li {
+  padding-left: 0.5rem;
+}
+
+.navigate-container .geo-suggestions li.is-active,
+.navigate-container .geo-suggestions li:hover {
+  background-color: #ddd;
+}
+
+.navigate-container .geo-suggestions .suggestion {
+  display: block;
+  overflow: hidden;
+  padding: 0.25rem 0.5rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
+</style>
