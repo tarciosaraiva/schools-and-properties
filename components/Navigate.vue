@@ -9,7 +9,7 @@
         placeholder="Enter address, suburb, region or school name to navigate"
         type="text"
         name="geo_go_to"
-        autocomplete="false"
+        autocomplete="off"
         @keyup="handleKeyUp"
         @keyup.down="onArrowDown"
         @keyup.up="onArrowUp"

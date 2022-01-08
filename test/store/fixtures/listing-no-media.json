@@ -1,0 +1,71 @@
+[
+  {
+      "type": "PropertyListing",
+      "listing": {
+          "listingType": "Sale",
+          "id": 2017452217,
+          "advertiser": {
+              "type": "Agency",
+              "id": 6011,
+              "name": "Miles Real Estate Ivanhoe",
+              "logoUrl": "https://images.domain.com.au/img/Agencys/6011/logo_6011.jpeg",
+              "preferredColourHex": "#c12030",
+              "bannerUrl": "https://images.domain.com.au/img/Agencys/6011/banner_6011.jpeg",
+              "contacts": [
+                  {
+                      "name": "Christopher Macey",
+                      "photoUrl": "https://images.domain.com.au/img/6011/contact_1280579.jpeg?mod=211220-092920"
+                  },
+                  {
+                      "name": "John Levingston",
+                      "photoUrl": "https://images.domain.com.au/img/6011/contact_921809.jpeg?mod=211220-092920"
+                  }
+              ]
+          },
+          "priceDetails": {
+              "price": 759000,
+              "priceFrom": 759000,
+              "priceTo": 759000,
+              "displayPrice": "$759,000"
+          },
+          "propertyDetails": {
+              "state": "VIC",
+              "features": [
+                  "Ensuite",
+                  "SecureParking",
+                  "Heating",
+                  "Dishwasher"
+              ],
+              "propertyType": "Townhouse",
+              "allPropertyTypes": [
+                  "Townhouse"
+              ],
+              "bathrooms": 2.0,
+              "bedrooms": 3.0,
+              "carspaces": 2,
+              "unitNumber": "",
+              "streetNumber": "10/101",
+              "street": "Martins Lane",
+              "area": "Banyule Council - Greater Area",
+              "region": "Melbourne Region",
+              "suburb": "VIEWBANK",
+              "postcode": "3084",
+              "displayableAddress": "10/101 Martins Lane, Viewbank",
+              "latitude": -37.73213,
+              "longitude": 145.093613
+          },
+          "headline": "Viewbank Value",
+          "summaryDescription": "<b></b><br />Important: In line with the Victorian Government directions, inspection and auction attendees are required to check-in via QR code and show proof of vaccination prior to entry.\n\nLocated in the heart of Viewbank is this modern and stylish t...",
+          "hasFloorplan": true,
+          "hasVideo": true,
+          "labels": [],
+          "dateListed": "2021-11-29T11:10:19",
+          "inspectionSchedule": {
+              "byAppointment": true,
+              "recurring": false,
+              "times": []
+          },
+          "listingSlug": "10-101-martins-lane-viewbank-vic-3084-2017452217"
+      }
+  }
+]

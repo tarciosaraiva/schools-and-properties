@@ -187,23 +187,11 @@ export const mutations: MutationTree<RootState> = {
   UPDATE_SCHOOL_PRIMARY_RATING (state, payload) {
     state.filter.schools.primary.rating = Number(payload)
   },
-  UPDATE_SCHOOL_PRIMARY_ENG_RATING (state, payload) {
-    state.filter.schools.primary.englishRating = Number(payload)
-  },
-  UPDATE_SCHOOL_PRIMARY_MATH_RATING (state, payload) {
-    state.filter.schools.primary.mathsRating = Number(payload)
-  },
   UPDATE_PLOT_SECONDARY_SCHOOLS (state, payload) {
     state.filter.schools.secondary.plot = payload
   },
   UPDATE_SCHOOL_SECONDARY_RATING (state, payload) {
     state.filter.schools.secondary.rating = Number(payload)
-  },
-  UPDATE_SCHOOL_SECONDARY_ENG_RATING (state, payload) {
-    state.filter.schools.secondary.englishRating = Number(payload)
-  },
-  UPDATE_SCHOOL_SECONDARY_MATH_RATING (state, payload) {
-    state.filter.schools.secondary.mathsRating = Number(payload)
   },
   ADD_GEOCODE_RESULTS (state, payload) {
     state.geocodeSuggestions = payload.map((f: any) => ({
